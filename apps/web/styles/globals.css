@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: var(--inke-white);
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsla(215, 10%, 77%, 0);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: hsla(0, 0%, 59%, 0.524);
+}
+
+.grids {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 0
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-position: 50%;
+  background-size: 24px 24px;
+}

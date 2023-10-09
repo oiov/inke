@@ -1,0 +1,53 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+node_modules
+packages/*/node_modules
+apps/*/node_modules
+.next
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+.pnpm-debug.log*
+
+# other lockfiles that's not pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# local env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# vscode
+.vscode
+
+# intellij
+.idea
+
+dist/**
+/dist
+packages/*/dist
+
+.turbo
+/test-results/
+/playwright-report/
+/playwright/.cache/
