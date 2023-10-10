@@ -24,7 +24,7 @@ export function Welcome() {
       </p>
 
       <NewPostButton
-        className="w-36 py-2 font-medium shadow-md md:w-44 md:px-3 md:text-lg "
+        className="h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
         text="Start For Free"
       />
     </div>
@@ -58,7 +58,7 @@ export function EditorGuide() {
           height={300}
         />
         <NewPostButton
-          className="my-3 w-32 py-2 font-medium md:w-44 md:px-6 md:text-lg "
+          className="mt-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
           text="Start For Free"
         />
       </>

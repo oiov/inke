@@ -186,7 +186,7 @@ export default function Sidebar({
         animate={controls}
         className={
           `${active ? "border-r" : ""}` +
-          " animate group flex h-screen w-[270px] flex-col gap-3 overflow-y-auto border-gray-100 py-6 duration-300"
+          " animate group flex h-screen w-[270px] flex-col gap-3 overflow-y-auto border-slate-200/80 py-6 duration-300"
         }
       >
         {active && (
@@ -211,7 +211,7 @@ export default function Sidebar({
           <NewPostButton className="h-9 w-1/3" text="New" from="post" />
         </div>
 
-        <hr />
+        <div className="border-b border-slate-200/70" />
 
         <div className="h-[40%] w-full grow overflow-y-auto px-3">
           <div className="flex items-center justify-between">
@@ -279,14 +279,14 @@ export default function Sidebar({
 
           {sharesCache.length > 0 && (
             <>
-              <div className="mt-4 flex items-center justify-between border-t pt-4">
+              <div className="mt-4 flex items-center justify-between border-t border-slate-200/70 pt-4">
                 <p className="font-mono text-sm font-semibold text-slate-400">
                   Published({shares.data.length})
                 </p>
-                <Download
+                {/* <Download
                   onClick={handleExportJsonPublished}
                   className="h-4 w-4 cursor-pointer text-slate-400 hover:text-slate-300"
-                />
+                /> */}
               </div>
 
               {sharesCache.map((item) => (
@@ -314,7 +314,7 @@ export default function Sidebar({
           )}
         </div>
 
-        <hr />
+        <div className="border-b border-slate-200/70" />
 
         <Suspense>
           {session ? (

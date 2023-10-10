@@ -183,7 +183,8 @@ export default function Editor({
             />
             <span className="text-xs text-slate-400 transition-all">
               {saveStatus}{" "}
-              {currentIndex !== -1 &&
+              {saveStatus === "Saved" &&
+                currentIndex !== -1 &&
                 timeAgo(contents[currentIndex].updated_at)}
             </span>
           </div>
@@ -197,11 +198,17 @@ export default function Editor({
             )}
 
           <button
-            className="ml-1 flex h-7 w-20 items-center justify-center gap-1 rounded-md bg-blue-500 px-4 py-1 text-sm text-white hover:bg-blue-300"
+            className="ml-1 flex h-7 w-20 items-center justify-center gap-1 rounded-md bg-blue-500 px-4 py-1 text-sm text-white transition-all hover:bg-blue-300"
             onClick={handleCreateShare}
             disabled={isSharing || saveStatus !== "Saved"}
           >
-            {isSharing ? <LoadingDots color="#fff" /> : "Publish"}
+            {isSharing ? (
+              <LoadingDots color="#fff" />
+            ) : (
+              <span className="bg-gradient-to-r from-red-100 via-yellow-200 to-orange-200 bg-clip-text font-semibold text-transparent">
+                Publish
+              </span>
+            )}
           </button>
 
           <Menu
