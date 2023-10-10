@@ -61,4 +61,8 @@ Inke is built on the following stack:
 
 ## License
 
-Licensed under the [Apache-2.0 license](LICENSE.md).
+Licensed under the [Apache-2.0 license](LICENSE).
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yesmore/inke&type=Date)](https://star-history.com/#yesmore/inke&Date)
