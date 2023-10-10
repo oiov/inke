@@ -61,8 +61,10 @@ Inke is built on the following stack:
 
 ## License
 
-Licensed under the [Apache-2.0 license](LICENSE).
+[GPL](./LICENSE) © [yesmore](https://github.com/yesmore)
 
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=yesmore/inke&type=Date)](https://star-history.com/#yesmore/inke&Date)
+
+<a href="https://www.buymeacoffee.com/yesmore/gallery" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
