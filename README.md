@@ -1,5 +1,4 @@
 <a href="https://inke.app">
-  <img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/opengraph-image.png">
   <h1 align="center">Inke</h1>
 </a>
 
@@ -17,6 +16,8 @@
 ## Introduction
 
 [Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
+
+<img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/opengraph-image.png">
 
 ## Self Hosting
 
