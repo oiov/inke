@@ -216,7 +216,7 @@ export default function Editor({
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
             <InkeEditor
-              className="relative overflow-y-auto overflow-x-hidden border-stone-200 bg-white"
+              className="relative overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
               storageKey={Content_Storage_Key}
               debounceDuration={debounceDuration}
               defaultValue={currentContent}

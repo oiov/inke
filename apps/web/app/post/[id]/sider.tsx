@@ -25,6 +25,7 @@ import Link from "next/link";
 import { exportAsJson, fetcher } from "@/lib/utils";
 import { ShareNote } from "@prisma/client";
 import SearchInput from "@/ui/search-input";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Sidebar({
   id,
@@ -234,7 +235,7 @@ export default function Sidebar({
                   <input
                     type="text"
                     className="rounded border px-2 py-1 text-xs text-slate-500"
-                    value={item.title}
+                    defaultValue={item.title}
                     onChange={(e) => handleChangeTitle(e.target.value)}
                     onKeyDown={(e) => handleKeydown(e.key)}
                   />

@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yesmore/inke/blob/main/LICENSE">
+  <a href="https://github.com/yesmore/inke/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/yesmore/inke?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
   </a>
   <a href="https://github.com/yesmore/inke"><img src="https://img.shields.io/github/stars/yesmore/inke?style=social" alt="inke.app's GitHub repo"></a>

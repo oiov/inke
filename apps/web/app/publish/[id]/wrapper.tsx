@@ -14,6 +14,7 @@ import { Editor as InkeEditor } from "inke";
 import { JSONContent } from "@tiptap/react";
 import UINotFound from "../../../ui/layout/not-found";
 import { timeAgo } from "@/lib/utils";
+import { LoadingCircle } from "@/ui/shared/icons";
 
 export default function Wrapper({
   id,
@@ -42,25 +43,25 @@ export default function Wrapper({
   }, [share]);
 
   return (
-    <div className=" min-h-screen">
-      {isLoading && <>Loading...</>}
+    <div className="min-h-screen">
+      {isLoading && <LoadingCircle className="mx-auto h-6 w-6" />}
       {!isLoading && share && share.data && canRenderGuide && (
         <>
-          {user && (
-            <div className="mx-6">
-              <span className="font-semibold text-slate-700">{user.name}</span>{" "}
-              <span className="text-xs text-slate-500">
-                Published at {share.data.createdAt.toString().slice(0, 10)}
-              </span>
-              {/* {timeAgo(share.data.createdAt.getTime() || 0)} */}
-            </div>
-          )}
           <InkeEditor
-            className=" relative mb-3 w-screen max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+            className="relative -mt-3 mb-3 w-screen max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
             storageKey={Content_Public_Storage_Key}
             debounceDuration={Default_Debounce_Duration}
             defaultValue={currentContent}
           />
+          {user && (
+            <div className="z-[1000] float-right mx-10">
+              <span className="font-semibold text-slate-700">{user.name}</span>{" "}
+              <span className="text-xs text-slate-500">
+                Published at {share.data.updatedAt.toString().slice(0, 10)}
+              </span>
+              {/* {timeAgo(share.data.createdAt.getTime() || 0)} */}
+            </div>
+          )}
         </>
       )}
       {!isLoading && !share.data && <UINotFound />}
