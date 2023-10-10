@@ -13,19 +13,16 @@
   </a>
   <a href="https://github.com/yesmore/inke"><img src="https://img.shields.io/github/stars/yesmore/inke?style=social" alt="inke.app's GitHub repo"></a>
 </p>
-<br/>
 
 ## Introduction
 
 [Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
 
-<br />
-
-## Deploy Your Own
+## Self Hosting
 
 You can deploy your own version of Inke to Vercel with one click:
 
-<!-- [![Deploy with Vercel]()]() -->
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-link=https%3A%2F%2Fgithub.com%2Fyesmore%2Finke&env=OPENAI_API_KEY&envDescription=Find%20your%20OpenAI%20API%20Key%20by%20click%20the%20right%20Learn%20More%20button.%20%20&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys&project-name=inke&repository-name=inke)
 
 ## Setting Up Locally
 
@@ -38,11 +35,14 @@ If you've deployed this to Vercel, you can also use [`vc env pull`](https://verc
 
 To run the app locally, you can run the following commands:
 
-```
+```bash
 pnpm i
 pnpm build
 pnpm dev
+```
 
+```bash
+# Sync
 git fetch upstream
 git merge upstream/main
 git push origin main
@@ -58,7 +58,6 @@ Inke is built on the following stack:
 - [Vercel AI SDK](https://sdk.vercel.ai/docs) – AI library
 - [Vercel](https://vercel.com) – deployments
 - [TailwindCSS](https://tailwindcss.com/) – styles
-- [Cal Sans](https://github.com/calcom/font) – font
 
 ## License
 

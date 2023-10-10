@@ -132,3 +132,24 @@ export function exportAsTxtFile(data: string, fileName: string) {
   linkElement.click();
   document.body.removeChild(linkElement);
 }
+
+export function getRandomElement(arr: string[]) {
+  let currentIndex = arr.length;
+  let temporaryValue;
+  let randomIndex;
+
+  // 当还有未洗牌的元素时
+  while (currentIndex !== 0) {
+    // 从剩余的元素中随机选择一个元素
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // 将当前元素与随机选择的元素进行交换
+    temporaryValue = arr[currentIndex];
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = temporaryValue;
+  }
+
+  // 返回洗牌后的数组的第一个元素
+  return arr[0];
+}
