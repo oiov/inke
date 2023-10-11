@@ -26,10 +26,11 @@ import { Session } from "next-auth";
 import { IResponse } from "@/lib/types/response";
 import { ShareNote } from "@prisma/client";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
-import { ExternalLink, UploadCloud } from "lucide-react";
+import { BadgeInfo, ExternalLink, UploadCloud } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useUserShareNotes } from "./request";
 import Link from "next/link";
+import Tooltip from "@/ui/shared/tooltip";
 
 export default function Editor({
   id,
@@ -210,6 +211,27 @@ export default function Editor({
               </span>
             )}
           </button>
+
+          <Tooltip
+            content={
+              <div className="w-56 p-4 text-sm text-slate-400">
+                <h1 className="mb-2 font-semibold text-slate-500">
+                  Publish and Share
+                </h1>
+                <p>
+                  Click the <code>`Publish`</code> button to save your note
+                  remotely and generate a sharing link, allowing you to share
+                  your notes with others. Your notes will be uploaded after
+                  serialization.
+                </p>
+              </div>
+            }
+            fullWidth={false}
+          >
+            <button className="">
+              <BadgeInfo className="h-4 w-4 text-slate-400 hover:text-slate-500" />
+            </button>
+          </Tooltip>
 
           <Menu
             onExportImage={handleExportImage}

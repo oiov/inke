@@ -6,6 +6,7 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "vercel.com",
       "api.dicebear.com",
+      "api.producthunt.com",
     ],
   },
   redirects: async () => {

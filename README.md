@@ -1,10 +1,10 @@
 <a href="https://inke.app">
-  <h1 align="center">Inke</h1>
+  <h2 align="center">Inke</h2>
 </a>
 
-<p align="center">
+<!-- <p align="center">
   An open-source Notion-style WYSIWYG editor with AI-powered autocompletions. 
-</p>
+</p> -->
 
 <p align="center">
   <a href="https://github.com/yesmore/inke/blob/master/LICENSE">
@@ -60,12 +60,14 @@ Inke is built on the following stack:
 - [Vercel](https://vercel.com) – deployments
 - [TailwindCSS](https://tailwindcss.com/) – styles
 
-## License
-
-[GPL](./LICENSE) © [yesmore](https://github.com/yesmore)
-
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=yesmore/inke&type=Date)](https://star-history.com/#yesmore/inke&Date)
 
+[![product hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light)](https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke)
+
 <a href="https://www.buymeacoffee.com/yesmore/gallery" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+## License
+
+[GPL](./LICENSE) © [yesmore](https://github.com/yesmore)

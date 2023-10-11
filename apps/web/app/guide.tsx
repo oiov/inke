@@ -57,10 +57,22 @@ export function EditorGuide() {
           width={960}
           height={300}
         />
-        <NewPostButton
+        {/* <NewPostButton
           className="mt-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
           text="Start For Free"
-        />
+        /> */}
+        <a
+          className="mb-2 mt-4"
+          href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
+          target="_blank"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light"
+            alt="Product Hunt"
+            width="250"
+            height="54"
+          />
+        </a>
       </>
     )
   );
