@@ -45,6 +45,23 @@ pnpm build
 pnpm dev
 ```
 
+##  Environment Variable
+
+| Prop                    | Type     | Description                                                                                                                                              | Example                                                                                                             |
+| ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY`        | `string` | The API Key to use for the OpenAI completion API.                                                                                                        | `sk-xxx`                                                                                                            |
+| `BLOB_READ_WRITE_TOKEN` | `string` | OPTIONAL: Vercel Blob (for uploading images). Get your Vercel Blob credentials [here](https://vercel.com/docs/storage/vercel-blob/quickstart#quickstart) | `vercel_blob_xxxx`                                                                                                  |
+| `KV_REST_API_URL`       | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart)           | [`"https//xxx.com"`](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/default-content.tsx) |
+| `KV_REST_API_TOKEN`     | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart).          | `abcdefg`                                                                                                           |
+| `NEXTAUTH_SECRET`       | `string` | Only for production – generate one here: [generate-secret](https://generate-secret.vercel.app/32).                                                       | `fasgagahhjerherg`                                                                                                  |
+| `DATABASE_URL`          | `string` | DATABASE url                                                                                                                                             | `mongodb://xxxx`                                                                                                    |
+| `EMAIL_FROM`            | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `Inke <regist@inke.app>`                                                                                            |
+| `EMAIL_SERVER`          | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `smtps://xxxx`                                                                                                      |
+| `GITHUB_ID`             | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `xadsafsa`                                                                                                          |
+| `GITHUB_SECRET`         | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `xadsafsa`                                                                                                          |
+
+## Sync repo
+
 ```bash
 # Sync
 git fetch upstream
