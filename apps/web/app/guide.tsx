@@ -9,6 +9,7 @@ import NewPostButton from "@/ui/new-post-button";
 import { Editor as InkeEditor } from "inke";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Welcome() {
   return (
@@ -51,7 +52,7 @@ export function EditorGuide() {
           defaultValue={defaultEditorGuideContent}
         />
         <Image
-          className="-mt-12"
+          className="-mt-8 px-4"
           alt={"example"}
           src={"/opengraph-image.png"}
           width={960}
@@ -61,7 +62,7 @@ export function EditorGuide() {
           className="mt-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
           text="Start For Free"
         /> */}
-        <a
+        <Link
           className="mb-2 mt-4"
           href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
           target="_blank"
@@ -72,7 +73,7 @@ export function EditorGuide() {
             width="250"
             height="54"
           />
-        </a>
+        </Link>
       </>
     )
   );

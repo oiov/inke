@@ -5,6 +5,9 @@
 <p align="center"><strong> Inke - Small is beautiful</strong></p>
 
 <p align="center">
+  <a href="https://inke.app">
+    <img src="https://badgen.net/https/inke.app/api/status" alt="status"/>
+  </a>
   <a href="https://github.com/yesmore/inke/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/yesmore/inke?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
   </a>
