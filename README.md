@@ -1,19 +1,21 @@
-<a href="https://inke.app">
-  <h2 align="center">Inke</h2>
-</a>
+<!-- <a href="https://inke.app">
+  <h1 align="center">Inke</h1>
+</a> -->
 
 <!-- <p align="center">
   An open-source Notion-style WYSIWYG editor with AI-powered autocompletions. 
 </p> -->
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://github.com/yesmore/inke/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/yesmore/inke?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
   </a>
   <a href="https://github.com/yesmore/inke"><img src="https://img.shields.io/github/stars/yesmore/inke?style=social" alt="inke.app's GitHub repo"></a>
-</p>
+</p> -->
 
-## Introduction
+<img width="108" src="https://inke.app/logo.png">
+
+## Inke
 
 [Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
 
