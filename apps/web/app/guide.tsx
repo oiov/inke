@@ -10,6 +10,7 @@ import { Editor as InkeEditor } from "inke";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LoadingCircle } from "@/ui/shared/icons";
 
 export function Welcome() {
   return (
@@ -42,39 +43,39 @@ export function EditorGuide() {
     }
   }, []);
 
-  return (
-    canRenderGuide && (
-      <>
-        <InkeEditor
-          className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
-          storageKey={Content_Guide_Storage_Key}
-          debounceDuration={Default_Debounce_Duration}
-          defaultValue={defaultEditorGuideContent}
-        />
-        <Image
-          className="-mt-8 px-4"
-          alt={"example"}
-          src={"/opengraph-image.png"}
-          width={960}
-          height={300}
-        />
-        {/* <NewPostButton
+  return canRenderGuide ? (
+    <>
+      <InkeEditor
+        className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+        storageKey={Content_Guide_Storage_Key}
+        debounceDuration={Default_Debounce_Duration}
+        defaultValue={defaultEditorGuideContent}
+      />
+      <Image
+        className="-mt-8 px-4"
+        alt={"example"}
+        src={"/opengraph-image.png"}
+        width={960}
+        height={300}
+      />
+      {/* <NewPostButton
           className="mt-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
           text="Start For Free"
         /> */}
-        <Link
-          className="mb-2 mt-4"
-          href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
-          target="_blank"
-        >
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light"
-            alt="Product Hunt"
-            width="250"
-            height="54"
-          />
-        </Link>
-      </>
-    )
+      <Link
+        className="mb-2 mt-4"
+        href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
+        target="_blank"
+      >
+        <img
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light"
+          alt="Product Hunt"
+          width="250"
+          height="54"
+        />
+      </Link>
+    </>
+  ) : (
+    <LoadingCircle className="my-10 h-6 w-6" />
   );
 }
