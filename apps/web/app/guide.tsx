@@ -43,6 +43,10 @@ export function EditorGuide() {
     }
   }, []);
 
+  const imageLoader = ({ src, width, quality }) => {
+    return `${src}?w=${width}&q=${quality || 75}`;
+  };
+
   return canRenderGuide ? (
     <>
       <InkeEditor
@@ -67,11 +71,12 @@ export function EditorGuide() {
         href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
         target="_blank"
       >
-        <img
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light"
+        <Image
+          loader={imageLoader}
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.png?post_id=419235&theme=light"
           alt="Product Hunt"
-          width="250"
-          height="54"
+          width={250}
+          height={54}
         />
       </Link>
     </>

@@ -27,11 +27,6 @@ const nextConfig = {
         destination: "https://www.npmjs.com/package/inke",
         permanent: true,
       },
-      // {
-      //   source: "/discord",
-      //   destination: "https://discord.gg/utuNdj35vr",
-      //   permanent: true,
-      // },
     ];
   },
   productionBrowserSourceMaps: true,
