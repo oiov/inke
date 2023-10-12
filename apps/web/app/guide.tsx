@@ -14,7 +14,7 @@ import { LoadingCircle } from "@/ui/shared/icons";
 
 export function Welcome() {
   return (
-    <div className="grids mt-3 flex w-full max-w-[90%] flex-col items-center justify-center py-6">
+    <div className="grids mt-3 flex w-full max-w-[88%] flex-col items-center justify-center py-6">
       <p className="title-font animate-fade-up font-display mb-6 text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:mb-8 md:text-5xl">
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Simple
@@ -27,7 +27,7 @@ export function Welcome() {
 
       <NewPostButton
         className="h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
-        text="Start For Free"
+        text="Start writing now"
       />
     </div>
   );
@@ -51,16 +51,12 @@ export function EditorGuide() {
   return (
     <>
       <Image
-        className="mt-3 px-4"
+        className="mt-2 px-6 hover:opacity-80"
         alt={"example"}
         src={"/opengraph-image.png"}
         width={960}
         height={300}
       />
-      {/* <NewPostButton
-          className="mt-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
-          text="Start For Free"
-        /> */}
       <Link
         className="mb-2 mt-4"
         href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
@@ -91,7 +87,7 @@ export function EditorGuide() {
 
       {canRenderGuide ? (
         <InkeEditor
-          className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+          className="relative -mt-2 mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
           storageKey={Content_Guide_Storage_Key}
           debounceDuration={Default_Debounce_Duration}
           defaultValue={defaultEditorGuideContent}
@@ -99,6 +95,11 @@ export function EditorGuide() {
       ) : (
         <LoadingCircle className="my-10 h-6 w-6" />
       )}
+
+      <NewPostButton
+        className="mb-3 h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
+        text="Start writing now"
+      />
     </>
   );
 }
