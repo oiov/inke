@@ -23,7 +23,7 @@ export default async function OG() {
           justifyContent: "center",
           backgroundColor: "white",
           backgroundImage:
-            "linear-gradient(to bottom right, #E0E7FF 25%, #ffffff 50%, #c3dfe1 75%)",
+            "linear-gradient(to bottom right, #E0E7FF 25%, #ffffff 50%, #CFFAFE 75%)",
         }}
       >
         {/* <Pill className="h-5 w-5" /> */}
@@ -46,6 +46,12 @@ export default async function OG() {
     {
       width: 1200,
       height: 630,
+      // fonts: [
+      //   {
+      //     name: "SF Pro",
+      //     data: sfPro,
+      //   },
+      // ],
     },
   );
 }

@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://inke.app"),
   themeColor: "#ffffff",
-  manifest: "/manifest.json",
   icons: {
     icon: "/logo.svg",
   },
