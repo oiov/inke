@@ -214,7 +214,7 @@ export default function Editor({
 
           <Tooltip
             content={
-              <div className="w-56 p-4 text-sm text-slate-400">
+              <div className="w-64 px-3 py-2 text-sm text-slate-400">
                 <h1 className="mb-2 font-semibold text-slate-500">
                   Publish and Share
                 </h1>
@@ -222,7 +222,14 @@ export default function Editor({
                   Click the <code>`Publish`</code> button to save your note
                   remotely and generate a sharing link, allowing you to share
                   your notes with others. Your notes will be uploaded after
-                  serialization.
+                  serialization. e.g.{" "}
+                  <a
+                    className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                    href="https://inke.app/publish/5fe39539-377f-40e9-8a3f-9071e2165e21"
+                    target="_blank"
+                  >
+                    link
+                  </a>
                 </p>
               </div>
             }

@@ -153,3 +153,16 @@ export function getRandomElement(arr: string[]) {
   // 返回洗牌后的数组的第一个元素
   return arr[0];
 }
+
+export function greeting() {
+  var currentTime = new Date();
+  var currentHour = currentTime.getHours();
+
+  if (currentHour < 12) {
+    return "上午好";
+  } else if (currentHour < 18) {
+    return "下午好";
+  } else {
+    return "晚上好";
+  }
+}

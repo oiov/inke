@@ -6,7 +6,7 @@ import { LogOut, UserCog, ShieldCheck, Settings } from "lucide-react";
 import Popover from "@/ui/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
-import { generateName } from "@/lib/utils";
+import { generateName, greeting } from "@/lib/utils";
 import { useUserInfoByEmail } from "@/app/post/[id]/request";
 import { useRouter } from "next/navigation";
 
@@ -34,7 +34,7 @@ export default function UserDropdown({
             {user && (
               <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
                 <span className="truncate font-semibold text-slate-700">
-                  {user?.name || `${generateName(user.id || "")}`}
+                  {greeting()}, {user?.name || `${generateName(user.id || "")}`}
                 </span>
               </button>
             )}
@@ -69,15 +69,15 @@ export default function UserDropdown({
               <span className="text-sm">Edit nickname</span>
             </button>
 
-            <button
+            {/* <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => {
-                router.push("/setting");
+                router.push("/settings");
               }}
             >
               <Settings className="h-4 w-4" />
               <span className="text-sm">Preferences</span>
-            </button>
+            </button> */}
 
             <hr className="my-2" />
 

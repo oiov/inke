@@ -51,11 +51,12 @@ export function EditorGuide() {
   return (
     <>
       <Image
-        className="mt-2 px-6 hover:opacity-80"
+        className="mt-2 px-6 transition-all hover:opacity-70"
         alt={"example"}
         src={"/opengraph-image.png"}
         width={960}
         height={300}
+        placeholder="empty"
       />
       <Link
         className="mb-2 mt-4"
