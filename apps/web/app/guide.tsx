@@ -43,18 +43,22 @@ export function EditorGuide() {
     }
   }, []);
 
-  const imageLoader = ({ src, width, quality }) => {
-    return `${src}?w=${width}&q=${quality || 75}`;
+  const imageLoader = ({ src, width }) => {
+    return `${src}?w=${width}`;
   };
 
-  return canRenderGuide ? (
+  return (
     <>
-      <InkeEditor
-        className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
-        storageKey={Content_Guide_Storage_Key}
-        debounceDuration={Default_Debounce_Duration}
-        defaultValue={defaultEditorGuideContent}
-      />
+      {canRenderGuide ? (
+        <InkeEditor
+          className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+          storageKey={Content_Guide_Storage_Key}
+          debounceDuration={Default_Debounce_Duration}
+          defaultValue={defaultEditorGuideContent}
+        />
+      ) : (
+        <LoadingCircle className="my-10 h-6 w-6" />
+      )}
       <Image
         className="-mt-8 px-4"
         alt={"example"}
@@ -80,7 +84,5 @@ export function EditorGuide() {
         />
       </Link>
     </>
-  ) : (
-    <LoadingCircle className="my-10 h-6 w-6" />
   );
 }
