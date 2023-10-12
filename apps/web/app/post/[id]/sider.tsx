@@ -2,17 +2,6 @@
 
 import { useState, useEffect, Suspense, Dispatch, SetStateAction } from "react";
 import { motion, useAnimation } from "framer-motion";
-import {
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  Edit,
-  ExternalLink,
-  Square,
-  Trash2,
-  UploadCloud,
-} from "lucide-react";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { Note_Storage_Key } from "@/lib/consts";
@@ -20,12 +9,20 @@ import { useRouter } from "next/navigation";
 import NewPostButton from "../../../ui/new-post-button";
 import UserDropdown from "../../../ui/layout/user-dropdown";
 import { Session } from "next-auth";
-import { useUserInfoByEmail, useUserShareNotes } from "./request";
+import { useUserShareNotes } from "./request";
 import Link from "next/link";
 import { exportAsJson, fetcher } from "@/lib/utils";
 import { ShareNote } from "@prisma/client";
 import SearchInput from "@/ui/search-input";
-import { useDebouncedCallback } from "use-debounce";
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Edit,
+  ExternalLink,
+  Trash2,
+} from "lucide-react";
 
 export default function Sidebar({
   id,
@@ -330,7 +327,7 @@ export default function Sidebar({
             </div>
           ) : (
             <button
-              className="mx-3 mt-3 rounded-md border border-slate-800 bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-slate-600"
+              className="mx-3 mt-3 rounded-md border border-slate-800 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 transition-all hover:bg-slate-600"
               onClick={() => setShowSignInModal(true)}
             >
               Sign in for more
