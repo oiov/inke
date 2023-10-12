@@ -22,6 +22,9 @@ export default function Wrapper({ session }: { session: Session | null }) {
         ask you to provide certain personal identity information, including but
         not limited to email, avatar. The information I request will be retained
         on your device and will not be collected by me in any way.
+        <h2 className="mt-2 text-lg font-bold">Other</h2>
+        It is strictly prohibited to upload notes with illegal or pornographic
+        content. We will take strict measures to permanently ban violators.
         <h2 className="mt-2 text-lg font-bold">Contact Us </h2>
         If you have any questions or suggestions regarding my privacy policy,
         please feel free to contact me at songsonghhhh@gmail.com.

@@ -350,10 +350,10 @@ export default function Sidebar({
           <span className="mx-2">‣</span>
           <Link
             className="hover:text-slate-300"
-            href="https://discord.gg/utuNdj35vr"
+            href="https://www.producthunt.com/products/inke?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-inke"
             target="_blank"
           >
-            Discord
+            Follow
           </Link>
         </div>
 
