@@ -55,8 +55,7 @@ export function EditorGuide() {
         alt={"example"}
         src={"/opengraph-image.png"}
         width={960}
-        height={300}
-        placeholder="empty"
+        height={550}
       />
       <Link
         className="mb-2 mt-4"
