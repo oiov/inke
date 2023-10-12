@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import Providers from "./providers";
 import Script from "next/script";
 
-const title = "Inke – Simple, WYSIWYG, Markdown-like AI-Powered editor";
+const title = "Inke – Simple, Markdown-like and AI-Powered editor";
 const description =
   "Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.";
 

@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 
-const title = "Inke | Feedback";
+const title = "Inke | Privacy";
 const description =
   "Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.";
 
