@@ -60,7 +60,8 @@ export async function POST(req: Request): Promise<Response> {
       {
         role: "system",
         content:
-          "You are an AI writing assistant that continues existing text based on context from prior text. " +
+          "You are an AI writing assistant that continues existing text based on context from prior text." +
+          "(and use the same language as the previous text, unless the previous text specifies which language to use)." +
           "Give more weight/priority to the later characters than the beginning ones. " +
           "Limit your response to no more than 200 characters, but make sure to construct complete sentences.",
         // "Use Markdown formatting when appropriate.",
