@@ -22,6 +22,18 @@
 
 <img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/opengraph-image.png">
 
+## Features
+
+- 😗 WYSIWYG Editing like markdown
+- 😄 Efficient Shortcut Inputs
+- 😍 AI-powered Text Autocomplete
+- 🥰 Local Data Storage
+- 🥳 Image uploads(use command or drag)
+- 😍 Cloud storage notes
+- 😄 Export as json/image/txt
+- 🥰 Install as PWA App to your desktop
+
+
 ## Self Hosting
 
 You can deploy your own version of Inke to Vercel with one click:

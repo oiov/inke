@@ -148,20 +148,6 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Heading 4",
-      description: "Small section heading.",
-      searchTerms: ["subtitle", "small"],
-      icon: <Heading3 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .setNode("heading", { level: 4 })
-          .run();
-      },
-    },
-    {
       title: "Bullet List",
       description: "Create a simple bullet list.",
       searchTerms: ["unordered", "point"],

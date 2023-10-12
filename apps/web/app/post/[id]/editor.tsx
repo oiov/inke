@@ -150,7 +150,7 @@ export default function Editor({
 
   if (isLoading)
     return (
-      <div className="m-6 flex w-full items-center justify-center">
+      <div className="m-6 ">
         <LoadingCircle className="h-6 w-6" />
       </div>
     );
@@ -252,13 +252,11 @@ export default function Editor({
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
             <InkeEditor
-              className="relative overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
+              className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
               storageKey={Content_Storage_Key}
               debounceDuration={debounceDuration}
               defaultValue={currentContent}
-              onUpdate={() => {
-                setSaveStatus("Unsaved");
-              }}
+              onUpdate={() => setSaveStatus("Unsaved")}
               onDebouncedUpdate={(json: JSONContent, text: string) => {
                 setSaveStatus("Saving...");
                 if (json) debouncedUpdates(json, text);

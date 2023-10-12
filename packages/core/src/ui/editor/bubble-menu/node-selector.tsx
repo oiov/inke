@@ -5,6 +5,7 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  Heading4,
   TextQuote,
   ListOrdered,
   TextIcon,
@@ -103,16 +104,14 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
       <div className="novel-relative novel-h-full">
         <Popover.Trigger
           className="novel-flex novel-h-full novel-items-center novel-gap-1 novel-whitespace-nowrap novel-p-2 novel-text-sm novel-font-medium novel-text-stone-600 hover:novel-bg-stone-100 active:novel-bg-stone-200"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+          onClick={() => setIsOpen(!isOpen)}>
           <span>{activeItem?.name}</span>
           <ChevronDown className="h-4 w-4" />
         </Popover.Trigger>
 
         <Popover.Content
           align="start"
-          className="novel-z-[99999] novel-my-1 novel-flex novel-max-h-80 novel-w-48 novel-flex-col novel-overflow-hidden novel-overflow-y-auto novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1"
-        >
+          className="novel-z-[99999] novel-my-1 novel-flex novel-max-h-80 novel-w-48 novel-flex-col novel-overflow-hidden novel-overflow-y-auto novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
           {items.map((item, index) => (
             <button
               key={index}
@@ -121,8 +120,7 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
                 setIsOpen(false);
               }}
               className="novel-flex novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-stone-600 hover:novel-bg-stone-100"
-              type="button"
-            >
+              type="button">
               <div className="flex items-center space-x-2">
                 <div className="novel-flex novel-items-center novel-space-x-2">
                   {" "}

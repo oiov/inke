@@ -21,7 +21,7 @@ import DragAndDrop from "./drag-and-drop";
 export const defaultExtensions = [
   StarterKit.configure({
     heading: {
-      levels: [1, 2, 3, 4],
+      levels: [1, 2, 3],
     },
     bulletList: {
       HTMLAttributes: {
