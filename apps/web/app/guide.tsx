@@ -35,6 +35,7 @@ export function Welcome() {
 
 export function EditorGuide() {
   const [canRenderGuide, setCanRenderGuide] = useState(false);
+  const [isShowLocalHunt, setShowLocalHunt] = useState(false);
 
   useEffect(() => {
     if (window) {
@@ -49,18 +50,8 @@ export function EditorGuide() {
 
   return (
     <>
-      {canRenderGuide ? (
-        <InkeEditor
-          className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
-          storageKey={Content_Guide_Storage_Key}
-          debounceDuration={Default_Debounce_Duration}
-          defaultValue={defaultEditorGuideContent}
-        />
-      ) : (
-        <LoadingCircle className="my-10 h-6 w-6" />
-      )}
       <Image
-        className="-mt-8 px-4"
+        className="mt-3 px-4"
         alt={"example"}
         src={"/opengraph-image.png"}
         width={960}
@@ -75,14 +66,39 @@ export function EditorGuide() {
         href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
         target="_blank"
       >
-        <Image
-          loader={imageLoader}
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.png?post_id=419235&theme=light"
-          alt="Product Hunt"
-          width={250}
-          height={54}
-        />
+        {isShowLocalHunt ? (
+          <Image
+            src="/product.svg"
+            alt="Product Hunt"
+            width={250}
+            height={54}
+          />
+        ) : (
+          <Image
+            loader={imageLoader}
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.png?post_id=419235&theme=light"
+            alt="Product Hunt"
+            width={250}
+            height={54}
+            onError={(e) => {
+              if (e) {
+                setShowLocalHunt(true);
+              }
+            }}
+          />
+        )}
       </Link>
+
+      {canRenderGuide ? (
+        <InkeEditor
+          className="relative mb-3 w-full max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+          storageKey={Content_Guide_Storage_Key}
+          debounceDuration={Default_Debounce_Duration}
+          defaultValue={defaultEditorGuideContent}
+        />
+      ) : (
+        <LoadingCircle className="my-10 h-6 w-6" />
+      )}
     </>
   );
 }

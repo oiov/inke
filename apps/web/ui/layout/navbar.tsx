@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import useScroll from "@/lib/hooks/use-scroll";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import { Suspense } from "react";
 import { useEditNicknameModal } from "./edit-nickname-modal";
-import NewPostButton from "../new-post-button";
 import Logo from "../shared/icons/logo";
 
 export default function NavBar({ session }: { session: Session | null }) {
@@ -44,14 +44,23 @@ export default function NavBar({ session }: { session: Session | null }) {
 
           <Suspense>
             <div className="flex items-center justify-center gap-4">
-              {/* <NewPostButton className="h-8" text="Start Writing" /> */}
-
               <Link
+                href="https://www.producthunt.com/products/inke?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-inke"
+                target="_blank"
+              >
+                <Image
+                  src="/follow.svg"
+                  alt="Inke | Product Hunt"
+                  width="86"
+                  height="32"
+                />
+              </Link>
+              {/* <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/feedback"}
               >
                 feedback
-              </Link>
+              </Link> */}
 
               {session ? (
                 <UserDropdown
