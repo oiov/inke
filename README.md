@@ -20,7 +20,7 @@
 
 [Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
 
-<img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/opengraph-image.png">
+<img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/desktop.png">
 
 ## Features
 

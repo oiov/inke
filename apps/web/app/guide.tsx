@@ -51,9 +51,9 @@ export function EditorGuide() {
   return (
     <>
       <Image
-        className="mt-2 px-6 transition-all hover:opacity-70"
+        className="my-6 w-[85%] rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
         alt={"example"}
-        src={"/opengraph-image.png"}
+        src={"/desktop.png"}
         width={960}
         height={550}
       />
