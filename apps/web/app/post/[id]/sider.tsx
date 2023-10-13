@@ -315,11 +315,12 @@ export default function Sidebar({
 
         <Suspense>
           {session ? (
-            <UserDropdown
-              className="-mb-2 text-center"
-              session={session}
-              setShowEditModal={setShowEditModal}
-            />
+            <div className="-mb-2 text-center">
+              <UserDropdown
+                session={session}
+                setShowEditModal={setShowEditModal}
+              />
+            </div>
           ) : (
             <button
               className="mx-3 mt-3 rounded-md border border-slate-800 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 transition-all hover:bg-slate-600"
