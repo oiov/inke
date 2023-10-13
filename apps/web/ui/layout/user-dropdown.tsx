@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { signOut } from "next-auth/react";
-import { LogOut, UserCog, ShieldCheck, Settings } from "lucide-react";
+import { LogOut, UserCog, ShieldCheck, Settings, Mail } from "lucide-react";
 import Popover from "@/ui/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
@@ -39,6 +39,7 @@ export default function UserDropdown({
               </button>
             )}
             <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
+              <Mail className="h-4 w-4" />
               <span className="truncate text-sm">{email}</span>
             </button>
 
@@ -69,7 +70,7 @@ export default function UserDropdown({
               <span className="text-sm">Edit nickname</span>
             </button>
 
-            {/* <button
+            <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => {
                 router.push("/settings");
@@ -77,7 +78,7 @@ export default function UserDropdown({
             >
               <Settings className="h-4 w-4" />
               <span className="text-sm">Preferences</span>
-            </button> */}
+            </button>
 
             <hr className="my-2" />
 

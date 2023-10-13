@@ -6,8 +6,8 @@ import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { Note_Storage_Key } from "@/lib/consts";
 import { useRouter } from "next/navigation";
-import NewPostButton from "../../../ui/new-post-button";
-import UserDropdown from "../../../ui/layout/user-dropdown";
+import NewPostButton from "@/ui/new-post-button";
+import UserDropdown from "@/ui/layout/user-dropdown";
 import { Session } from "next-auth";
 import { useUserShareNotes } from "./request";
 import Link from "next/link";
@@ -315,16 +315,11 @@ export default function Sidebar({
 
         <Suspense>
           {session ? (
-            <div className="mx-3 mt-3 flex items-center justify-center">
-              <UserDropdown
-                session={session}
-                setShowEditModal={setShowEditModal}
-              />
-
-              {/* <button className="mx-3 rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold text-slate-100 transition-all hover:bg-blue-300">
-                Active your account
-              </button> */}
-            </div>
+            <UserDropdown
+              className="-mb-2 text-center"
+              session={session}
+              setShowEditModal={setShowEditModal}
+            />
           ) : (
             <button
               className="mx-3 mt-3 rounded-md border border-slate-800 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 transition-all hover:bg-slate-600"
@@ -335,7 +330,7 @@ export default function Sidebar({
           )}
         </Suspense>
 
-        <div className="-mb-2 flex items-center justify-center text-sm">
+        <div className="-mb-1 flex items-center justify-center text-sm">
           <Link className="hover:text-slate-300" href="/">
             Home
           </Link>
@@ -356,18 +351,6 @@ export default function Sidebar({
             Follow
           </Link>
         </div>
-
-        <div className="text-center text-sm">
-          Copyright © 2023{" "}
-          <Link href="/" className="font-bold">
-            <span className="bg-gradient-to-r from-slate-400 via-slate-600 to-slate-800 bg-clip-text text-transparent ">
-              INK
-            </span>
-            <span>E</span>
-          </Link>
-        </div>
-
-        {/* <div>v{pkg.version}</div> */}
       </motion.div>
     </div>
   );
