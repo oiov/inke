@@ -27,7 +27,11 @@ export default function Wrapper({ session }: { session: Session | null }) {
         content. We will take strict measures to permanently ban violators.
         <h2 className="mt-2 text-lg font-bold">Contact Us </h2>
         If you have any questions or suggestions regarding my privacy policy,
-        please feel free to contact me at songsonghhhh@gmail.com.
+        please feel free to contact me at{" "}
+        <a className="text-blue-400" href="/feedback" target="_blank">
+          feedback
+        </a>
+        .
       </div>
     </>
   );

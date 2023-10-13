@@ -15,7 +15,7 @@ export default function Footer() {
       <div className="mt-2 flex items-center justify-center text-sm">
         <Link href="/privacy">Privacy Policy</Link>
         <span className="mx-2">‣</span>
-        <Link href="mailto:songsonghhhh@gmail.com">Contact Us</Link>
+        <Link href="/feedback">Contact</Link>
         <span className="mx-2">‣</span>
         <Link
           className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text font-semibold text-transparent "
