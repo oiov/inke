@@ -106,20 +106,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         editor.chain().focus().deleteRange(range).toggleTaskList().run();
       },
     },
-    {
-      title: "Table",
-      description: "Create a 2x2 table",
-      searchTerms: ["table", "cell", "row"],
-      icon: <Table2 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .insertTable({ rows: 2, cols: 2, withHeaderRow: true })
-          .run();
-      },
-    },
+
     {
       title: "Heading 1",
       description: "Big section heading.",
@@ -203,6 +190,20 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
     },
     {
+      title: "Table",
+      description: "Create a 2x2 table.",
+      searchTerms: ["table", "cell", "row"],
+      icon: <Table2 size={18} />,
+      command: ({ editor, range }: CommandProps) => {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .insertTable({ rows: 2, cols: 2, withHeaderRow: true })
+          .run();
+      },
+    },
+    {
       title: "Image",
       description: "Upload an image from your computer.",
       searchTerms: ["photo", "picture", "media"],
@@ -223,15 +224,15 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         input.click();
       },
     },
-    {
-      title: "Send Feedback",
-      description: "Let us know how we can improve.",
-      icon: <MessageSquarePlus size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
-        window.open("/feedback", "_blank");
-      },
-    },
+    // {
+    //   title: "Send Feedback",
+    //   description: "Let us know how we can improve.",
+    //   icon: <MessageSquarePlus size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).run();
+    //     window.open("/feedback", "_blank");
+    //   },
+    // },
   ].filter((item) => {
     if (typeof query === "string" && query.length > 0) {
       const search = query.toLowerCase();
