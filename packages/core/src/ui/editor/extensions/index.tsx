@@ -14,9 +14,6 @@ import Typography from "@tiptap/extension-typography";
 import SlashCommand from "./slash-command";
 import { InputRule } from "@tiptap/core";
 import UploadImagesPlugin from "@/ui/editor/plugins/upload-images";
-import UpdatedImage from "./updated-image";
-import CustomKeymap from "./custom-keymap";
-import DragAndDrop from "./drag-and-drop";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { createLowlight, common } from "lowlight";
 import markdown from "highlight.js/lib/languages/markdown";
@@ -24,6 +21,13 @@ import css from "highlight.js/lib/languages/css";
 import js from "highlight.js/lib/languages/javascript";
 import ts from "highlight.js/lib/languages/typescript";
 import html from "highlight.js/lib/languages/xml";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import UpdatedImage from "./updated-image";
+import CustomKeymap from "./custom-keymap";
+import DragAndDrop from "./drag-and-drop";
 
 const lowlight = createLowlight(common);
 lowlight.register({ markdown });
@@ -154,6 +158,13 @@ export const defaultExtensions = [
   CodeBlockLowlight.configure({
     lowlight,
   }),
+  Table.configure({
+    resizable: true,
+    allowTableNodeSelection: true,
+  }),
+  TableRow,
+  TableHeader,
+  TableCell,
   Typography,
   CustomKeymap,
   DragAndDrop,

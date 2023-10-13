@@ -24,6 +24,7 @@ import {
   Image as ImageIcon,
   Code,
   CheckSquare,
+  Table2,
 } from "lucide-react";
 import { LoadingCircle } from "@/ui/icons";
 import { toast } from "sonner";
@@ -103,6 +104,20 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       icon: <CheckSquare size={18} />,
       command: ({ editor, range }: CommandProps) => {
         editor.chain().focus().deleteRange(range).toggleTaskList().run();
+      },
+    },
+    {
+      title: "Table",
+      description: "Create a 2x2 table",
+      searchTerms: ["table", "cell", "row"],
+      icon: <Table2 size={18} />,
+      command: ({ editor, range }: CommandProps) => {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .insertTable({ rows: 2, cols: 2, withHeaderRow: true })
+          .run();
       },
     },
     {

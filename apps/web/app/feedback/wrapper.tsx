@@ -6,7 +6,7 @@ import Giscus from "@giscus/react";
 export default function Wrapper({ session }: { session: Session | null }) {
   return (
     <>
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto min-h-screen max-w-3xl px-6">
         <Giscus
           id="feedback"
           repo="yesmore/inke"

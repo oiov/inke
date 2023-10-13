@@ -8,7 +8,7 @@ export default function UINotFound() {
     <>
       <div className="z-10 mx-auto mt-24 flex w-full max-w-xl flex-col items-center justify-center px-5">
         <Image
-          src="/not-found.svg"
+          src="/cat.png"
           alt="404"
           width="250"
           height="250"
@@ -18,7 +18,7 @@ export default function UINotFound() {
           href="/"
           className="mt-24 rounded-md border px-4 py-2 text-sm hover:border-gray-800"
         >
-          Oops, Not Found!
+          Oops, Cat Not Found!
         </Link>
       </div>
     </>

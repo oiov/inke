@@ -11,6 +11,7 @@ import { NodeSelector } from "./node-selector";
 import { ColorSelector } from "./color-selector";
 import { LinkSelector } from "./link-selector";
 import { cn } from "@/lib/utils";
+import { TableSelector } from "./table-selector";
 
 export interface BubbleMenuItem {
   name: string;
@@ -76,6 +77,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
         setIsNodeSelectorOpen(false);
         setIsColorSelectorOpen(false);
         setIsLinkSelectorOpen(false);
+        setIsTableSelectorOpen(false);
       },
     },
   };
@@ -83,18 +85,19 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
   const [isNodeSelectorOpen, setIsNodeSelectorOpen] = useState(false);
   const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false);
   const [isLinkSelectorOpen, setIsLinkSelectorOpen] = useState(false);
+  const [isTableSelectorOpen, setIsTableSelectorOpen] = useState(false);
 
   return (
     <BubbleMenu
       {...bubbleMenuProps}
-      className="novel-flex novel-w-fit novel-divide-x novel-divide-stone-200 novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl"
-    >
+      className="novel-flex novel-w-fit novel-divide-x novel-divide-stone-200 novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl">
       <NodeSelector
         editor={props.editor}
         isOpen={isNodeSelectorOpen}
         setIsOpen={() => {
           setIsNodeSelectorOpen(!isNodeSelectorOpen);
           setIsColorSelectorOpen(false);
+          setIsTableSelectorOpen(false);
           setIsLinkSelectorOpen(false);
         }}
       />
@@ -104,6 +107,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
         setIsOpen={() => {
           setIsLinkSelectorOpen(!isLinkSelectorOpen);
           setIsColorSelectorOpen(false);
+          setIsTableSelectorOpen(false);
           setIsNodeSelectorOpen(false);
         }}
       />
@@ -113,8 +117,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
             key={index}
             onClick={item.command}
             className="novel-p-2 novel-text-stone-600 hover:novel-bg-stone-100 active:novel-bg-stone-200"
-            type="button"
-          >
+            type="button">
             <item.icon
               className={cn("novel-h-4 novel-w-4", {
                 "novel-text-blue-500": item.isActive(),
@@ -128,6 +131,17 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
         isOpen={isColorSelectorOpen}
         setIsOpen={() => {
           setIsColorSelectorOpen(!isColorSelectorOpen);
+          setIsTableSelectorOpen(false);
+          setIsNodeSelectorOpen(false);
+          setIsLinkSelectorOpen(false);
+        }}
+      />
+      <TableSelector
+        editor={props.editor}
+        isOpen={isTableSelectorOpen}
+        setIsOpen={() => {
+          setIsTableSelectorOpen(!isTableSelectorOpen);
+          setIsColorSelectorOpen(false);
           setIsNodeSelectorOpen(false);
           setIsLinkSelectorOpen(false);
         }}
