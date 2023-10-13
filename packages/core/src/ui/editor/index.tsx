@@ -16,6 +16,7 @@ import { ImageResizer } from "./extensions/image-resizer";
 import { EditorProps } from "@tiptap/pm/view";
 import { Editor as EditorClass, Extensions } from "@tiptap/core";
 import { NovelContext } from "./provider";
+import "./styles.css";
 
 export default function Editor({
   completionApi = "/api/generate",

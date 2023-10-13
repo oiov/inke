@@ -28,6 +28,7 @@
   "dependencies": {
     "@radix-ui/react-popover": "^1.0.6",
     "@tiptap/core": "^2.1.7",
+    "@tiptap/extension-code-block-lowlight": "^2.1.12",
     "@tiptap/extension-color": "^2.1.7",
     "@tiptap/extension-highlight": "^2.1.7",
     "@tiptap/extension-horizontal-rule": "^2.1.7",
@@ -55,6 +56,8 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "eventsource-parser": "^0.1.0",
+    "highlight.js": "^11.9.0",
+    "lowlight": "^3.1.0",
     "lucide-react": "^0.244.0",
     "next": "13.4.20-canary.15",
     "react": "18.2.0",

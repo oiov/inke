@@ -17,6 +17,20 @@ import UploadImagesPlugin from "@/ui/editor/plugins/upload-images";
 import UpdatedImage from "./updated-image";
 import CustomKeymap from "./custom-keymap";
 import DragAndDrop from "./drag-and-drop";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import { createLowlight, common } from "lowlight";
+import markdown from "highlight.js/lib/languages/markdown";
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+
+const lowlight = createLowlight(common);
+lowlight.register({ markdown });
+lowlight.register({ html });
+lowlight.register({ css });
+lowlight.register({ js });
+lowlight.register({ ts });
 
 export const defaultExtensions = [
   StarterKit.configure({
@@ -42,12 +56,6 @@ export const defaultExtensions = [
     blockquote: {
       HTMLAttributes: {
         class: "novel-border-l-4 novel-border-stone-700",
-      },
-    },
-    codeBlock: {
-      HTMLAttributes: {
-        class:
-          "novel-rounded-sm novel-bg-stone-100 novel-p-5 novel-font-mono novel-font-medium novel-text-stone-800",
       },
     },
     code: {
@@ -142,6 +150,9 @@ export const defaultExtensions = [
     html: false,
     transformCopiedText: true,
     transformPastedText: true,
+  }),
+  CodeBlockLowlight.configure({
+    lowlight,
   }),
   Typography,
   CustomKeymap,
