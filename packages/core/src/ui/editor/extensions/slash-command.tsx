@@ -393,7 +393,7 @@ const CommandList = ({
                 {item.description}
               </p>
             </div>
-            {item.title === "Continue writing" && !isLoading && (
+            {item.title === "Continue writing" && isLoading && (
               <div>
                 <PauseCircle
                   className="novel-h-5 novel-w-5 novel-text-stone-300 hover:novel-text-stone-500 novel-cursor-pointer"
