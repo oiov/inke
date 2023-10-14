@@ -102,4 +102,4 @@ Inke is built on the following stack:
 
 ## License
 
-[GPL](./LICENSE) © [yesmore](https://github.com/yesmore)
+[Apache-2.0](./LICENSE) © [yesmore](https://github.com/yesmore)
