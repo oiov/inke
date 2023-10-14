@@ -297,7 +297,7 @@ const CommandList = ({
     },
     onError: (e) => {
       if (e.message !== "Failed to fetch") {
-        toast.error("Something wrong! Please try aging.");
+        toast.error(e.message);
       }
     },
   });
