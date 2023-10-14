@@ -344,11 +344,7 @@ export default function Sidebar({
             Feedback
           </Link>
           <span className="mx-2">‣</span>
-          <Link
-            className="hover:text-slate-300"
-            href="https://github.com/yesmore/inke"
-            target="_blank"
-          >
+          <Link className="hover:text-slate-300" href="/github" target="_blank">
             Github
           </Link>
         </div>

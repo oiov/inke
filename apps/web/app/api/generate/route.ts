@@ -31,7 +31,7 @@ export async function POST(req: Request): Promise<Response> {
     const ip = req.headers.get("x-forwarded-for");
     const ratelimit = new Ratelimit({
       redis: kv,
-      limiter: Ratelimit.slidingWindow(50, "1 d"),
+      limiter: Ratelimit.slidingWindow(100, "1 d"),
     });
 
     const { success, limit, reset, remaining } = await ratelimit.limit(

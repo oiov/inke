@@ -13,13 +13,17 @@ export default function Footer() {
         <Logo className="h-8 w-8" />
       </Link>
       <div className="mt-2 flex items-center justify-center text-sm">
-        <Link href="/privacy">Privacy Policy</Link>
+        <Link href="/privacy" className="hover:text-slate-300">
+          Privacy Policy
+        </Link>
         <span className="mx-2">‣</span>
-        <Link href="/feedback">Feedback</Link>
+        <Link className="hover:text-slate-300" href="/feedback">
+          Feedback
+        </Link>
         <span className="mx-2">‣</span>
         <Link
-          className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text font-semibold text-transparent "
-          href="https://github.com/yesmore/inke"
+          className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text font-semibold text-transparent hover:text-slate-300 "
+          href="/github"
           target="_blank"
         >
           Open Source
