@@ -222,7 +222,7 @@ export default function Editor({
                   Click the <code>`Publish`</code> button to save your note
                   remotely and generate a sharing link, allowing you to share
                   your notes with others. Your notes will be uploaded after
-                  serialization. e.g.{" "}
+                  serialization. e.g{" "}
                   <a
                     className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
                     href="https://inke.app/publish/5fe39539-377f-40e9-8a3f-9071e2165e21"
@@ -230,6 +230,11 @@ export default function Editor({
                   >
                     link
                   </a>
+                  .
+                </p>
+                <p>
+                  You need to <strong>sign in</strong> first to try this
+                  feature.
                 </p>
               </div>
             }
