@@ -278,7 +278,7 @@ const CommandList = ({
   const { completionApi } = useContext(NovelContext);
 
   const { complete, completion, isLoading, stop } = useCompletion({
-    id: "inke-cmd",
+    id: "inke",
     api: completionApi,
     onResponse: (response) => {
       if (response.status === 429) {
@@ -301,15 +301,6 @@ const CommandList = ({
       }
     },
   });
-
-  const prev = useRef("");
-
-  // Insert chunks of the generated text
-  useEffect(() => {
-    const diff = completion.slice(prev.current.length);
-    prev.current = completion;
-    editor.commands.insertContent(diff);
-  }, [isLoading, editor, completion]);
 
   const selectItem = useCallback(
     (index: number) => {
