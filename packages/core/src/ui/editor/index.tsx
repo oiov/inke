@@ -93,6 +93,8 @@ export default function Editor({
 
   const [hydrated, setHydrated] = useState(false);
 
+  const [isLoadingOutside, setLoadingOutside] = useState(false);
+
   const debouncedUpdates = useDebouncedCallback(async ({ editor }) => {
     const json = editor.getJSON();
     const text = editor.getText();
@@ -115,6 +117,7 @@ export default function Editor({
         chars: 2,
       });
       if (lastTwo === "??" && !isLoading) {
+        setLoadingOutside(true);
         e.editor.commands.deleteRange({
           from: selection.from - 2,
           to: selection.from,
@@ -159,6 +162,9 @@ export default function Editor({
     const diff = completion.slice(prev.current.length);
     prev.current = completion;
     editor?.commands.insertContent(diff);
+    if (!isLoading) {
+      setLoadingOutside(false);
+    }
   }, [isLoading, editor, completion]);
 
   // useEffect(() => {
@@ -223,7 +229,7 @@ export default function Editor({
         {editor && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
-        {isLoading && (
+        {isLoadingOutside && isLoading && (
           <div className="novel-fixed novel-bottom-3 novel-right-3">
             <div className="flex items-center justify-start novel-bg-white shadow-lg rounded-full px-3 py-2 w-16 h-10">
               <Magic className="novel-w-7 novel-animate-pulse" />
