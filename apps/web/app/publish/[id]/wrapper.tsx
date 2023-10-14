@@ -52,6 +52,7 @@ export default function Wrapper({
             storageKey={Content_Public_Storage_Key}
             debounceDuration={Default_Debounce_Duration}
             defaultValue={currentContent}
+            editable={false}
           />
           {user && (
             <div className="z-[1000] float-right mx-10">

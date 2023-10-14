@@ -31,6 +31,7 @@ export default function Editor({
   debounceDuration = 750,
   storageKey = "novel__content",
   disableLocalStorage = false,
+  editable = true,
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -88,6 +89,11 @@ export default function Editor({
    * Defaults to false.
    */
   disableLocalStorage?: boolean;
+  /**
+   * Enable editing.
+   * Defaults to true.
+   */
+  editable?: boolean;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -111,6 +117,7 @@ export default function Editor({
       ...defaultEditorProps,
       ...editorProps,
     },
+    editable: editable,
     onUpdate: (e) => {
       const selection = e.editor.state.selection;
       const lastTwo = getPrevText(e.editor, {
