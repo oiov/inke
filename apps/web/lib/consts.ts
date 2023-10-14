@@ -6,13 +6,7 @@ export const Default_Debounce_Duration = 750;
 
 export const defaultEditorContent = {
   type: "doc",
-  content: [
-    {
-      type: "heading",
-      attrs: { level: 2 },
-      content: [{ type: "text", text: "What's New?" }],
-    },
-  ],
+  content: [{ type: "paragraph" }],
 };
 
 export const defaultEditorGuideContent = {
