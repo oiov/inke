@@ -33,7 +33,6 @@ export default function EmailButton() {
 
     const sign_req = await signIn("email", {
       email: email,
-      // image: "https://chooose.icu/_next/image?url=%2Flogo.png&w=32&q=75",
       callbackUrl: pathname,
       redirect: false,
     });

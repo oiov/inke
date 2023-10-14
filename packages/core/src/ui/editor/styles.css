@@ -1,5 +1,5 @@
 .tiptap pre {
-  background: #191919;
+  background: #000;
   border-radius: 0.5rem;
   color: #fff;
   font-family: "JetBrainsMono", monospace;
@@ -92,6 +92,7 @@
 
 .tiptap table th {
   background-color: #f1f3f5;
+  color: #000;
   font-weight: bold;
   text-align: left;
 }
