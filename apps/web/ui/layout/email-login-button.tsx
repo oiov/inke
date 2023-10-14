@@ -115,7 +115,7 @@ export default function EmailButton() {
         ) : (
           <>
             <Github className="h-5 w-5" />
-            <p>Sign In with Github</p>
+            <p>Sign in with Github</p>
           </>
         )}
       </button>

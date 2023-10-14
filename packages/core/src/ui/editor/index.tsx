@@ -17,6 +17,8 @@ import { EditorProps } from "@tiptap/pm/view";
 import { Editor as EditorClass, Extensions } from "@tiptap/core";
 import { NovelContext } from "./provider";
 import "./styles.css";
+import { PauseCircle } from "lucide-react";
+import { Magic } from "../icons";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -159,41 +161,41 @@ export default function Editor({
     editor?.commands.insertContent(diff);
   }, [isLoading, editor, completion]);
 
-  useEffect(() => {
-    // if user presses escape or cmd + z and it's loading,
-    // stop the request, delete the completion, and insert back the "++"
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
-        stop();
-        if (e.key === "Escape") {
-          editor?.commands.deleteRange({
-            from: editor.state.selection.from - completion.length,
-            to: editor.state.selection.from,
-          });
-        }
-        editor?.commands.insertContent("??");
-      }
-    };
-    const mousedownHandler = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      stop();
-      if (window.confirm("AI writing paused. Continue?")) {
-        complete(editor?.getText() || "");
-      }
-    };
-    if (isLoading) {
-      document.addEventListener("keydown", onKeyDown);
-      window.addEventListener("mousedown", mousedownHandler);
-    } else {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
-    }
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
-    };
-  }, [stop, isLoading, editor, complete, completion.length]);
+  // useEffect(() => {
+  //   // if user presses escape or cmd + z and it's loading,
+  //   // stop the request, delete the completion, and insert back the "??"
+  //   const onKeyDown = (e: KeyboardEvent) => {
+  //     if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
+  //       stop();
+  //       if (e.key === "Escape") {
+  //         editor?.commands.deleteRange({
+  //           from: editor.state.selection.from - completion.length,
+  //           to: editor.state.selection.from,
+  //         });
+  //       }
+  //       editor?.commands.insertContent("??");
+  //     }
+  //   };
+  //   const mousedownHandler = (e: MouseEvent) => {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //     stop();
+  //     if (window.confirm("AI writing paused. Continue?")) {
+  //       complete(editor?.getText() || "");
+  //     }
+  //   };
+  //   // if (isLoading) {
+  //   //   // document.addEventListener("keydown", onKeyDown);
+  //   //   // window.addEventListener("mousedown", mousedownHandler);
+  //   // } else {
+  //   //   // document.removeEventListener("keydown", onKeyDown);
+  //   //   // window.removeEventListener("mousedown", mousedownHandler);
+  //   // }
+  //   // return () => {
+  //   //   // document.removeEventListener("keydown", onKeyDown);
+  //   //   // window.removeEventListener("mousedown", mousedownHandler);
+  //   // };
+  // }, [stop, isLoading, editor, complete, completion.length]);
 
   // Default: Hydrate the editor with the content from localStorage.
   // If disableLocalStorage is true, hydrate the editor with the defaultValue.
@@ -221,6 +223,20 @@ export default function Editor({
         {editor && <EditorBubbleMenu editor={editor} />}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
+        {isLoading && (
+          <div className="novel-fixed novel-bottom-3 novel-right-3">
+            <div className="flex items-center justify-start shadow-lg rounded-full px-3 py-2 w-16 h-10">
+              <Magic className="novel-w-7 novel-animate-pulse" />
+              <span className="text-sm novel-animate-pulse novel-ml-1 novel-text-slate-500">
+                generating...
+              </span>
+              <PauseCircle
+                onClick={stop}
+                className="novel-h-5 hover:novel-text-stone-500 cursor-pointer novel-ml-6 novel-w-5 novel-text-stone-300"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </NovelContext.Provider>
   );

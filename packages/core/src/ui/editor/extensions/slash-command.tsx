@@ -25,6 +25,7 @@ import {
   Code,
   CheckSquare,
   Table2,
+  PauseCircle,
 } from "lucide-react";
 import { LoadingCircle } from "@/ui/icons";
 import { toast } from "sonner";
@@ -276,8 +277,8 @@ const CommandList = ({
 
   const { completionApi } = useContext(NovelContext);
 
-  const { complete, isLoading } = useCompletion({
-    id: "inke",
+  const { complete, isLoading, stop } = useCompletion({
+    id: "inke-slash",
     api: completionApi,
     onResponse: (response) => {
       if (response.status === 429) {
@@ -295,7 +296,9 @@ const CommandList = ({
       });
     },
     onError: (e) => {
-      toast.error(e.message);
+      if (e.message !== "Failed to fetch") {
+        toast.error("Something wrong! Please try aging.");
+      }
     },
   });
 
@@ -390,6 +393,14 @@ const CommandList = ({
                 {item.description}
               </p>
             </div>
+            {item.title === "Continue writing" && !isLoading && (
+              <div>
+                <PauseCircle
+                  className="novel-h-5 novel-w-5 novel-text-stone-300 hover:novel-text-stone-500 novel-cursor-pointer"
+                  onClick={stop}
+                />
+              </div>
+            )}
           </button>
         );
       })}
