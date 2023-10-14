@@ -225,7 +225,7 @@ export default function Editor({
         <EditorContent editor={editor} />
         {isLoading && (
           <div className="novel-fixed novel-bottom-3 novel-right-3">
-            <div className="flex items-center justify-start shadow-lg rounded-full px-3 py-2 w-16 h-10">
+            <div className="flex items-center justify-start novel-bg-white shadow-lg rounded-full px-3 py-2 w-16 h-10">
               <Magic className="novel-w-7 novel-animate-pulse" />
               <span className="text-sm novel-animate-pulse novel-ml-1 novel-text-slate-500">
                 generating...

@@ -278,7 +278,7 @@ const CommandList = ({
   const { completionApi } = useContext(NovelContext);
 
   const { complete, completion, isLoading, stop } = useCompletion({
-    id: "inke-slash",
+    id: "inke",
     api: completionApi,
     onResponse: (response) => {
       if (response.status === 429) {
@@ -325,11 +325,11 @@ const CommandList = ({
     [complete, isLoading, command, editor, items]
   );
 
-  useEffect(() => {
-    if (completion) {
-      editor.commands.insertContent(completion);
-    }
-  }, [isLoading, editor, completion]);
+  // useEffect(() => {
+  //   if (completion) {
+  //     editor.commands.insertContent(completion);
+  //   }
+  // }, [isLoading, editor, completion]);
 
   useEffect(() => {
     const navigationKeys = ["ArrowUp", "ArrowDown", "Enter"];
