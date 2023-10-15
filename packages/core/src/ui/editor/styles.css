@@ -133,3 +133,32 @@
   cursor: ew-resize;
   cursor: col-resize;
 }
+
+/* youtube */
+
+.tiptap iframe {
+  border: 1px solid #c4c4c400;
+  border-radius: 6px;
+  min-width: 200px;
+  min-height: 180px;
+  width: 100%;
+  display: block;
+  outline: 0px solid transparent;
+  box-shadow: 1px 1px 10px #72727236;
+}
+.tiptap iframe:before {
+  content: "";
+  display: inline-block;
+  padding-bottom: 100%;
+  width: 0.1px;
+  vertical-align: middle;
+}
+.tiptap div[data-youtube-video] {
+  cursor: move;
+  padding-right: 24px;
+  width: 100%;
+}
+.tiptap .ProseMirror-selectednode iframe {
+  transition: outline 0.15s;
+  outline: 3px solid #3c69ff;
+}

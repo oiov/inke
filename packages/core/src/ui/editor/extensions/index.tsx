@@ -25,6 +25,7 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+import Youtube from "@tiptap/extension-youtube";
 import UpdatedImage from "./updated-image";
 import CustomKeymap from "./custom-keymap";
 import DragAndDrop from "./drag-and-drop";
@@ -161,6 +162,11 @@ export const defaultExtensions = [
   Table.configure({
     resizable: true,
     allowTableNodeSelection: true,
+  }),
+  Youtube.configure({
+    origin: "inke.app",
+    controls: true,
+    inline: false,
   }),
   TableRow,
   TableHeader,

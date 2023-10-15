@@ -34,6 +34,7 @@ import { Magic } from "@/ui/icons";
 import { getPrevText } from "@/lib/editor";
 import { startImageUpload } from "@/ui/editor/plugins/upload-images";
 import { NovelContext } from "../provider";
+import { Youtube } from "lucide-react";
 
 interface CommandItemProps {
   title: string;
@@ -98,6 +99,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
           .run();
       },
     },
+
     {
       title: "To-do List",
       description: "Track tasks with a to-do list.",
@@ -223,6 +225,30 @@ const getSuggestionItems = ({ query }: { query: string }) => {
           }
         };
         input.click();
+      },
+    },
+    {
+      title: "Youtube Video (beta)",
+      description: "Play the Youtube url video you filled out.",
+      searchTerms: ["video", "ytb", "Youtube", "youtube"],
+      icon: <Youtube size={19} />,
+      command: ({ editor, range }: CommandProps) => {
+        const url = prompt(
+          "Enter YouTube URL",
+          "https://www.youtube.com/watch?v="
+        );
+        if (url) {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setYoutubeVideo({
+              src: url,
+              // width: 640,
+              // height: 480,
+            })
+            .run();
+        }
       },
     },
     // {
