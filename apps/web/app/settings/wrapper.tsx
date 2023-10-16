@@ -15,7 +15,7 @@ export default function Wrapper({ session }: { session: Session | null }) {
             height="250"
             className="ml-4 rounded-sm"
           />
-          <p>Please waiting...</p>
+          <p>Coming soon...</p>
         </div>
       </div>
     </>
