@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
 import { isEmail } from "@/lib/utils";
-import { Github, LoadingDots } from "../shared/icons";
+import { Github, Google, LoadingDots } from "../shared/icons";
 import { usePathname } from "next/navigation";
 
 export default function EmailButton() {
@@ -13,6 +13,7 @@ export default function EmailButton() {
   const [loading, setLoading] = useState(false);
   const [isSendSuccess, setIsSendSuccess] = useState(false);
   const [signInGithubClicked, setSignInGithubClicked] = useState(false);
+  const [signInGoogleClicked, setSignInGoogleClicked] = useState(false);
 
   const handleSubmit = async () => {
     if (email === "") {
@@ -116,6 +117,27 @@ export default function EmailButton() {
           <>
             <Github className="h-5 w-5" />
             <p>Sign in with Github</p>
+          </>
+        )}
+      </button>
+      <button
+        disabled={signInGoogleClicked}
+        className={`${
+          signInGoogleClicked
+            ? "cursor-not-allowed bg-gray-100"
+            : "border text-black hover:bg-gray-50"
+        } nice-border flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow transition-all duration-75 hover:border-gray-800 focus:outline-none`}
+        onClick={() => {
+          setSignInGoogleClicked(true);
+          signIn("google", { callbackUrl: pathname, redirect: false });
+        }}
+      >
+        {signInGoogleClicked ? (
+          <LoadingDots color="#808080" />
+        ) : (
+          <>
+            <Google className="h-5 w-5" />
+            <p>Sign in with Google</p>
           </>
         )}
       </button>
