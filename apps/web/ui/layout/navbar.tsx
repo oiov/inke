@@ -57,6 +57,12 @@ export default function NavBar({ session }: { session: Session | null }) {
               </Link> */}
               <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
+                href={"/pricing"}
+              >
+                pricing
+              </Link>
+              <Link
+                className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/feedback"}
               >
                 feedback
@@ -69,7 +75,7 @@ export default function NavBar({ session }: { session: Session | null }) {
                 />
               ) : (
                 <button
-                  className="bg-gradient-to-r from-slate-400 via-slate-600 to-slate-800 bg-clip-text px-3 py-1.5 text-sm font-semibold text-transparent transition-all hover:text-slate-300"
+                  className="bg-gradient-to-r from-slate-400 via-slate-600 to-slate-800 bg-clip-text py-1.5 text-sm font-semibold text-transparent transition-all hover:text-slate-300"
                   onClick={() => setShowSignInModal(true)}
                 >
                   Sign in

@@ -7,6 +7,7 @@ import {
   useMemo,
 } from "react";
 import EmailButton from "./email-login-button";
+import Link from "next/link";
 
 const SignInModal = ({
   showSignInModal,
@@ -21,8 +22,14 @@ const SignInModal = ({
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-5 pt-8 text-center md:px-16">
           <h3 className="font-display text-2xl font-bold">Inke</h3>
           <p className="text-sm text-gray-500">
-            Please enter the correct email address, sign in to unlock more
-            features.
+            Please enter your email, sign in to unlock more features.{" "}
+            <Link
+              className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+              href="/pricing"
+            >
+              Learn more
+            </Link>{" "}
+            about our plan.
           </p>
         </div>
 

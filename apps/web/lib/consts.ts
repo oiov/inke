@@ -11,19 +11,15 @@ interface Plans {
 
 export const Account_Plans: Plans[] = [
   {
-    limit_day: 200,
+    limit_day: 300,
     limit_chars: 300,
   },
   {
-    limit_day: 500,
-    limit_chars: 500,
-  },
-  {
-    limit_day: 1000,
-    limit_chars: 1000,
-  },
-  {
     limit_day: 2000,
+    limit_chars: 2000,
+  },
+  {
+    limit_day: 2500,
     limit_chars: 2000,
   },
   {

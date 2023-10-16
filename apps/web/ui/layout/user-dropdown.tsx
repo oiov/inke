@@ -48,24 +48,24 @@ export default function UserDropdown({
             <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => {
-                router.push("/plan");
+                router.push("/pricing");
               }}
             >
               <ShieldCheck
                 className={
-                  user?.plan !== "0"
+                  user?.plan === "1"
                     ? "h-4 w-4 text-blue-500"
                     : "h-4 w-4 text-yellow-500"
                 }
               />
               <span
                 className={
-                  "text-sm " + user?.plan !== "0" ? "" : "text-yellow-500"
+                  "text-sm " + (user?.plan === "1" ? "" : "text-yellow-500")
                 }
               >
                 {user && (
                   <span className="text-sm">
-                    {user?.plan !== "0" ? "Plan (Active)" : "Plan (Inactive)"}
+                    {user?.plan === "1" ? "Actived plan" : "Upgrade your plan"}
                   </span>
                 )}
               </span>
