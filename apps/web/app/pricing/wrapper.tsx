@@ -205,16 +205,16 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             >
               Product Hunt
             </Link>
-            and leave a comment on our{" "}
-            <Link
-              className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
-              href="/feedback"
-              target="_blank"
-            >
-              feedback
-            </Link>{" "}
-            page (please include your registered nickname and Product Hunt
-            nickname in the comment).
+            and send an email named{" "}
+            <strong>
+              <code>Apply for Premium</code>
+            </strong>{" "}
+            to{" "}
+            <strong>
+              <code>songsonghhhh@gmail.com</code>
+            </strong>{" "}
+            , please include your registered email address (inke.app) and
+            Product Hunt nickname in the email content .
           </p>
           <p>
             we will process your request within 1-2 business days. All you need
