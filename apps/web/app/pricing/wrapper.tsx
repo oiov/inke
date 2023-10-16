@@ -57,10 +57,6 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  10 notes upload to Cloud
-                </li>
-                <li className="flex items-center">
-                  <Checked />
                   AI generates 100 times per day
                 </li>
                 <li className="flex items-center">
