@@ -28,7 +28,7 @@ import { ShareNote } from "@prisma/client";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { BadgeInfo, ExternalLink, UploadCloud } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { useUserShareNotes } from "./request";
+import { useUserInfoByEmail, useUserShareNotes } from "./request";
 import Link from "next/link";
 import Tooltip from "@/ui/shared/tooltip";
 
@@ -59,6 +59,7 @@ export default function Editor({
   const [currentPureContent, setPureContent] = useState("");
 
   const { shares } = useUserShareNotes();
+  const { user } = useUserInfoByEmail(session?.user.email);
 
   useEffect(() => {
     if (id && contents.length > 0) {
@@ -261,6 +262,7 @@ export default function Editor({
               storageKey={Content_Storage_Key}
               debounceDuration={debounceDuration}
               defaultValue={currentContent}
+              plan={user?.plan || "5"}
               onUpdate={() => setSaveStatus("Unsaved")}
               onDebouncedUpdate={(json: JSONContent, text: string) => {
                 setSaveStatus("Saving...");

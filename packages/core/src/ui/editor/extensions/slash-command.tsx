@@ -299,11 +299,12 @@ const CommandList = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const { completionApi } = useContext(NovelContext);
+  const { completionApi, plan } = useContext(NovelContext);
 
-  const { complete, completion, isLoading, stop } = useCompletion({
+  const { complete, isLoading, stop } = useCompletion({
     id: "inke",
     api: completionApi,
+    body: { plan },
     onResponse: (response) => {
       if (response.status === 429) {
         toast.error("You have reached your request limit for the day.");

@@ -2,7 +2,9 @@ import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { kv } from "@vercel/kv";
 import { Ratelimit } from "@upstash/ratelimit";
-import { getRandomElement } from "@/lib/utils";
+import { fetcher, getRandomElement } from "@/lib/utils";
+import { User } from "@prisma/client";
+import { Account_Plans } from "../../../lib/consts";
 
 const api_key = process.env.OPENAI_API_KEY || "";
 const api_keys = process.env.OPENAI_API_KEYs || "";
@@ -23,16 +25,18 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  if (
-    process.env.NODE_ENV != "development" &&
-    process.env.KV_REST_API_URL &&
-    process.env.KV_REST_API_TOKEN
-  ) {
+  const { prompt, plan } = await req.json();
+
+  const planN = Number(plan || "0");
+
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     const ip = req.headers.get("x-forwarded-for");
     const ratelimit = new Ratelimit({
       redis: kv,
-      limiter: Ratelimit.slidingWindow(300, "1 d"),
+      limiter: Ratelimit.slidingWindow(Account_Plans[planN].limit_day, "1 d"),
     });
+
+    console.log("plan", planN, Account_Plans[planN], ip);
 
     const { success, limit, reset, remaining } = await ratelimit.limit(
       `novel_ratelimit_${ip}`,
@@ -50,8 +54,6 @@ export async function POST(req: Request): Promise<Response> {
     }
   }
 
-  let { prompt } = await req.json();
-
   openai.apiKey = getRandomElement(api_keys.split(",")) || api_key;
 
   const response = await openai.chat.completions.create({
@@ -62,7 +64,7 @@ export async function POST(req: Request): Promise<Response> {
         content:
           "You are an AI writing assistant that continues existing text based on context from prior text." +
           "Give more weight/priority to the later characters than the beginning ones. " +
-          "Limit your response to no more than 500 characters, but make sure to construct complete sentences.",
+          `Limit your response to no more than ${Account_Plans[planN].limit_chars} characters, but make sure to construct complete sentences.`,
         // "Use Markdown formatting when appropriate.",
       },
       {

@@ -32,6 +32,7 @@ export default function Editor({
   storageKey = "novel__content",
   disableLocalStorage = false,
   editable = true,
+  plan = "5",
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -94,6 +95,7 @@ export default function Editor({
    * Defaults to true.
    */
   editable?: boolean;
+  plan?: string;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -137,7 +139,6 @@ export default function Editor({
         // complete(e.editor.storage.markdown.getMarkdown());
         va.track("Autocomplete Shortcut Used");
       } else {
-        const json = e.editor.getJSON();
         onUpdate(e.editor);
         debouncedUpdates(e);
       }
@@ -148,6 +149,7 @@ export default function Editor({
   const { complete, completion, isLoading, stop } = useCompletion({
     id: "inke",
     api: completionApi,
+    body: { plan },
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
         from: editor.state.selection.from - completion.length,
@@ -174,42 +176,6 @@ export default function Editor({
     }
   }, [isLoading, editor, completion]);
 
-  // useEffect(() => {
-  //   // if user presses escape or cmd + z and it's loading,
-  //   // stop the request, delete the completion, and insert back the "??"
-  //   const onKeyDown = (e: KeyboardEvent) => {
-  //     if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
-  //       stop();
-  //       if (e.key === "Escape") {
-  //         editor?.commands.deleteRange({
-  //           from: editor.state.selection.from - completion.length,
-  //           to: editor.state.selection.from,
-  //         });
-  //       }
-  //       editor?.commands.insertContent("??");
-  //     }
-  //   };
-  //   const mousedownHandler = (e: MouseEvent) => {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //     stop();
-  //     if (window.confirm("AI writing paused. Continue?")) {
-  //       complete(editor?.getText() || "");
-  //     }
-  //   };
-  //   // if (isLoading) {
-  //   //   // document.addEventListener("keydown", onKeyDown);
-  //   //   // window.addEventListener("mousedown", mousedownHandler);
-  //   // } else {
-  //   //   // document.removeEventListener("keydown", onKeyDown);
-  //   //   // window.removeEventListener("mousedown", mousedownHandler);
-  //   // }
-  //   // return () => {
-  //   //   // document.removeEventListener("keydown", onKeyDown);
-  //   //   // window.removeEventListener("mousedown", mousedownHandler);
-  //   // };
-  // }, [stop, isLoading, editor, complete, completion.length]);
-
   // Default: Hydrate the editor with the content from localStorage.
   // If disableLocalStorage is true, hydrate the editor with the defaultValue.
   useEffect(() => {
@@ -227,6 +193,7 @@ export default function Editor({
     <NovelContext.Provider
       value={{
         completionApi,
+        plan,
       }}>
       <div
         onClick={() => {

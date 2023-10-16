@@ -1,7 +1,6 @@
 "use client";
 
 import { Session } from "next-auth";
-import Giscus from "@giscus/react";
 
 export default function Wrapper({ session }: { session: Session | null }) {
   return (

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LoadingCircle } from "@/ui/shared/icons";
+import { Session } from "next-auth";
 
 export function Welcome() {
   return (
@@ -33,7 +34,7 @@ export function Welcome() {
   );
 }
 
-export function EditorGuide() {
+export function EditorGuide({ session }: { session: Session | null }) {
   const [canRenderGuide, setCanRenderGuide] = useState(false);
   const [isShowLocalHunt, setShowLocalHunt] = useState(false);
 

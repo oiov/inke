@@ -4,6 +4,38 @@ export const Content_Guide_Storage_Key = "inke__guide__content";
 export const Content_Public_Storage_Key = "inke__public__content";
 export const Default_Debounce_Duration = 750;
 
+interface Plans {
+  limit_day: number;
+  limit_chars: number;
+}
+
+export const Account_Plans: Plans[] = [
+  {
+    limit_day: 200,
+    limit_chars: 300,
+  },
+  {
+    limit_day: 500,
+    limit_chars: 500,
+  },
+  {
+    limit_day: 1000,
+    limit_chars: 1000,
+  },
+  {
+    limit_day: 2000,
+    limit_chars: 2000,
+  },
+  {
+    limit_day: 3000,
+    limit_chars: 2000,
+  },
+  {
+    limit_day: 100,
+    limit_chars: 200,
+  },
+];
+
 export const defaultEditorContent = {
   type: "doc",
   content: [{ type: "paragraph" }],
