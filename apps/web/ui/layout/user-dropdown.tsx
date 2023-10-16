@@ -65,7 +65,7 @@ export default function UserDropdown({
               >
                 {user && (
                   <span className="text-sm">
-                    {user?.plan === "1" ? "Actived plan" : "Upgrade your plan"}
+                    {user?.plan === "1" ? "Actived plan" : "Upgrade to Premium"}
                   </span>
                 )}
               </span>

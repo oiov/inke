@@ -27,6 +27,10 @@ export const Account_Plans: Plans[] = [
     limit_chars: 2000,
   },
   {
+    limit_day: 5000,
+    limit_chars: 3000,
+  },
+  {
     limit_day: 100,
     limit_chars: 200,
   },
