@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="108" src="https://inke.app/logo.png">
+  <img width="108" src="https://inke.app/logo-c.png">
 </p>
 
 <p align="center"><strong> Inke - Small is beautiful</strong></p>
@@ -66,11 +66,13 @@ pnpm dev
 | `KV_REST_API_URL`       | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart)           | [`"https//xxx.com"`](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/default-content.tsx) |
 | `KV_REST_API_TOKEN`     | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart).          | `abcdefg`                                                                                                           |
 | `NEXTAUTH_SECRET`       | `string` | Only for production – generate one here: [generate-secret](https://generate-secret.vercel.app/32).                                                       | `fasgagahhjerherg`                                                                                                  |
-| `DATABASE_URL`          | `string` | DATABASE url                                                                                                                                             | `mongodb://xxxx`                                                                                                    |
-| `EMAIL_FROM`            | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `Inke <regist@inke.app>`                                                                                            |
+| `DATABASE_URL`          | `string` | DATABASE url                                                                                                                                             | `mongodb+srv://xxxx`                                                                                                |
+| `EMAIL_FROM`            | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `Inke <email@inke.app>`                                                                                             |
 | `EMAIL_SERVER`          | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `smtps://xxxx`                                                                                                      |
-| `GITHUB_ID`             | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `xadsafsa`                                                                                                          |
-| `GITHUB_SECRET`         | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `xadsafsa`                                                                                                          |
+| `GITHUB_ID`             | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `aaaaaaaa`                                                                                                          |
+| `GITHUB_SECRET`         | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `aaaaaaaa`                                                                                                          |
+| `GOOGLE_CLIENT_ID`      | `string` | Next Auth Provider: [Google](https://next-auth.js.org/providers/google)                                                                                  | `aaaaaaaa`                                                                                                          |
+| `GOOGLE_CLIENT_SECRET`  | `string` | Next Auth Provider: [Google](https://next-auth.js.org/providers/google)                                                                                  | `aaaaaaaa`                                                                                                          |
 
 ## Sync repo
 
