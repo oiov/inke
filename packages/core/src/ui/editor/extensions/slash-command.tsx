@@ -228,7 +228,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Youtube Video (beta)",
+      title: "Youtube video",
       description: "Play the Youtube url video you filled out.",
       searchTerms: ["video", "ytb", "Youtube", "youtube"],
       icon: <Youtube size={19} />,
@@ -244,8 +244,6 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             .deleteRange(range)
             .setYoutubeVideo({
               src: url,
-              // width: 640,
-              // height: 480,
             })
             .run();
         }
