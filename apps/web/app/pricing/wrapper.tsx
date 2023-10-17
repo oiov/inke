@@ -74,7 +74,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             </div>
             <div className="mt-6">
               <button className="w-full rounded-lg bg-black px-3 py-2 font-semibold text-slate-100 shadow-md">
-                Beta for free
+                Get start
               </button>
             </div>
           </div>
@@ -126,7 +126,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             </div>
             <div className="mt-6">
               <button className="w-full rounded-lg bg-black px-3 py-2 font-semibold text-slate-100 shadow-md">
-                Beta for free
+                Sign in for free
               </button>
             </div>
           </div>
