@@ -152,7 +152,7 @@ export const defaultExtensions = [
     nested: true,
   }),
   Markdown.configure({
-    html: false,
+    html: true,
     transformCopiedText: true,
     transformPastedText: true,
   }),

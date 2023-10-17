@@ -118,14 +118,12 @@ export function exportAsJson(data: any, filename: string) {
   document.body.removeChild(linkElement);
 }
 
-export function exportAsTxtFile(data: string, fileName: string) {
-  const dataStr = JSON.stringify(data);
-  const dataUri =
-    "data:text/plain;charset=utf-8," + encodeURIComponent(dataStr);
+export function exportAsMarkdownFile(data: string, fileName: string) {
+  const dataUri = "data:text/plain;charset=utf-8," + encodeURIComponent(data);
 
   const linkElement = document.createElement("a");
   linkElement.setAttribute("href", dataUri);
-  linkElement.setAttribute("download", fileName + ".txt");
+  linkElement.setAttribute("download", fileName + ".md");
   linkElement.style.display = "none";
   document.body.appendChild(linkElement);
 

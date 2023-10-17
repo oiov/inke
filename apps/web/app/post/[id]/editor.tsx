@@ -14,7 +14,7 @@ import {
 import { ContentItem } from "@/lib/types/note";
 import {
   exportAsJson,
-  exportAsTxtFile,
+  exportAsMarkdownFile,
   fetcher,
   fomatTmpDate,
   timeAgo,
@@ -73,10 +73,13 @@ export default function Editor({
     setLoading(false);
   }, [id, contents]);
 
-  const debouncedUpdates = useDebouncedCallback(async (value, text) => {
-    handleUpdateItem(id, value);
-    setPureContent(text);
-  }, debounceDuration);
+  const debouncedUpdates = useDebouncedCallback(
+    async (value, text, markdown) => {
+      handleUpdateItem(id, value);
+      setPureContent(markdown);
+    },
+    debounceDuration,
+  );
 
   const handleUpdateItem = (id: string, updatedContent: JSONContent) => {
     if (currentIndex !== -1) {
@@ -118,14 +121,15 @@ export default function Editor({
     exportAsJson(contents[currentIndex], contents[currentIndex].title);
   };
 
-  const handleExportTxT = () => {
+  const handleExportMarkdown = () => {
     if (
       currentPureContent.length === 0 ||
       currentIndex === -1 ||
       saveStatus !== "Saved"
     )
       return;
-    exportAsTxtFile(currentPureContent, contents[currentIndex].title);
+
+    exportAsMarkdownFile(currentPureContent, contents[currentIndex].title);
   };
 
   const handleCreateShare = async () => {
@@ -249,7 +253,7 @@ export default function Editor({
           <Menu
             onExportImage={handleExportImage}
             onExportJson={handleExportJson}
-            onExportTxT={handleExportTxT}
+            onExportTxT={handleExportMarkdown}
           />
         </div>
 
@@ -264,9 +268,13 @@ export default function Editor({
               defaultValue={currentContent}
               plan={user?.plan || "5"}
               onUpdate={() => setSaveStatus("Unsaved")}
-              onDebouncedUpdate={(json: JSONContent, text: string) => {
+              onDebouncedUpdate={(
+                json: JSONContent,
+                text: string,
+                markdown: string,
+              ) => {
                 setSaveStatus("Saving...");
-                if (json) debouncedUpdates(json, text);
+                if (json) debouncedUpdates(json, text, markdown);
                 setTimeout(() => {
                   setSaveStatus("Saved");
                 }, 500);

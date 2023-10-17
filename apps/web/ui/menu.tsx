@@ -82,17 +82,17 @@ export default function Menu({
           </button>
           <button
             className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
+            onClick={onExportTxT}
+          >
+            <FileText className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
+            <span>Export as markdown</span>
+          </button>
+          <button
+            className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
             onClick={onExportJson}
           >
             <FileJson className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
             <span>Export as json</span>
-          </button>
-          <button
-            className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
-            onClick={onExportTxT}
-          >
-            <FileText className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
-            <span>Export as txt</span>
           </button>
         </div>
 

@@ -15,7 +15,6 @@
 </p>
 
 
-
 # About Inke
 
 [Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
@@ -30,7 +29,7 @@
 - 🥰 Local Data Storage
 - 🥳 Image uploads(use command or drag)
 - 😍 Cloud storage notes
-- 😄 Export as json/image/txt
+- 😄 Export as json/image/markdown
 - 🥰 Install as PWA App to your desktop
 
 

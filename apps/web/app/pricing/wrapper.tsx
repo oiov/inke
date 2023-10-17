@@ -139,9 +139,13 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               " dark:bg-zinc-850 relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-lg"
             }
           >
-            {activeIndex === "1" && (
+            {activeIndex === "1" ? (
               <div className="absolute left-1/2 top-0 inline-block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-4 py-1 text-sm text-slate-100">
                 Current
+              </div>
+            ) : (
+              <div className="absolute left-1/2 top-0 inline-block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-4 py-1 text-sm text-slate-100">
+                Beta for free
               </div>
             )}
             <div>
@@ -184,10 +188,10 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
           </div>
         </div>
 
-        <h3 className="mb-4 mt-10 text-lg font-semibold" id="about-plan">
-          About Plan
-        </h3>
-        <div className=" text-sm">
+        <div className="mx-3">
+          <h3 className="mb-4 mt-10 text-lg font-semibold" id="about-plan">
+            About Plan
+          </h3>
           <p>
             Thank you for using our services! We would like to inform our
             non-registered users that there are limited usage quotas (Free for

@@ -73,6 +73,7 @@ export default function Editor({
   onDebouncedUpdate?: (
     json: JSONContent,
     text: string,
+    markdown: string,
     editor: EditorClass
   ) => void;
   /**
@@ -106,7 +107,9 @@ export default function Editor({
   const debouncedUpdates = useDebouncedCallback(async ({ editor }) => {
     const json = editor.getJSON();
     const text = editor.getText();
-    onDebouncedUpdate(json, text, editor);
+    const markdown = editor.storage.markdown.getMarkdown();
+
+    onDebouncedUpdate(json, text, markdown, editor);
 
     if (!disableLocalStorage) {
       setContent(json);
