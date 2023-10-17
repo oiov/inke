@@ -41,6 +41,14 @@ export async function findShareByDBId(id: string) {
     },
   });
 }
+export async function findUserSharesCount(uid: string) {
+  return await prisma.shareNote.count({
+    where: {
+      userId: uid,
+      deletedAt: null,
+    },
+  });
+}
 export async function findUserShares(uid: string) {
   return await prisma.shareNote.findMany({
     where: {

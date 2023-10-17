@@ -139,6 +139,12 @@ export const handleImageUpload = (file: File) => {
             "`BLOB_READ_WRITE_TOKEN` environment variable not found, reading image locally instead."
           );
           // Unknown error
+        } else if (res.status === 429) {
+          resolve(file);
+
+          throw new Error(
+            "You have exceeded the maximum size of uploads, please upgrade your plan."
+          );
         } else {
           throw new Error(`Error uploading image. Please try again.`);
         }

@@ -5,34 +5,48 @@ export const Content_Public_Storage_Key = "inke__public__content";
 export const Default_Debounce_Duration = 750;
 
 interface Plans {
-  limit_day: number;
-  limit_chars: number;
+  ai_generate_day: number;
+  ai_generate_chars: number;
+  note_upload_count: number;
+  image_upload_size: number;
 }
 
 export const Account_Plans: Plans[] = [
   {
-    limit_day: 300,
-    limit_chars: 300,
+    ai_generate_day: 300,
+    ai_generate_chars: 300,
+    note_upload_count: 20,
+    image_upload_size: 3, // mb
   },
   {
-    limit_day: 2000,
-    limit_chars: 2000,
+    ai_generate_day: 2000,
+    ai_generate_chars: 2000,
+    note_upload_count: 10000,
+    image_upload_size: 3,
   },
   {
-    limit_day: 2500,
-    limit_chars: 2000,
+    ai_generate_day: 10,
+    ai_generate_chars: 10,
+    note_upload_count: 0,
+    image_upload_size: 5,
   },
   {
-    limit_day: 3000,
-    limit_chars: 2000,
+    ai_generate_day: 10,
+    ai_generate_chars: 10,
+    note_upload_count: 0,
+    image_upload_size: 5,
   },
   {
-    limit_day: 5000,
-    limit_chars: 3000,
+    ai_generate_day: 10,
+    ai_generate_chars: 10,
+    note_upload_count: 0,
+    image_upload_size: 5,
   },
   {
-    limit_day: 100,
-    limit_chars: 200,
+    ai_generate_day: 100,
+    ai_generate_chars: 200,
+    note_upload_count: 0,
+    image_upload_size: 3,
   },
 ];
 

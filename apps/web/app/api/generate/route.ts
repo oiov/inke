@@ -2,8 +2,7 @@ import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { kv } from "@vercel/kv";
 import { Ratelimit } from "@upstash/ratelimit";
-import { fetcher, getRandomElement } from "@/lib/utils";
-import { User } from "@prisma/client";
+import { getRandomElement } from "@/lib/utils";
 import { Account_Plans } from "../../../lib/consts";
 
 const api_key = process.env.OPENAI_API_KEY || "";
@@ -33,10 +32,13 @@ export async function POST(req: Request): Promise<Response> {
     const ip = req.headers.get("x-forwarded-for");
     const ratelimit = new Ratelimit({
       redis: kv,
-      limiter: Ratelimit.slidingWindow(Account_Plans[planN].limit_day, "1 d"),
+      limiter: Ratelimit.slidingWindow(
+        Account_Plans[planN].ai_generate_day,
+        "1 d",
+      ),
     });
 
-    console.log("plan", planN, Account_Plans[planN], ip);
+    // console.log("plan", planN, Account_Plans[planN], ip);
 
     const { success, limit, reset, remaining } = await ratelimit.limit(
       `novel_ratelimit_${ip}`,
@@ -64,7 +66,7 @@ export async function POST(req: Request): Promise<Response> {
         content:
           "You are an AI writing assistant that continues existing text based on context from prior text." +
           "Give more weight/priority to the later characters than the beginning ones. " +
-          `Limit your response to no more than ${Account_Plans[planN].limit_chars} characters, but make sure to construct complete sentences.`,
+          `Limit your response to no more than ${Account_Plans[planN].ai_generate_chars} characters, but make sure to construct complete sentences.`,
         // "Use Markdown formatting when appropriate.",
       },
       {

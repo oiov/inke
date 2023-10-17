@@ -6,8 +6,10 @@ import {
   createShareNote,
   deleteShareNote,
   findShareByLocalId,
+  findUserSharesCount,
   updateShareNote,
 } from "@/lib/db/share";
+import { Account_Plans } from "@/lib/consts";
 
 export async function GET(
   req: NextRequest,
@@ -72,6 +74,18 @@ export async function POST(
       return NextResponse.json({
         code: 405,
         msg: "Empty data",
+        data: null,
+      });
+    }
+
+    const find_share_count = await findUserSharesCount(user.id);
+
+    if (
+      find_share_count >= Account_Plans[Number(user.plan)].note_upload_count
+    ) {
+      return NextResponse.json({
+        code: 429,
+        msg: "You have exceeded the maximum number of uploads, please upgrade your plan.",
         data: null,
       });
     }

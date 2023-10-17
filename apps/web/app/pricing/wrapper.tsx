@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { useUserInfoByEmail } from "../post/[id]/request";
 import Link from "next/link";
+import { Account_Plans } from "@/lib/consts";
 
 export default function Wrapper({ session }: { session: Session | null }) {
   const { user } = useUserInfoByEmail(session?.user?.email || "");
@@ -57,15 +58,17 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates 100 times per day
+                  AI generates {Account_Plans[5].ai_generate_day} times per day
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates up to 200 characters per time
+                  AI generates up to {Account_Plans[5].ai_generate_chars}{" "}
+                  characters per time
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  Less than 5MB for upload image per time
+                  Less than {Account_Plans[5].image_upload_size}MB for upload
+                  image per time
                 </li>
               </ul>
             </div>
@@ -103,19 +106,21 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  30 notes upload to Cloud
+                  {Account_Plans[0].note_upload_count} notes upload to Cloud
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates 300 times per day
+                  AI generates {Account_Plans[0].ai_generate_day} times per day
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates up to 300 characters per time
+                  AI generates up to {Account_Plans[0].ai_generate_chars}{" "}
+                  characters per time
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  Less than 5MB for upload image per time
+                  Less than {Account_Plans[5].image_upload_size}MB for upload
+                  image per time
                 </li>
               </ul>
             </div>
@@ -155,15 +160,17 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates 2000 times per day
+                  AI generates {Account_Plans[1].ai_generate_day} times per day
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  AI generates up to 2000 characters per time
+                  AI generates up to {Account_Plans[1].ai_generate_chars}{" "}
+                  characters per time
                 </li>
                 <li className="flex items-center">
                   <Checked />
-                  Less than 10MB for upload image per time
+                  Less than {Account_Plans[1].image_upload_size}MB for upload
+                  image per time
                 </li>
               </ul>
             </div>
@@ -177,7 +184,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
           </div>
         </div>
 
-        <h3 className="mb-4 mt-8 text-lg font-semibold" id="about-plan">
+        <h3 className="mb-4 mt-10 text-lg font-semibold" id="about-plan">
           About Plan
         </h3>
         <div className=" text-sm">
@@ -201,7 +208,15 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             >
               Product Hunt
             </Link>
-            and send an email named{" "}
+            or give a star on{" "}
+            <Link
+              className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+              href="/github"
+              target="_blank"
+            >
+              Github
+            </Link>
+            , and send an email named{" "}
             <strong>
               <code>Apply for Premium</code>
             </strong>{" "}
@@ -210,7 +225,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               <code>songsonghhhh@gmail.com</code>
             </strong>{" "}
             , please include your registered email address (inke.app) and
-            Product Hunt nickname in the email content .
+            Product Hunt nickname or Github nickname in the email content .
           </p>
           <p>
             we will process your request within 1-2 business days. All you need

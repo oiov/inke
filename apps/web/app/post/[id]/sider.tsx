@@ -344,8 +344,8 @@ export default function Sidebar({
             Feedback
           </Link>
           <span className="mx-2">‣</span>
-          <Link className="hover:text-slate-300" href="/github" target="_blank">
-            Github
+          <Link className="hover:text-slate-300" href="/pricing">
+            Pricing
           </Link>
         </div>
       </motion.div>
