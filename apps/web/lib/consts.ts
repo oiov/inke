@@ -17,7 +17,7 @@ export const Account_Plans: Plans[] = [
     ai_generate_day: 100,
     ai_generate_chars: 300,
     note_upload_count: 20,
-    image_upload_size: 3, // mb
+    image_upload_size: 5, // mb
   },
   {
     // basic
