@@ -5,7 +5,6 @@ import { Editor as InkeEditor } from "inke";
 import { JSONContent } from "@tiptap/react";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useDebouncedCallback } from "use-debounce";
-import { useRouter } from "next/navigation";
 import {
   Content_Storage_Key,
   Default_Debounce_Duration,
@@ -39,7 +38,6 @@ export default function Editor({
   id?: string;
   session: Session | null;
 }) {
-  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const [debounceDuration, setDebounceDuration] = useState(
     Default_Debounce_Duration,
@@ -151,6 +149,9 @@ export default function Editor({
       });
     }
     setSharing(false);
+    // const new_shares = await fetcher<IResponse<ShareNote[]>>("/api/share/all");
+    // if (new_shares && new_shares.code === 200) {
+    // }
   };
 
   if (isLoading)
@@ -212,7 +213,7 @@ export default function Editor({
               <LoadingDots color="#fff" />
             ) : (
               <span className="bg-gradient-to-r from-red-100 via-yellow-200 to-orange-200 bg-clip-text font-semibold text-transparent">
-                Publish
+                Share
               </span>
             )}
           </button>
@@ -224,7 +225,7 @@ export default function Editor({
                   Publish and Share
                 </h1>
                 <p>
-                  Click the <code>`Publish`</code> button to save your note
+                  Click the <code>`Share`</code> button to save your note
                   remotely and generate a sharing link, allowing you to share
                   your notes with others. Your notes will be uploaded after
                   serialization. e.g{" "}

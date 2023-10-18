@@ -48,7 +48,7 @@ export function useUserShareNotes() {
       fetcher(api, {
         method: "GET",
       }),
-    // { revalidateOnFocus: false },
+    { revalidateOnFocus: false },
   );
 
   return {

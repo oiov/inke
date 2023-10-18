@@ -90,6 +90,4 @@ model ShareNote {
   deletedAt DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, localId])
 }
