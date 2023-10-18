@@ -39,9 +39,9 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             they can receive <strong>100</strong> times. Sign in and upgrade
             now!
           </p>
-          <p className=" text-blue-500">
+          <p className="text-blue-500">
             Moreover, Inke is currently in beta version and you can apply for
-            the Basic plan for free. Please refer to "About plan" below for the
+            the Basic plan for free. Please refer to `About plan` below for the
             application method.
           </p>
           <p>
