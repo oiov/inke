@@ -59,13 +59,13 @@ export default function NavBar({ session }: { session: Session | null }) {
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/pricing"}
               >
-                pricing
+                Pricing
               </Link>
               <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/feedback"}
               >
-                feedback
+                Feedback
               </Link>
 
               {session ? (

@@ -44,10 +44,6 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             the Basic plan for free. Please refer to `About plan` below for the
             application method.
           </p>
-          <p>
-            Note that all paid plans are one-time purchases, allowing users to
-            permanently access all features.
-          </p>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -65,9 +61,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               </div>
             )}
             <div>
-              <h3 className="text-center text-2xl font-bold">
-                Free for registered
-              </h3>
+              <h3 className="text-center text-2xl font-bold">Free</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                 <span className="text-4xl font-bold">$0</span>
               </div>
@@ -224,6 +218,10 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
           <h3 className="mb-4 mt-10 text-lg font-semibold" id="about-plan">
             About Plan
           </h3>
+          <p>
+            All paid plans are one-time purchases, allowing users to permanently
+            access all features.
+          </p>
           <p className="my-2">
             🎉 We have just introduced the Basic plan. And the best part is that
             Basic plan is currently available for free activation indefinitely!
