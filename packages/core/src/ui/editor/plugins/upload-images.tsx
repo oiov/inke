@@ -2,6 +2,8 @@ import { BlobResult } from "@vercel/blob";
 import { toast } from "sonner";
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet, EditorView } from "@tiptap/pm/view";
+import { NovelContext } from "../provider";
+import { useContext } from "react";
 
 const uploadKey = new PluginKey("upload-image");
 
@@ -60,10 +62,8 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
   if (!file.type.includes("image/")) {
     toast.error("File type not supported.");
     return;
-
-    // check if the file size is less than 20MB
-  } else if (file.size / 1024 / 1024 > 20) {
-    toast.error("File size too big (max 20MB).");
+  } else if (file.size / 1024 / 1024 > 15) {
+    toast.error(`File size too big (max ${15}MB).`);
     return;
   }
 
@@ -141,7 +141,6 @@ export const handleImageUpload = (file: File) => {
           // Unknown error
         } else if (res.status === 429) {
           resolve(file);
-
           throw new Error(
             "You have exceeded the maximum size of uploads, please upgrade your plan."
           );

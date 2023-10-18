@@ -77,7 +77,13 @@ const Command = Extension.create({
   },
 });
 
-const getSuggestionItems = ({ query }: { query: string }) => {
+const getSuggestionItems = ({
+  query,
+  plan,
+}: {
+  query: string;
+  plan: number;
+}) => {
   return [
     {
       title: "Continue writing",
@@ -99,7 +105,6 @@ const getSuggestionItems = ({ query }: { query: string }) => {
           .run();
       },
     },
-
     {
       title: "To-do List",
       description: "Track tasks with a to-do list.",
@@ -109,7 +114,6 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         editor.chain().focus().deleteRange(range).toggleTaskList().run();
       },
     },
-
     {
       title: "Heading 1",
       description: "Big section heading.",
@@ -229,7 +233,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
     },
     {
       title: "Youtube video",
-      description: "Play the Youtube url video you filled out.",
+      description: "Play the Youtube video you filled out.",
       searchTerms: ["video", "ytb", "Youtube", "youtube"],
       icon: <Youtube size={19} />,
       command: ({ editor, range }: CommandProps) => {
@@ -249,15 +253,6 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         }
       },
     },
-    // {
-    //   title: "Send Feedback",
-    //   description: "Let us know how we can improve.",
-    //   icon: <MessageSquarePlus size={18} />,
-    //   command: ({ editor, range }: CommandProps) => {
-    //     editor.chain().focus().deleteRange(range).run();
-    //     window.open("/feedback", "_blank");
-    //   },
-    // },
   ].filter((item) => {
     if (typeof query === "string" && query.length > 0) {
       const search = query.toLowerCase();
