@@ -232,14 +232,6 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               target="_blank"
             >
               Product Hunt
-            </Link>{" "}
-            or give a star on{" "}
-            <Link
-              className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
-              href="/github"
-              target="_blank"
-            >
-              Github
             </Link>
             , and send an email named{" "}
             <strong>
@@ -250,7 +242,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               <code>songsonghhhh@gmail.com</code>
             </strong>{" "}
             , please include your registered email address (inke.app) and
-            Product Hunt nickname or Github nickname in the email content .
+            Product Hunt nickname in the email content .
           </p>
           <p>
             we will process your request within 1-2 business days. All you need

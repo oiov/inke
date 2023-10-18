@@ -23,10 +23,10 @@ export default function Footer() {
         <span className="mx-2">‣</span>
         <Link
           className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text font-semibold text-transparent hover:text-slate-300 "
-          href="/github"
+          href="/pricing"
           target="_blank"
         >
-          Open Source
+          Pricing
         </Link>
       </div>
       <div className="mt-2 flex items-center justify-center gap-1 text-sm">

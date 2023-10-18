@@ -53,19 +53,19 @@ export default function UserDropdown({
             >
               <ShieldCheck
                 className={
-                  user?.plan === "1"
+                  user?.plan !== "0"
                     ? "h-4 w-4 text-blue-500"
                     : "h-4 w-4 text-yellow-500"
                 }
               />
               <span
                 className={
-                  "text-sm " + (user?.plan === "1" ? "" : "text-yellow-500")
+                  "text-sm " + (user?.plan !== "0" ? "" : "text-yellow-500")
                 }
               >
                 {user && (
                   <span className="text-sm">
-                    {user?.plan === "1" ? "Actived plan" : "Upgrade to Premium"}
+                    {user?.plan !== "0" ? "Actived plan" : "Upgrade to Premium"}
                   </span>
                 )}
               </span>
