@@ -45,6 +45,7 @@ export default function Editor({
   const [saveStatus, setSaveStatus] = useState("Saved");
   const [isLoading, setLoading] = useState(true);
   const [isSharing, setSharing] = useState(false);
+  const [isShowShareLink, setShowShareLink] = useState(false);
   const [contents, setContents] = useLocalStorage<ContentItem[]>(
     Note_Storage_Key,
     [],
@@ -147,11 +148,9 @@ export default function Editor({
       toast.success(res.msg, {
         icon: "🎉",
       });
+      if (!isShowShareLink) setShowShareLink(true);
     }
     setSharing(false);
-    // const new_shares = await fetcher<IResponse<ShareNote[]>>("/api/share/all");
-    // if (new_shares && new_shares.code === 200) {
-    // }
   };
 
   if (isLoading)
@@ -196,13 +195,14 @@ export default function Editor({
             </span>
           </div>
 
-          {shares &&
+          {((shares &&
             shares.data &&
-            shares.data.find((i) => i.localId === id) && (
-              <Link href={`/publish/${id}`} target="_blank">
-                <ExternalLink className="h-4 w-4 text-blue-500 hover:text-blue-300" />
-              </Link>
-            )}
+            shares.data.find((i) => i.localId === id)) ||
+            isShowShareLink) && (
+            <Link href={`/publish/${id}`} target="_blank">
+              <ExternalLink className="h-4 w-4 text-blue-500 hover:text-blue-300" />
+            </Link>
+          )}
 
           <button
             className="ml-1 flex h-7 w-20 items-center justify-center gap-1 rounded-md bg-blue-500 px-4 py-1 text-sm text-white transition-all hover:bg-blue-300"
