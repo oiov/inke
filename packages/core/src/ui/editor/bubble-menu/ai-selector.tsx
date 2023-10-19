@@ -39,7 +39,7 @@ export const AISelector: FC<AISelectorProps> = ({
     },
     {
       name: "Summarize text",
-      detail: "Summarize text",
+      detail: "Accurately summarize this text in one sentence",
       icon: Pipette,
     },
   ];
@@ -63,28 +63,26 @@ export const AISelector: FC<AISelectorProps> = ({
   const { complete, completion, isLoading, stop } = useCompletion({
     id: "novel-edit",
     api: "/api/generate",
-    onFinish: (_prompt, completion) => {
-      editor?.commands.setTextSelection({
-        from: editor.state.selection.from - completion.length,
-        to: editor.state.selection.from,
-      });
-    },
-    onError: (err) => {
-      toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
-      }
-    },
+    // onFinish: (_prompt, completion) => {
+    //   editor?.commands.setTextSelection({
+    //     from: editor.state.selection.from - completion.length,
+    //     to: editor.state.selection.from,
+    //   });
+    // },
+    // onError: (err) => {
+    //   toast.error(err.message);
+    //   if (err.message === "You have reached your request limit for the day.") {
+    //     va.track("Rate Limit Reached");
+    //   }
+    // },
   });
 
-  const prev = useRef("");
-
-  // Insert chunks of the generated text
-  useEffect(() => {
-    const diff = completion.slice(prev.current.length);
-    prev.current = completion;
-    editor?.commands.insertContent(diff);
-  }, [editor, completion]);
+  // const prev = useRef("");
+  // useEffect(() => {
+  //   const diff = completion.slice(prev.current.length);
+  //   prev.current = completion;
+  //   editor?.commands.insertContent(diff);
+  // }, [editor, completion]);
 
   return (
     <div className="novel-relative novel-h-full">
@@ -127,7 +125,6 @@ export const AISelector: FC<AISelectorProps> = ({
           </Command.List>
         </Command>
       )}
-      {/* {isLoading && <AIGeneratingLoading stop={stop} />} */}
     </div>
   );
 };

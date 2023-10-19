@@ -205,7 +205,7 @@ export default function Editor({
         {editor && (
           <>
             <EditorBubbleMenu editor={editor} />
-            {/* <AIBubbleMenu editor={editor} /> */}
+            <AIBubbleMenu editor={editor} />
           </>
         )}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}

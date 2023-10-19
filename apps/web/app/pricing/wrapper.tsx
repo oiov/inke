@@ -117,9 +117,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             <div>
               <h3 className="text-center text-2xl font-bold">Basic</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p className="text-4xl font-bold">
-                  $6 <span className="text-xl">or ¥39</span>
-                </p>
+                <p className="text-4xl font-bold">$9</p>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-center">
@@ -173,9 +171,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             <div>
               <h3 className="text-center text-2xl font-bold">Premium</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p className="text-4xl font-bold">
-                  $12 <span className="text-xl">or ¥79</span>
-                </p>
+                <p className="text-4xl font-bold">$19</p>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-center">
