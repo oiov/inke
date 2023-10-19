@@ -109,10 +109,12 @@ export const AISelector: FC<AISelectorProps> = ({
               <Command.Item
                 key={index}
                 onSelect={() => {
-                  const { from, to } = editor.state.selection;
-                  const text = editor.state.doc.textBetween(from, to, " ");
-                  complete(`${item.detail}:\n ${text}`);
-                  setIsOpen(false);
+                  if (!isLoading) {
+                    const { from, to } = editor.state.selection;
+                    const text = editor.state.doc.textBetween(from, to, " ");
+                    complete(`${item.detail}:\n ${text}`);
+                    setIsOpen(false);
+                  }
                 }}
                 className="novel-flex group novel-cursor-pointer novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-gray-600 active:novel-bg-stone-200 aria-selected:novel-bg-stone-100">
                 <div className="novel-flex novel-items-center novel-space-x-2">

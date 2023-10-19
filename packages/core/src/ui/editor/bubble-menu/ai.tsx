@@ -2,11 +2,9 @@ import LoadingCircle from "@/ui/icons/loading-circle";
 import LoadingDots from "@/ui/icons/loading-dots";
 import Magic from "@/ui/icons/magic";
 import { Editor } from "@tiptap/core";
-import { BubbleMenu } from "@tiptap/react";
 import { useCompletion } from "ai/react";
-import { Clapperboard, PauseCircle, Trash2 } from "lucide-react";
-import AIGeneratingLoading from "./ai-loading";
-import { useEffect, useState } from "react";
+import { X, Clipboard } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   editor: Editor;
@@ -21,34 +19,39 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
     api: "/api/generate",
   });
 
+  const prev = useRef("");
   useEffect(() => {
-    if (completion.length > 0) {
-      setIsShow(true);
-      setCompletion(completion);
-    }
-  }, [completion]);
+    const diff = completion.slice(prev.current.length);
+    prev.current = completion;
+    setCompletion(diff);
+  }, [editor, completion]);
+
+  useEffect(() => {
+    if (isLoading || completion.length > 0) setIsShow(true);
+  }, [isLoading, completion]);
 
   const handleCopy = () => {
     // setCompletion("");
   };
 
-  return isShow || isLoading ? (
-    <div className="novel-fixed novel-max-w-64 novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
+  return isShow ? (
+    <div className="novel-fixed novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
       {isLoading ? (
         <div className="novel-flex gap-2 novel-items-center ">
           <Magic className="novel-h-5 novel-mr-auto novel-w-5 novel-text-purple-500" />
-          <span className="novel-text-slate-500">loading...</span>
+          <span className="novel-text-slate-500">thinking</span>
+          <LoadingDots color="#9e9e9e" />
         </div>
       ) : (
-        <>
+        <div className="novel-w-64">
           <div className=" novel-flex novel-gap-2 novel-items-center novel-text-slate-500">
             <Magic className="novel-h-5 novel-mr-auto novel-w-5 novel-text-purple-500" />
 
-            <Clapperboard
+            <Clipboard
               onClick={handleCopy}
               className="novel-w-4 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
             />
-            <Trash2
+            <X
               onClick={() => {
                 setIsShow(false);
                 setCompletion("");
@@ -56,8 +59,8 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
               className="novel-w-4 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
             />
           </div>
-          <div className="novel-text-sm">{currentCompletion}</div>
-        </>
+          <div className="novel-text-sm mt-2">{currentCompletion}</div>
+        </div>
       )}
     </div>
   ) : null;
