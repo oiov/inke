@@ -10,10 +10,11 @@ import {
   Languages,
   Globe2,
 } from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC, useContext, useEffect } from "react";
 import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
+import { NovelContext } from "../provider";
 
 interface AISelectorProps {
   editor: Editor;
@@ -81,29 +82,13 @@ export const AISelector: FC<AISelectorProps> = ({
     };
   }, [isOpen]);
 
+  const { completionApi, plan } = useContext(NovelContext);
+
   const { complete, isLoading, stop } = useCompletion({
     id: "novel-edit",
-    api: "/api/generate",
-    // onFinish: (_prompt, completion) => {
-    //   editor?.commands.setTextSelection({
-    //     from: editor.state.selection.from - completion.length,
-    //     to: editor.state.selection.from,
-    //   });
-    // },
-    // onError: (err) => {
-    //   toast.error(err.message);
-    //   if (err.message === "You have reached your request limit for the day.") {
-    //     va.track("Rate Limit Reached");
-    //   }
-    // },
+    api: completionApi,
+    body: { plan },
   });
-
-  // const prev = useRef("");
-  // useEffect(() => {
-  //   const diff = completion.slice(prev.current.length);
-  //   prev.current = completion;
-  //   editor?.commands.insertContent(diff);
-  // }, [editor, completion]);
 
   return (
     <div className="novel-relative novel-h-full">

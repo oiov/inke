@@ -26,7 +26,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const { prompt, plan } = await req.json();
 
-  const planN = Number(plan || "0");
+  const planN = Number(plan || "5");
 
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     const ip = req.headers.get("x-forwarded-for");
