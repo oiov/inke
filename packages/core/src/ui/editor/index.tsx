@@ -17,8 +17,8 @@ import { EditorProps } from "@tiptap/pm/view";
 import { Editor as EditorClass, Extensions } from "@tiptap/core";
 import { NovelContext } from "./provider";
 import "./styles.css";
-import { PauseCircle } from "lucide-react";
-import { Magic } from "../icons";
+import AIBubbleMenu from "./bubble-menu/ai";
+import AIGeneratingLoading from "./bubble-menu/ai-loading";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -203,21 +203,17 @@ export default function Editor({
           editor?.chain().focus().run();
         }}
         className={className}>
-        {editor && <EditorBubbleMenu editor={editor} />}
+        {editor && (
+          <>
+            <EditorBubbleMenu editor={editor} />
+            <AIBubbleMenu editor={editor} />
+          </>
+        )}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
         {isLoadingOutside && isLoading && (
           <div className="novel-fixed novel-bottom-3 novel-right-3">
-            <div className="flex items-center justify-start novel-bg-white shadow-lg rounded-full px-3 py-2 w-16 h-10">
-              <Magic className="novel-w-7 novel-animate-pulse" />
-              <span className="text-sm novel-animate-pulse novel-ml-1 novel-text-slate-500">
-                generating...
-              </span>
-              <PauseCircle
-                onClick={stop}
-                className="novel-h-5 hover:novel-text-stone-500 cursor-pointer novel-ml-6 novel-w-5 novel-text-stone-300"
-              />
-            </div>
+            <AIGeneratingLoading stop={stop} />
           </div>
         )}
       </div>
