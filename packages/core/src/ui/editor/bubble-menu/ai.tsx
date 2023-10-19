@@ -19,14 +19,12 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
     api: "/api/generate",
   });
 
-  const prev = useRef("");
   useEffect(() => {
-    if (completion.length > 0) setIsShow(true);
-
-    const diff = completion.slice(prev.current.length);
-    prev.current = completion;
-    setCompletion(diff);
-  }, [editor, completion]);
+    if (completion.length > 0) {
+      setIsShow(true);
+      setCompletion(completion);
+    }
+  }, [completion]);
 
   const handleCopy = () => {
     // setCompletion("");
