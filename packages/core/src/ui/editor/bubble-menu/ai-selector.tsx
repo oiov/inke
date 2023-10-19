@@ -2,17 +2,18 @@ import { Editor } from "@tiptap/core";
 import {
   CheckCheck,
   ChevronDown,
-  CornerDownLeft,
+  ListMinus,
+  ListPlus,
   PauseCircle,
   Pipette,
   Wand,
+  Languages,
+  Globe2,
 } from "lucide-react";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect } from "react";
 import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
-import { toast } from "sonner";
-import va from "@vercel/analytics";
 
 interface AISelectorProps {
   editor: Editor;
@@ -38,9 +39,29 @@ export const AISelector: FC<AISelectorProps> = ({
       icon: CheckCheck,
     },
     {
-      name: "Summarize text",
+      name: "Summarize",
       detail: "Accurately summarize this text in one sentence",
       icon: Pipette,
+    },
+    {
+      name: "Make shorter",
+      detail: "Make shorter",
+      icon: ListMinus,
+    },
+    {
+      name: "Make longer",
+      detail: "Make longer",
+      icon: ListPlus,
+    },
+    {
+      name: "Translate into English",
+      detail: "Translate into English",
+      icon: Languages,
+    },
+    {
+      name: "Translate into Chinese",
+      detail: "Translate into Chinese",
+      icon: Globe2,
     },
   ];
 
@@ -60,7 +81,7 @@ export const AISelector: FC<AISelectorProps> = ({
     };
   }, [isOpen]);
 
-  const { complete, completion, isLoading, stop } = useCompletion({
+  const { complete, isLoading, stop } = useCompletion({
     id: "novel-edit",
     api: "/api/generate",
     // onFinish: (_prompt, completion) => {
