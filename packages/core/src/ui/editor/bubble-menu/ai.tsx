@@ -3,9 +3,10 @@ import Magic from "@/ui/icons/magic";
 import { Editor } from "@tiptap/core";
 import { useCompletion } from "ai/react";
 import { X, Clipboard } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
+import { NovelContext } from "../provider";
 
 type Props = {
   editor: Editor;
@@ -14,9 +15,12 @@ type Props = {
 const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
   const [isShow, setIsShow] = useState(false);
 
-  const { completion, isLoading, stop } = useCompletion({
+  const { completionApi, plan } = useContext(NovelContext);
+
+  const { completion, setCompletion, isLoading, stop } = useCompletion({
     id: "novel-edit",
-    api: "/api/generate",
+    api: completionApi,
+    body: { plan },
     onError: (err) => {
       toast.error(err.message);
       if (err.message === "You have reached your request limit for the day.") {
@@ -55,7 +59,10 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
             </button>
 
             <X
-              onClick={() => setIsShow(false)}
+              onClick={() => {
+                setIsShow(false);
+                setCompletion("");
+              }}
               className="novel-w-4 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
             />
           </div>
