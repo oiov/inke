@@ -21,20 +21,18 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
 
   const prev = useRef("");
   useEffect(() => {
+    if (completion.length > 0) setIsShow(true);
+
     const diff = completion.slice(prev.current.length);
     prev.current = completion;
     setCompletion(diff);
   }, [editor, completion]);
 
-  useEffect(() => {
-    if (isLoading || completion.length > 0) setIsShow(true);
-  }, [isLoading, completion]);
-
   const handleCopy = () => {
     // setCompletion("");
   };
 
-  return isShow ? (
+  return isShow || isLoading ? (
     <div className="novel-fixed novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
       {isLoading ? (
         <div className="novel-flex gap-2 novel-items-center ">
