@@ -29,6 +29,7 @@ import Youtube from "@tiptap/extension-youtube";
 import UpdatedImage from "./updated-image";
 import CustomKeymap from "./custom-keymap";
 import DragAndDrop from "./drag-and-drop";
+import Glyphs from "./glyphs";
 
 const lowlight = createLowlight(common);
 lowlight.register({ markdown });
@@ -174,4 +175,5 @@ export const defaultExtensions = [
   Typography,
   CustomKeymap,
   DragAndDrop,
+  Glyphs,
 ];
