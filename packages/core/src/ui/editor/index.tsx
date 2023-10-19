@@ -139,7 +139,6 @@ export default function Editor({
             chars: 5000,
           })
         );
-        // complete(e.editor.storage.markdown.getMarkdown());
         va.track("Autocomplete Shortcut Used");
       } else {
         onUpdate(e.editor);
@@ -206,7 +205,7 @@ export default function Editor({
         {editor && (
           <>
             <EditorBubbleMenu editor={editor} />
-            <AIBubbleMenu editor={editor} />
+            {/* <AIBubbleMenu editor={editor} /> */}
           </>
         )}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}

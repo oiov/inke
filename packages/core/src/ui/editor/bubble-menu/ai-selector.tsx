@@ -4,13 +4,15 @@ import {
   ChevronDown,
   CornerDownLeft,
   PauseCircle,
+  Pipette,
   Wand,
 } from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
-import AIGeneratingLoading from "./ai-loading";
+import { toast } from "sonner";
+import va from "@vercel/analytics";
 
 interface AISelectorProps {
   editor: Editor;
@@ -35,6 +37,11 @@ export const AISelector: FC<AISelectorProps> = ({
         "Please correct spelling and grammar errors in the following text",
       icon: CheckCheck,
     },
+    {
+      name: "Summarize text",
+      detail: "Summarize text",
+      icon: Pipette,
+    },
   ];
 
   useEffect(() => {
@@ -53,10 +60,31 @@ export const AISelector: FC<AISelectorProps> = ({
     };
   }, [isOpen]);
 
-  const { complete, isLoading, stop } = useCompletion({
+  const { complete, completion, isLoading, stop } = useCompletion({
     id: "novel-edit",
     api: "/api/generate",
+    onFinish: (_prompt, completion) => {
+      editor?.commands.setTextSelection({
+        from: editor.state.selection.from - completion.length,
+        to: editor.state.selection.from,
+      });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+      if (err.message === "You have reached your request limit for the day.") {
+        va.track("Rate Limit Reached");
+      }
+    },
   });
+
+  const prev = useRef("");
+
+  // Insert chunks of the generated text
+  useEffect(() => {
+    const diff = completion.slice(prev.current.length);
+    prev.current = completion;
+    editor?.commands.insertContent(diff);
+  }, [editor, completion]);
 
   return (
     <div className="novel-relative novel-h-full">
@@ -88,12 +116,12 @@ export const AISelector: FC<AISelectorProps> = ({
                   complete(`${item.detail}:\n ${text}`);
                   setIsOpen(false);
                 }}
-                className="novel-flex novel-cursor-pointer novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-gray-600 active:novel-bg-stone-200 aria-selected:novel-bg-stone-100">
+                className="novel-flex group novel-cursor-pointer novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-gray-600 active:novel-bg-stone-200 aria-selected:novel-bg-stone-100">
                 <div className="novel-flex novel-items-center novel-space-x-2">
                   <item.icon className="novel-h-4 novel-w-4 novel-text-purple-500" />
                   <span>{item.name}</span>
                 </div>
-                <CornerDownLeft className="invisible novel-h-4 novel-w-4 aria-selected:visible" />
+                {/* <CornerDownLeft className="novel-hidden novel-h-4 novel-w-4 group-hover:novel-block" /> */}
               </Command.Item>
             ))}
           </Command.List>
