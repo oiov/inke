@@ -2,7 +2,7 @@ import LoadingDots from "@/ui/icons/loading-dots";
 import Magic from "@/ui/icons/magic";
 import { Editor } from "@tiptap/core";
 import { useCompletion } from "ai/react";
-import { X, Clipboard } from "lucide-react";
+import { X, Clipboard, Replace } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
@@ -39,6 +39,15 @@ const AIEditorBubble: React.FC<Props> = ({ editor }: Props) => {
     navigator.clipboard.writeText(completion);
   };
 
+  const handleReplace = () => {
+    if (completion.length > 0) {
+      const { from, to } = editor.state.selection;
+      editor.commands.insertContent(completion, {
+        updateSelection: true,
+      });
+    }
+  };
+
   return isShow || isLoading ? (
     <div className="novel-fixed z-[1000] novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
       <div className="novel-w-64 novel-max-h-48 novel-overflow-y-auto">
@@ -52,9 +61,15 @@ const AIEditorBubble: React.FC<Props> = ({ editor }: Props) => {
 
           <div className="novel-flex novel-items-center novel-ml-auto gap-2">
             <button>
+              <Replace
+                onClick={handleReplace}
+                className="novel-w-4 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
+              />
+            </button>
+            <button>
               <Clipboard
                 onClick={handleCopy}
-                className="novel-w-4 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
+                className="novel-w-4 active:novel-text-green-500 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
               />
             </button>
 

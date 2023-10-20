@@ -12,8 +12,8 @@ import { ColorSelector } from "./color-selector";
 import { LinkSelector } from "./link-selector";
 import { cn } from "@/lib/utils";
 import { TableSelector } from "./table-selector";
-import { AISelector } from "./ai-menus/edit/ai-edit-selector";
-import { TranslateSelector } from "./ai-menus/translate/ai-translate-selector";
+import { AISelector } from "./ai-selectors/edit/ai-edit-selector";
+import { TranslateSelector } from "./ai-selectors/translate/ai-translate-selector";
 
 export interface BubbleMenuItem {
   name: string;

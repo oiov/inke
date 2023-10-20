@@ -17,9 +17,9 @@ import { EditorProps } from "@tiptap/pm/view";
 import { Editor as EditorClass, Extensions } from "@tiptap/core";
 import { NovelContext } from "./provider";
 import "./styles.css";
-import AIEditorBubble from "./bubble-menu/ai-menus/edit/ai-edit-bubble";
-import AIGeneratingLoading from "./bubble-menu/ai-loading";
-import AITranslateBubble from "./bubble-menu/ai-menus/translate/ai-translate-bubble";
+import AIEditorBubble from "./bubble-menu/ai-selectors/edit/ai-edit-bubble";
+import AIGeneratingLoading from "./bubble-menu/ai-selectors/ai-loading";
+import AITranslateBubble from "./bubble-menu/ai-selectors/translate/ai-translate-bubble";
 
 export default function Editor({
   completionApi = "/api/generate",

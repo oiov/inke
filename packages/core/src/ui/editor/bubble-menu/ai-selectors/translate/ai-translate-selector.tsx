@@ -1,5 +1,5 @@
 import { Editor } from "@tiptap/core";
-import { Globe2, PauseCircle } from "lucide-react";
+import { Globe2, Languages, PauseCircle } from "lucide-react";
 import { FC, useContext, useEffect } from "react";
 import { Command } from "cmdk";
 import { useCompletion } from "ai/react";
@@ -95,16 +95,16 @@ export const TranslateSelector: FC<TranslateSelectorProps> = ({
           </button>
         ) : (
           <button className="p-2">
-            <Globe2
+            <Languages
               onClick={() => setIsOpen(!isOpen)}
-              className="novel-h-5 novel-text-blue-500 novel-w-4"
+              className="novel-h-5 novel-text-stone-600 novel-w-4"
             />
           </button>
         )}
       </div>
 
       {isOpen && (
-        <Command className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-w-24 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-2 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
+        <Command className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-w-28 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-2 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
           <Command.List>
             {items.map((item, index) => (
               <Command.Item
