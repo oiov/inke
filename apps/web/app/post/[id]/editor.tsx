@@ -231,7 +231,7 @@ export default function Editor({
                   serialization. e.g{" "}
                   <a
                     className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
-                    href="https://inke.app/publish/5fe39539-377f-40e9-8a3f-9071e2165e21"
+                    href="https://inke.app/publish/0e1be533-ae66-4ffa-9725-bd6b84899e78"
                     target="_blank"
                   >
                     link

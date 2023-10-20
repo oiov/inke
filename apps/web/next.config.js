@@ -18,13 +18,9 @@ const nextConfig = {
   redirects: async () => {
     return [
       {
-        source: "/github",
-        destination: "https://github.com/yesmore/inke",
-        permanent: true,
-      },
-      {
-        source: "/sdk",
-        destination: "https://www.npmjs.com/package/inke",
+        source: "/document",
+        destination:
+          "https://inke.app/publish/0e1be533-ae66-4ffa-9725-bd6b84899e78",
         permanent: true,
       },
     ];

@@ -338,10 +338,10 @@ export default function Sidebar({
           <span className="mx-2">‣</span>
           <Link
             className="hover:text-slate-300"
-            href="/feedback"
+            href="/document"
             target="_blank"
           >
-            Feedback
+            Document
           </Link>
           <span className="mx-2">‣</span>
           <Link className="hover:text-slate-300" href="/pricing">

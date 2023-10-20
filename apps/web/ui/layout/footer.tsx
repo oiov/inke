@@ -17,8 +17,8 @@ export default function Footer() {
           Privacy Policy
         </Link>
         <span className="mx-2">‣</span>
-        <Link className="hover:text-slate-300" href="/feedback">
-          Feedback
+        <Link className="hover:text-slate-300" href="/document">
+          Document
         </Link>
         <span className="mx-2">‣</span>
         <Link
