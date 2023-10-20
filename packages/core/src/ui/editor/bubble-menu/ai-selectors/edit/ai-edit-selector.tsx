@@ -66,8 +66,7 @@ export const AISelector: FC<AISelectorProps> = ({
     },
     {
       name: "Generate titles",
-      detail:
-        "Automatically generate compelling titles and subtitles for the content",
+      detail: "Automatically generate compelling titles for the content",
       icon: Heading1,
     },
     {
@@ -117,17 +116,21 @@ export const AISelector: FC<AISelectorProps> = ({
     <div className="novel-relative novel-h-full">
       <div className="novel-flex novel-h-full novel-items-center novel-gap-1 novel-text-sm novel-font-medium novel-text-purple-500 hover:novel-bg-stone-100 active:novel-bg-stone-200">
         <button
-          className="novel-flex p-2 novel-h-full novel-items-center novel-gap-1"
-          onClick={() => setIsOpen(!isOpen)}>
+          className="novel-p-2 novel-flex novel-h-full novel-items-center novel-gap-1"
+          onClick={() => {
+            if (isLoading) {
+              stop();
+            }
+            setIsOpen(!isOpen);
+          }}>
           <Magic className="novel-h-4 novel-w-4" />
           <span className="novel-whitespace-nowrap">Ask AI</span>
-          {!isLoading && <ChevronDown className="novel-h-4 novel-w-4" />}
-        </button>
-        <button>
-          {isLoading && (
+          {!isLoading ? (
+            <ChevronDown className="novel-h-4 novel-w-4" />
+          ) : (
             <PauseCircle
               onClick={stop}
-              className="novel-h-4 hover:novel-text-stone-500 cursor-pointer novel-ml-1 novel-w-4 novel-text-stone-300"
+              className="novel-h-4 hover:novel-text-stone-500 cursor-pointer novel-w-4 novel-text-stone-300"
             />
           )}
         </button>

@@ -65,10 +65,7 @@ export async function POST(req: Request): Promise<Response> {
         role: "system",
         content: `I hope you can take on roles such as spell proofreading and rhetorical improvement, 
            or other roles related to text editing, optimization, and abbreviation. I will 
-           communicate with you in any language, and you will recognize the language. For 
-           example, entering the command 'Improve writing' means replacing my simple vocabulary and 
-           sentences with more elegant and elegant expressions, ensuring that the meaning remains the 
-           same but making it more literary. Please only answer the corrected and improved parts, and 
+           communicate with you in any language, and you will recognize the language. Please only answer the corrected and improved parts, and 
            do not write explanations.
            Limit your response to no more than ${Account_Plans[planN].ai_generate_chars} characters, 
            but make sure to construct complete sentences.`,
