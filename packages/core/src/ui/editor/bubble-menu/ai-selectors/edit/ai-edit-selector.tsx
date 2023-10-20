@@ -1,11 +1,18 @@
 import { Editor } from "@tiptap/core";
 import {
+  Beef,
+  Book,
   CheckCheck,
   ChevronDown,
+  Heading1,
+  LayoutPanelTop,
   ListMinus,
   ListPlus,
+  PartyPopper,
   PauseCircle,
   Pipette,
+  Repeat,
+  Scissors,
   Wand,
 } from "lucide-react";
 import { FC, useContext, useEffect } from "react";
@@ -46,6 +53,39 @@ export const AISelector: FC<AISelectorProps> = ({
       name: "Make longer",
       detail: "Make longer",
       icon: ListPlus,
+    },
+    {
+      name: "Writing suggestions",
+      detail: "Provide suggestions and improvements for the writing",
+      icon: Beef,
+    },
+    {
+      name: "Enhance vocabulary",
+      detail: "Suggest synonyms and expand vocabulary usage",
+      icon: Book,
+    },
+    {
+      name: "Generate titles",
+      detail:
+        "Automatically generate compelling titles and subtitles for the content",
+      icon: Heading1,
+    },
+    {
+      name: "Templates & structure",
+      detail:
+        "Offer templates and structure suggestions to improve the writing organization",
+      icon: LayoutPanelTop,
+    },
+    {
+      name: "Fix repetitive",
+      detail: "Identify and fix repetitive words or phrases in the content",
+      icon: Scissors,
+    },
+    {
+      name: "Adjust writing style",
+      detail:
+        "Suggest adjustments to writing style and tone based on the target audience",
+      icon: PartyPopper,
     },
   ];
 
