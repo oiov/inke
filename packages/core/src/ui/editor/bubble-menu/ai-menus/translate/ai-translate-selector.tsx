@@ -25,6 +25,38 @@ export const TranslateSelector: FC<TranslateSelectorProps> = ({
       name: "Chinese",
       detail: "Translate into Chinese",
     },
+    {
+      name: "Spanish",
+      detail: "Translate into Spanish",
+    },
+    {
+      name: "French",
+      detail: "Translate into French",
+    },
+    {
+      name: "German",
+      detail: "Translate into German",
+    },
+    {
+      name: "Japanese",
+      detail: "Translate into Japanese",
+    },
+    {
+      name: "Russian",
+      detail: "Translate into Russian",
+    },
+    {
+      name: "Korean",
+      detail: "Translate into Korean",
+    },
+    {
+      name: "Arabic",
+      detail: "Translate into Arabic",
+    },
+    {
+      name: "Portuguese",
+      detail: "Translate into Portuguese",
+    },
   ];
 
   useEffect(() => {
@@ -53,16 +85,16 @@ export const TranslateSelector: FC<TranslateSelectorProps> = ({
 
   return (
     <div className="novel-relative novel-h-full">
-      <div className="novel-flex novel-h-full novel-items-center novel-p-2 novel-gap-1 novel-text-sm novel-font-medium hover:novel-bg-stone-100 active:novel-bg-stone-200">
+      <div className="novel-flex novel-h-full novel-items-center novel-text-sm novel-font-medium hover:novel-bg-stone-100 active:novel-bg-stone-200">
         {isLoading ? (
-          <button>
+          <button className="p-2">
             <PauseCircle
               onClick={stop}
               className="novel-h-5 hover:novel-text-stone-500 cursor-pointer novel-w-4 novel-text-stone-300"
             />
           </button>
         ) : (
-          <button>
+          <button className="p-2">
             <Globe2
               onClick={() => setIsOpen(!isOpen)}
               className="novel-h-5 novel-text-blue-500 novel-w-4"

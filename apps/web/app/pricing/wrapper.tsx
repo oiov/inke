@@ -31,18 +31,18 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
   return (
     <section className="mt-3 flex w-full justify-center py-6 dark:from-zinc-900 dark:to-zinc-800">
       <div className="container px-4 md:px-6">
-        <h1 className=" text-center text-3xl font-bold">Choose your plan</h1>
+        <h1 className=" text-center text-4xl font-bold">PLAN</h1>
         <div className="mx-auto mt-10 px-3">
           <p>
             🎉 For users who are not logged in, the AI generation frequency will
             be limited to <strong>50</strong> times per day. Once logged in,
             they can receive <strong>100</strong> times. Sign in and upgrade
-            now!
-          </p>
-          <p className="text-blue-500">
-            Moreover, Inke is currently in beta version and you can apply for
-            the Basic plan for free. Please refer to `About plan` below for the
-            application method.
+            now!{" "}
+            <span className="text-blue-500">
+              Moreover, Inke is currently in beta version and you can apply for
+              the Basic plan for free. Please refer to `About plan` below for
+              the application method.
+            </span>
           </p>
         </div>
 
