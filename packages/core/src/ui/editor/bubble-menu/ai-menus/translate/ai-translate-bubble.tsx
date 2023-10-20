@@ -6,20 +6,20 @@ import { X, Clipboard } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
-import { NovelContext } from "../provider";
+import { NovelContext } from "../../../provider";
 
 type Props = {
   editor: Editor;
 };
 
-const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
+const AITranslateBubble: React.FC<Props> = ({ editor }: Props) => {
   const [isShow, setIsShow] = useState(false);
 
   const { completionApi, plan } = useContext(NovelContext);
 
   const { completion, setCompletion, isLoading, stop } = useCompletion({
-    id: "novel-edit",
-    api: completionApi,
+    id: "novel-translate",
+    api: `${completionApi}/translate`,
     body: { plan },
     onError: (err) => {
       toast.error(err.message);
@@ -75,4 +75,4 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
   ) : null;
 };
 
-export default AIBubbleMenu;
+export default AITranslateBubble;

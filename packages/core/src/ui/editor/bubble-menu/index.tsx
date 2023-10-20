@@ -12,7 +12,8 @@ import { ColorSelector } from "./color-selector";
 import { LinkSelector } from "./link-selector";
 import { cn } from "@/lib/utils";
 import { TableSelector } from "./table-selector";
-import { AISelector } from "./ai-selector";
+import { AISelector } from "./ai-menus/edit/ai-edit-selector";
+import { TranslateSelector } from "./ai-menus/translate/ai-translate-selector";
 
 export interface BubbleMenuItem {
   name: string;
@@ -80,6 +81,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
         setIsLinkSelectorOpen(false);
         setIsTableSelectorOpen(false);
         setIsAISelectorOpen(false);
+        setIsTranslateSelectorOpen(false);
       },
     },
   };
@@ -89,6 +91,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
   const [isLinkSelectorOpen, setIsLinkSelectorOpen] = useState(false);
   const [isTableSelectorOpen, setIsTableSelectorOpen] = useState(false);
   const [isAISelectorOpen, setIsAISelectorOpen] = useState(false);
+  const [isTranslateSelectorOpen, setIsTranslateSelectorOpen] = useState(false);
 
   return (
     <BubbleMenu
@@ -105,6 +108,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
               setIsColorSelectorOpen(false);
               setIsTableSelectorOpen(false);
               setIsLinkSelectorOpen(false);
+              setIsTranslateSelectorOpen(false);
             }}
           />
           <NodeSelector
@@ -116,8 +120,23 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
               setIsTableSelectorOpen(false);
               setIsLinkSelectorOpen(false);
               setIsAISelectorOpen(false);
+              setIsTranslateSelectorOpen(false);
             }}
           />
+          {props.editor.isActive("table") && (
+            <TableSelector
+              editor={props.editor}
+              isOpen={isTableSelectorOpen}
+              setIsOpen={() => {
+                setIsTableSelectorOpen(!isTableSelectorOpen);
+                setIsColorSelectorOpen(false);
+                setIsNodeSelectorOpen(false);
+                setIsLinkSelectorOpen(false);
+                setIsAISelectorOpen(false);
+                setIsTranslateSelectorOpen(false);
+              }}
+            />
+          )}
           <LinkSelector
             editor={props.editor}
             isOpen={isLinkSelectorOpen}
@@ -127,6 +146,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
               setIsTableSelectorOpen(false);
               setIsNodeSelectorOpen(false);
               setIsAISelectorOpen(false);
+              setIsTranslateSelectorOpen(false);
             }}
           />
           <div className="novel-flex">
@@ -153,21 +173,21 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
               setIsNodeSelectorOpen(false);
               setIsLinkSelectorOpen(false);
               setIsAISelectorOpen(false);
+              setIsTranslateSelectorOpen(false);
             }}
           />
-          {props.editor.isActive("table") && (
-            <TableSelector
-              editor={props.editor}
-              isOpen={isTableSelectorOpen}
-              setIsOpen={() => {
-                setIsTableSelectorOpen(!isTableSelectorOpen);
-                setIsColorSelectorOpen(false);
-                setIsNodeSelectorOpen(false);
-                setIsLinkSelectorOpen(false);
-                setIsAISelectorOpen(false);
-              }}
-            />
-          )}
+          <TranslateSelector
+            editor={props.editor}
+            isOpen={isTranslateSelectorOpen}
+            setIsOpen={() => {
+              setIsTranslateSelectorOpen(!isTranslateSelectorOpen);
+              setIsAISelectorOpen(false);
+              setIsNodeSelectorOpen(false);
+              setIsColorSelectorOpen(false);
+              setIsTableSelectorOpen(false);
+              setIsLinkSelectorOpen(false);
+            }}
+          />
         </>
       )}
     </BubbleMenu>

@@ -17,8 +17,9 @@ import { EditorProps } from "@tiptap/pm/view";
 import { Editor as EditorClass, Extensions } from "@tiptap/core";
 import { NovelContext } from "./provider";
 import "./styles.css";
-import AIBubbleMenu from "./bubble-menu/ai";
+import AIEditorBubble from "./bubble-menu/ai-menus/edit/ai-edit-bubble";
 import AIGeneratingLoading from "./bubble-menu/ai-loading";
+import AITranslateBubble from "./bubble-menu/ai-menus/translate/ai-translate-bubble";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -149,8 +150,8 @@ export default function Editor({
   });
 
   const { complete, completion, isLoading, stop } = useCompletion({
-    id: "inke",
-    api: completionApi,
+    id: "ai-continue",
+    api: `${completionApi}/continue`,
     body: { plan },
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
@@ -205,7 +206,8 @@ export default function Editor({
         {editor && (
           <>
             <EditorBubbleMenu editor={editor} />
-            <AIBubbleMenu editor={editor} />
+            <AIEditorBubble editor={editor} />
+            <AITranslateBubble editor={editor} />
           </>
         )}
         {editor?.isActive("image") && <ImageResizer editor={editor} />}

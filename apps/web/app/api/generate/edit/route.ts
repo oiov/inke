@@ -3,7 +3,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import { kv } from "@vercel/kv";
 import { Ratelimit } from "@upstash/ratelimit";
 import { getRandomElement } from "@/lib/utils";
-import { Account_Plans } from "../../../lib/consts";
+import { Account_Plans } from "../../../../lib/consts";
 
 const api_key = process.env.OPENAI_API_KEY || "";
 const api_keys = process.env.OPENAI_API_KEYs || "";
@@ -64,8 +64,14 @@ export async function POST(req: Request): Promise<Response> {
       {
         role: "system",
         content:
-          "You are an AI writing assistant that continues existing text based on context from prior text." +
-          "Give more weight/priority to the later characters than the beginning ones. " +
+          `I hope you can take on roles such as spell proofreading and rhetorical improvement, 
+           or other roles related to text editing, optimization, and abbreviation. I will 
+           communicate with you in any language, and you will recognize the language. For 
+           example, entering the command 'Improve writing' means replacing my simple vocabulary and 
+           sentences with more elegant and elegant expressions, ensuring that the meaning remains the 
+           same but making it more literary. Please only answer the corrected and improved parts, and 
+           do not write explanations.
+           Input format: [Command]: Original text. For example, [Improve writing]: my content ` +
           `Limit your response to no more than ${Account_Plans[planN].ai_generate_chars} characters, but make sure to construct complete sentences.`,
         // "Use Markdown formatting when appropriate.",
       },

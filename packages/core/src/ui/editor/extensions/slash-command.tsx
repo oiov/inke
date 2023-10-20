@@ -297,8 +297,8 @@ const CommandList = ({
   const { completionApi, plan } = useContext(NovelContext);
 
   const { complete, isLoading, stop } = useCompletion({
-    id: "inke",
-    api: completionApi,
+    id: "ai-continue",
+    api: `${completionApi}/continue`,
     body: { plan },
     onResponse: (response) => {
       if (response.status === 429) {

@@ -7,14 +7,12 @@ import {
   PauseCircle,
   Pipette,
   Wand,
-  Languages,
-  Globe2,
 } from "lucide-react";
 import { FC, useContext, useEffect } from "react";
 import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
-import { NovelContext } from "../provider";
+import { NovelContext } from "../../../provider";
 
 interface AISelectorProps {
   editor: Editor;
@@ -54,16 +52,6 @@ export const AISelector: FC<AISelectorProps> = ({
       detail: "Make longer",
       icon: ListPlus,
     },
-    {
-      name: "Translate into English",
-      detail: "Translate into English",
-      icon: Languages,
-    },
-    {
-      name: "Translate into Chinese",
-      detail: "Translate into Chinese",
-      icon: Globe2,
-    },
   ];
 
   useEffect(() => {
@@ -86,7 +74,7 @@ export const AISelector: FC<AISelectorProps> = ({
 
   const { complete, isLoading, stop } = useCompletion({
     id: "novel-edit",
-    api: completionApi,
+    api: `${completionApi}/edit`,
     body: { plan },
   });
 
@@ -98,14 +86,16 @@ export const AISelector: FC<AISelectorProps> = ({
           onClick={() => setIsOpen(!isOpen)}>
           <Magic className="novel-h-4 novel-w-4" />
           <span className="novel-whitespace-nowrap">Ask AI</span>
-          <ChevronDown className="novel-h-4 novel-w-4" />
+          {!isLoading && <ChevronDown className="novel-h-4 novel-w-4" />}
         </button>
-        {isLoading && (
-          <PauseCircle
-            onClick={stop}
-            className="novel-h-5 hover:novel-text-stone-500 cursor-pointer novel-ml-2 novel-w-5 novel-text-stone-300"
-          />
-        )}
+        <button>
+          {isLoading && (
+            <PauseCircle
+              onClick={stop}
+              className="novel-h-4 hover:novel-text-stone-500 cursor-pointer novel-ml-1 novel-w-4 novel-text-stone-300"
+            />
+          )}
+        </button>
       </div>
 
       {isOpen && (
