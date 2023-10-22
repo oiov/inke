@@ -25,7 +25,7 @@ const uploadFile = (stream: Readable, filename: string): Promise<any> => {
   });
 };
 
-// export const runtime = "edge";
+export const runtime = "nodejs";
 
 var cos = new COS({
   SecretId: process.env.TencentSecretID || "",

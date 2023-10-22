@@ -2,8 +2,6 @@ import { BlobResult } from "@vercel/blob";
 import { toast } from "sonner";
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet, EditorView } from "@tiptap/pm/view";
-import { NovelContext } from "../provider";
-import { useContext } from "react";
 
 const uploadKey = new PluginKey("upload-image");
 
@@ -26,7 +24,7 @@ const UploadImagesPlugin = () =>
           const image = document.createElement("img");
           image.setAttribute(
             "class",
-            "opacity-40 rounded-lg border border-stone-200"
+            "opacity-40 rounded-md border border-stone-200"
           );
           image.src = src;
           placeholder.appendChild(image);
@@ -62,7 +60,7 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
   if (!file.type.includes("image/")) {
     toast.error("File type not supported.");
     return;
-  } else if (file.size / 1024 / 1024 > 5) {
+  } else if (file.size / 1024 / 1024 > 10) {
     toast.error(`File size too big (max ${5}MB).`);
     return;
   }
@@ -111,7 +109,6 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
 }
 
 export const handleImageUpload = (file: File) => {
-  // upload to Vercel Blob
   return new Promise((resolve) => {
     toast.promise(
       fetch("/api/upload", {

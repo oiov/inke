@@ -61,7 +61,7 @@ export default function Wrapper({
       {!isLoading && share && share.data && canRenderGuide && (
         <>
           {user && (
-            <div className="z-[1000] mx-10 flex h-16 items-center justify-between">
+            <div className="mx-8 flex h-24 items-center justify-between">
               <div className="flex items-center gap-2">
                 <Image
                   alt="avatar"
@@ -116,7 +116,7 @@ export default function Wrapper({
             </div>
           )}
           <InkeEditor
-            className="relative -mt-3 mb-3 w-screen max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
+            className="relative -mt-6 mb-3 w-screen max-w-screen-lg overflow-y-auto border-stone-200 bg-white"
             storageKey={Content_Public_Storage_Key}
             debounceDuration={Default_Debounce_Duration}
             defaultValue={currentContent}
