@@ -7,15 +7,20 @@ import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { useState } from "react";
 import { LoadingDots } from "./shared/icons";
+import { JSONContent } from "@tiptap/react";
 
 export default function NewPostButton({
   className,
   text,
   from = "home",
+  defaultContent = defaultEditorContent,
+  callback,
 }: {
   className?: string;
   text: string;
-  from?: "home" | "post";
+  from?: "home" | "post" | "publish";
+  defaultContent?: JSONContent;
+  callback?: () => void;
 }) {
   const router = useRouter();
   const [clickNew, setClickNew] = useState(false);
@@ -29,6 +34,9 @@ export default function NewPostButton({
       handleNewNote();
     } else if (from === "home" && contents.length > 0) {
       handleHistoryNote();
+    } else if (from === "publish") {
+      handleNewNote();
+      callback();
     }
   };
 
@@ -50,7 +58,7 @@ export default function NewPostButton({
       title: `Untitled-${id.slice(0, 6)}-${
         date.getMonth() + 1
       }/${date.getDate()}`,
-      content: defaultEditorContent,
+      content: defaultContent,
       tag: "",
       created_at: date.getTime(),
       updated_at: date.getTime(),

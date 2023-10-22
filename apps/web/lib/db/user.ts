@@ -14,7 +14,7 @@ export const getUserByEmail = async (email: string) => {
 export const getUserById = async (id: string) => {
   return await prisma.user.findFirst({
     where: { id },
-    select: { name: true },
+    select: { name: true, image: true },
   });
 };
 

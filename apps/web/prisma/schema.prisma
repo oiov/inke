@@ -84,6 +84,8 @@ model ShareNote {
   userId  String @db.ObjectId
   localId String
   data    String
+  click   Int    @default(0)
+  keeps   Int    @default(0)
 
   createdAt DateTime
   updatedAt DateTime  @updatedAt

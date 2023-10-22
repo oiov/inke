@@ -69,9 +69,6 @@ export default function UserDropdown({
                   </span>
                 )}
               </span>
-              <span className="rounded-xl bg-blue-400 px-2 text-xs font-medium text-white">
-                Beta
-              </span>
             </button>
 
             <button

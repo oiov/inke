@@ -7,6 +7,8 @@ export async function createShareNote(json: ContentItem, uid: string) {
       userId: uid,
       localId: json.id,
       data: JSON.stringify(json),
+      click: 0,
+      keeps: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,
@@ -27,7 +29,6 @@ export async function findShareByLocalId(id: string, uid?: string) {
     return await prisma.shareNote.findFirst({
       where: {
         localId: id,
-
         deletedAt: null,
       },
     });
@@ -66,6 +67,26 @@ export async function updateShareNote(json: ContentItem, id: string) {
     data: {
       data: JSON.stringify(json),
       updatedAt: new Date(),
+    },
+  });
+}
+export async function updateShareClick(id: string, pre: number) {
+  return await prisma.shareNote.update({
+    where: {
+      id,
+    },
+    data: {
+      click: pre + 1,
+    },
+  });
+}
+export async function updateShareKeeps(id: string, pre: number) {
+  return await prisma.shareNote.update({
+    where: {
+      id,
+    },
+    data: {
+      keeps: pre + 1,
     },
   });
 }
