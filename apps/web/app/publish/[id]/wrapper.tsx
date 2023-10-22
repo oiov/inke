@@ -69,20 +69,19 @@ export default function Wrapper({
                   width={50}
                   height={50}
                 />
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-slate-700">
-                      {user.name}
-                    </span>
-                    <span className="hidden text-xs text-slate-500 sm:block">
-                      published at{" "}
-                      {share.data.updatedAt.toString().slice(5, 10)}
-                    </span>
-                  </div>
+                <div className="flex flex-col justify-between gap-1">
+                  <span className="cursor-pointer font-semibold text-slate-700">
+                    {user.name}
+                  </span>
+
                   <p className="flex text-xs text-slate-500">
                     <strong>{share.data.click}</strong>
                     &nbsp;clicks,&nbsp;
                     <strong>{share.data.keeps}</strong>&nbsp;keeps
+                    <span className="ml-2 hidden border-l border-slate-300 pl-2 text-xs text-slate-500 sm:block">
+                      published at{" "}
+                      {share.data.updatedAt.toString().slice(5, 10)}
+                    </span>
                   </p>
                 </div>
               </div>

@@ -27,6 +27,7 @@ const EditNicknameModal = ({
 
   const handleSubmit = async () => {
     if (!session?.user || !user || !nickname) return;
+    if (nickname.length < 3 || nickname.length > 20) return;
 
     setLoading(true);
 
