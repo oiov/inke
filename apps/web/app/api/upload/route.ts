@@ -1,5 +1,4 @@
 import { Account_Plans } from "@/lib/consts";
-import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "../auth/[...nextauth]/route";
@@ -27,11 +26,6 @@ const uploadFile = (stream: Readable, filename: string): Promise<any> => {
 };
 
 // export const runtime = "edge";
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 var cos = new COS({
   SecretId: process.env.TencentSecretID || "",
@@ -66,12 +60,6 @@ export async function POST(req: Request) {
   if (res && res.statusCode === 200) {
     return NextResponse.json({ url: "https://" + res.Location });
   }
-
-  // const blob = await put(finalName, file, {
-  //   contentType,
-  //   access: "public",
-  // });
-  // console.log(blob.url, blob.size);
 
   // if (
   //   blob &&
