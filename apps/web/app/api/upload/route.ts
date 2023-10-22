@@ -33,14 +33,14 @@ var cos = new COS({
 });
 
 export async function POST(req: Request) {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return new Response(
-      "Missing BLOB_READ_WRITE_TOKEN. Don't forget to add that to your .env file.",
-      {
-        status: 401,
-      },
-    );
-  }
+  // if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  //   return new Response(
+  //     "Missing BLOB_READ_WRITE_TOKEN. Don't forget to add that to your .env file.",
+  //     {
+  //       status: 401,
+  //     },
+  //   );
+  // }
 
   const file = req.body || "";
   const filename = req.headers.get("x-vercel-filename") || "file.txt";

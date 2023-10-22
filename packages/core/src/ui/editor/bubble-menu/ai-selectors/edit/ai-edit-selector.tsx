@@ -10,8 +10,6 @@ import {
   ListPlus,
   PartyPopper,
   PauseCircle,
-  Pipette,
-  Repeat,
   Scissors,
   Wand,
 } from "lucide-react";

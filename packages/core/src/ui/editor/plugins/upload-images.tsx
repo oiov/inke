@@ -60,8 +60,8 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
   if (!file.type.includes("image/")) {
     toast.error("File type not supported.");
     return;
-  } else if (file.size / 1024 / 1024 > 10) {
-    toast.error(`File size too big (max ${5}MB).`);
+  } else if (file.size / 1024 / 1024 > 1) {
+    toast.error(`File size too big (max ${1}MB).`);
     return;
   }
 
