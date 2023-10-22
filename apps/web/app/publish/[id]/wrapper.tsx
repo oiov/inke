@@ -99,7 +99,7 @@ export default function Wrapper({
                   content={
                     <div className="w-64 px-3 py-2 text-sm text-slate-400">
                       <h1 className="mb-2 font-semibold text-slate-500">
-                        What's keep writing?
+                        What&apos;s keep writing?
                       </h1>
                       <p>
                         Keep writing allows you to quickly create a note with
@@ -109,7 +109,7 @@ export default function Wrapper({
                   }
                   fullWidth={false}
                 >
-                  <button className="">
+                  <button>
                     <BadgeInfo className="h-4 w-4 text-slate-400 hover:text-slate-500" />
                   </button>
                 </Tooltip>
