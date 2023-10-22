@@ -151,7 +151,7 @@ export const handleImageUpload = (file: File) => {
       {
         loading: "Uploading image...",
         success: "Image uploaded successfully.",
-        error: (e) => "出错了：" + e.message,
+        error: (e) => e.message,
       }
     );
   });
