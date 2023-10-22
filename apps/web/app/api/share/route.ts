@@ -31,7 +31,7 @@ export async function GET(
     const res = await findShareByLocalId(id);
 
     if (res) {
-      await updateShareKeeps(res.id, res.click); // 数据库id
+      await updateShareClick(res.id, res.click); // 数据库id
       return NextResponse.json({
         code: 200,
         msg: "Successed!",
