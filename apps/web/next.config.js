@@ -13,6 +13,7 @@ const nextConfig = {
       "vercel.com",
       "api.dicebear.com",
       "api.producthunt.com",
+      "gcloud-1303456836.cos.ap-chengdu.myqcloud.com",
     ],
   },
   redirects: async () => {

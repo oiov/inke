@@ -63,7 +63,7 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
     toast.error("File type not supported.");
     return;
   } else if (file.size / 1024 / 1024 > 5) {
-    toast.error(`File size too big (max ${15}MB).`);
+    toast.error(`File size too big (max ${5}MB).`);
     return;
   }
 
@@ -125,6 +125,7 @@ export const handleImageUpload = (file: File) => {
         // Successfully uploaded image
         if (res.status === 200) {
           const { url } = (await res.json()) as BlobResult;
+
           // preload the image
           let image = new Image();
           image.src = url;
@@ -134,7 +135,6 @@ export const handleImageUpload = (file: File) => {
           // No blob store configured
         } else if (res.status === 401) {
           resolve(file);
-
           throw new Error(
             "`BLOB_READ_WRITE_TOKEN` environment variable not found, reading image locally instead."
           );
@@ -151,7 +151,7 @@ export const handleImageUpload = (file: File) => {
       {
         loading: "Uploading image...",
         success: "Image uploaded successfully.",
-        error: (e) => e.message,
+        error: (e) => "出错了：" + e.message,
       }
     );
   });
