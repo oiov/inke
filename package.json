@@ -1,6 +1,18 @@
 {
-  "name": "inke",
-  "private": true,
+  "name": "inkejs",
+  "version": "0.0.2",
+  "author": "yesmore",
+  "description": "A Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.",
+  "keywords": [
+    "editor",
+    "markdown",
+    "openai",
+    "ai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yesmore/inke"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
