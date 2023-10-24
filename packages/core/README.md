@@ -1,43 +1,29 @@
-<p align="center">
-  <img width="108" src="https://inke.app/logo-c.png">
-</p>
+# Inke
 
-<p align="center"><strong> Inke - Small is beautiful</strong></p>
+<a href="https://www.npmjs.org/package/inkejs" target='_blank'>
+  <img src="https://img.shields.io/npm/v/inkejs">
+</a>
+<a href="https://npmcharts.com/compare/inkejs?minimal=true" target='_blank'>
+  <img src="https://img.shields.io/npm/dt/inkejs.svg">
+</a>
+<a href="https://github.com/yesmore/inke/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/yesmore/inke?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
+</a>
+<a href="https://inke.app">
+  <img src="https://badgen.net/https/inke.app/api/status" alt="status"/>
+</a>
 
-<p align="center">
-  <a href="https://inke.app">
-    <img src="https://badgen.net/https/inke.app/api/status" alt="status"/>
-  </a>
-  <a href="https://github.com/yesmore/inke/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/yesmore/inke?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
-  </a>
-  <a href="https://github.com/yesmore/inke"><img src="https://img.shields.io/github/stars/yesmore/inke?style=social" alt="inke.app's GitHub repo"></a>
-</p>
+Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions.
 
-
-# About Inke
-
-[Inke](https://inke.app/) is a Notion-style WYSIWYG editor with AI-powered autocompletions.
+See live demo: [inke-web](https://inke.app)  
 
 <img alt="Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions." src="https://inke.app/desktop.png">
 
-## Features
+# Install Inke
 
-- 😗 WYSIWYG Editing like markdown
-- 😄 Efficient Shortcut Inputs
-- 😍 AI-powered Text Autocomplete
-- 🥰 Local Data Storage
-- 🥳 Image uploads(use command or drag)
-- 😍 Cloud storage notes
-- 😄 Export as json/image/markdown
-- 🥰 Install as PWA App to your desktop
-
-
-## Self Hosting
-
-You can deploy your own version of Inke to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-link=https%3A%2F%2Fgithub.com%2Fyesmore%2Finke&env=OPENAI_API_KEY&envDescription=Find%20your%20OpenAI%20API%20Key%20by%20click%20the%20right%20Learn%20More%20button.%20%20&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys&project-name=inke&repository-name=inke)
+```bash
+npm install inkejs
+```
 
 ## Setting Up Locally
 
@@ -56,30 +42,38 @@ pnpm build
 pnpm dev
 ```
 
-##  Environment Variable
+Then, you can use it in your code like this:
 
-| Prop                    | Type     | Description                                                                                                                                              | Example                                                                                                             |
-| ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `OPENAI_API_KEY`        | `string` | The API Key to use for the OpenAI completion API.                                                                                                        | `sk-xxx`                                                                                                            |
-| `BLOB_READ_WRITE_TOKEN` | `string` | OPTIONAL: Vercel Blob (for uploading images). Get your Vercel Blob credentials [here](https://vercel.com/docs/storage/vercel-blob/quickstart#quickstart) | `vercel_blob_xxxx`                                                                                                  |
-| `KV_REST_API_URL`       | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart)           | [`"https//xxx.com"`](https://github.com/steven-tey/novel/blob/main/packages/core/src/ui/editor/default-content.tsx) |
-| `KV_REST_API_TOKEN`     | `string` | OPTIONAL: Vercel KV (for ratelimiting). Get your Vercel KV credentials [here](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart).          | `abcdefg`                                                                                                           |
-| `NEXTAUTH_SECRET`       | `string` | Only for production – generate one here: [generate-secret](https://generate-secret.vercel.app/32).                                                       | `fasgagahhjerherg`                                                                                                  |
-| `DATABASE_URL`          | `string` | Database url, recommend using [MongoDB Atlas](https://account.mongodb.com/account/login?signedOut=true)                                                  | `mongodb+srv://xxxx`                                                                                                |
-| `EMAIL_FROM`            | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `Inke <email@inke.app>`                                                                                             |
-| `EMAIL_SERVER`          | `string` | Next Auth Provider: [Email](https://next-auth.js.org/providers/email)                                                                                    | `smtps://xxxx`                                                                                                      |
-| `GITHUB_ID`             | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `aaaaaaaa`                                                                                                          |
-| `GITHUB_SECRET`         | `string` | Next Auth Provider: [Github](https://next-auth.js.org/providers/github)                                                                                  | `aaaaaaaa`                                                                                                          |
-| `GOOGLE_CLIENT_ID`      | `string` | Next Auth Provider: [Google](https://next-auth.js.org/providers/google)                                                                                  | `aaaaaaaa`                                                                                                          |
-| `GOOGLE_CLIENT_SECRET`  | `string` | Next Auth Provider: [Google](https://next-auth.js.org/providers/google)                                                                                  | `aaaaaaaa`                                                                                                          |
+```jsx
+import { Editor } from "inkejs";
 
-## Sync repo
-
-```bash
-git fetch upstream
-git merge upstream/main
-git push origin main
+export default function App() {
+  return <Editor />;
+}
 ```
+
+The `Editor` is a React component that takes in the following props:
+
+| Prop                  | Type                        | Description                                                                                                                                                                            | Default                                                                                                                             |
+| --------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `completionApi`       | `string`                    | The API route to use for the OpenAI completion API.                                                                                                                                    | `/api/generate`                                                                                                                     |
+| `className`           | `string`                    | Editor container classname.                                                                                                                                                            | `"relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"` |
+| `defaultValue`        | `JSONContent` or `string`   | The default value to use for the editor.                                                                                                                                               | [`defaultEditorContent`](https://github.com/yesmore/inke/blob/main/packages/core/src/ui/editor/default-content.tsx)                 |
+| `extensions`          | `Extension[]`               | A list of extensions to use for the editor, in addition to the [default Novel extensions](https://github.com/yesmore/inke/blob/main/packages/core/src/ui/editor/extensions/index.tsx). | `[]`                                                                                                                                |
+| `editorProps`         | `EditorProps`               | Props to pass to the underlying Tiptap editor, in addition to the [default Novel editor props](https://github.com/yesmore/inke/blob/main/packages/core/src/ui/editor/props.ts).        | `{}`                                                                                                                                |
+| `onUpdate`            | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated.                                                                                                                     | `() => {}`                                                                                                                          |
+| `onDebouncedUpdate`   | `(editor?: Editor) => void` | A callback function that is called whenever the editor is updated, but only after the defined debounce duration.                                                                       | `() => {}`                                                                                                                          |
+| `debounceDuration`    | `number`                    | The duration (in milliseconds) to debounce the `onDebouncedUpdate` callback.                                                                                                           | `750`                                                                                                                               |
+| `storageKey`          | `string`                    | The key to use for storing the editor's value in local storage.                                                                                                                        | `novel__content`                                                                                                                    |
+| `disableLocalStorage` | `boolean`                   | Enabling this option will prevent read/write content from/to local storage.                                                                                                            | `false`                                                                                                                             |
+
+> **Note**: Make sure to define an API endpoint that matches the `completionApi` prop (default is `/api/generate`). This is needed for the AI autocompletions to work. Here's an example: https://github.com/yesmore/inke/blob/main/apps/web/app/api/generate/route.ts
+
+## Deploy Your Own
+
+You can deploy your own version of Novel to Vercel with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)]()
 
 ## Tech Stack
 
@@ -95,10 +89,6 @@ Inke is built on the following stack:
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=yesmore/inke&type=Date)](https://star-history.com/#yesmore/inke&Date)
-
-<a href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke">
-  <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419235&theme=light" alt="Product Hunt"/>
-</a>
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "name": "inkejs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "yesmore",
   "description": "A Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.",
   "keywords": [

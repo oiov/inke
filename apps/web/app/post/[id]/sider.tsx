@@ -343,7 +343,7 @@ export default function Sidebar({
                       fullWidth={false}
                     >
                       <button
-                        className="ml-3"
+                        className="ml-2"
                         onClick={() =>
                           handleSyncPublisToLocal(item.localId, item.data)
                         }
