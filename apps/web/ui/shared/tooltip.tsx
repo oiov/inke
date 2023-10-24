@@ -43,7 +43,7 @@ export default function Tooltip({
       {
         <TooltipPrimitive.Provider delayDuration={100}>
           <TooltipPrimitive.Root>
-            <TooltipPrimitive.Trigger className="hidden sm:inline-flex" asChild>
+            <TooltipPrimitive.Trigger className="" asChild>
               {children}
             </TooltipPrimitive.Trigger>
             <TooltipPrimitive.Content

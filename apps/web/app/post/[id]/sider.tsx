@@ -26,6 +26,7 @@ import {
   UploadCloud,
 } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
+import useWindowSize from "@/lib/hooks/use-window-size";
 
 export default function Sidebar({
   id,
@@ -39,6 +40,7 @@ export default function Sidebar({
   setShowEditModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const router = useRouter();
+  const { isMobile } = useWindowSize();
 
   const [active, setActive] = useState(false);
   const [showEditInput, setShowEditInput] = useState(false);
@@ -95,6 +97,12 @@ export default function Sidebar({
   useEffect(() => {
     showMore();
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      showLess();
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     if (searchKey === "") {
