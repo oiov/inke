@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Wrapper from "./wrapper";
 import Nav from "@/ui/layout/nav";
-import Footer from "@/ui/layout/footer";
+import FooterPublish from "@/ui/layout/footer-publish";
 
 // export async function generateMetadata({ params, searchParams }): Metadata {
 //   const data = await getDetail(params.slug);
@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       {/* @ts-expect-error Server Component */}
       <Nav />
       <Wrapper id={params.id} session={session} />
-      <Footer />
+      <FooterPublish />
     </div>
   );
 }

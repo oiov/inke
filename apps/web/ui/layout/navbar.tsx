@@ -56,7 +56,11 @@ export default function NavBar({ session }: { session: Session | null }) {
                 />
               </Link> */}
 
-              <Link href="https://github.com/yesmore/inke" target="_blank">
+              <Link
+                className="ml-4"
+                href="https://github.com/yesmore/inke"
+                target="_blank"
+              >
                 <img
                   src="https://img.shields.io/github/stars/yesmore/inke?style=social"
                   alt="inke.app's GitHub repo"
