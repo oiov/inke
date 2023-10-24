@@ -41,8 +41,11 @@ export default function Wrapper({
 
   useEffect(() => {
     if (share && share.data && share.data.data) {
-      setCurrentContent(JSON.parse(share.data.data || "{}").content);
+      const parsed = JSON.parse(share.data.data || "{}");
+      setCurrentContent(parsed.content);
       setCanRenderGuide(true);
+      const title = parsed.title || "Untitled";
+      document.title = `${title} - Inke Note`;
     }
   }, [share]);
 
