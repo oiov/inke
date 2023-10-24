@@ -356,7 +356,7 @@ export default function Sidebar({
                           handleSyncPublisToLocal(item.localId, item.data)
                         }
                       >
-                        <DownloadCloud className="h-4 w-4 text-blue-500" />
+                        <DownloadCloud className="h-4 w-4 text-slate-400" />
                       </button>
                     </Tooltip>
                   )}
