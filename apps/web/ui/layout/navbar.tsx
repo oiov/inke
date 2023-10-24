@@ -43,7 +43,7 @@ export default function NavBar({ session }: { session: Session | null }) {
           </div>
 
           <Suspense>
-            <div className="flex items-center justify-center gap-6">
+            <div className="flex items-center justify-center gap-3 md:gap-5">
               {/*<Link
                 href="https://www.producthunt.com/products/inke?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-inke"
                 target="_blank"
@@ -55,6 +55,13 @@ export default function NavBar({ session }: { session: Session | null }) {
                   height="32"
                 />
               </Link> */}
+
+              <Link href="https://github.com/yesmore/inke" target="_blank">
+                <img
+                  src="https://img.shields.io/github/stars/yesmore/inke?style=social"
+                  alt="inke.app's GitHub repo"
+                />
+              </Link>
               <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/pricing"}
