@@ -275,7 +275,7 @@ importers:
       html-to-image:
         specifier: ^1.11.11
         version: 1.11.11
-      inke:
+      inkejs:
         specifier: workspace:^
         version: link:../../packages/core
       lucide-react:

@@ -48,7 +48,7 @@
     "eventsource-parser": "^0.1.0",
     "focus-trap-react": "^10.2.2",
     "html-to-image": "^1.11.11",
-    "inke": "workspace:^",
+    "inkejs": "workspace:^",
     "lucide-react": "^0.244.0",
     "ms": "^2.1.3",
     "next": "13.4.8-canary.14",
