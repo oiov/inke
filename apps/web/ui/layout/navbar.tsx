@@ -57,16 +57,6 @@ export default function NavBar({ session }: { session: Session | null }) {
               </Link> */}
 
               <Link
-                className="ml-4"
-                href="https://github.com/yesmore/inke"
-                target="_blank"
-              >
-                <img
-                  src="https://img.shields.io/github/stars/yesmore/inke?style=social"
-                  alt="inke.app's GitHub repo"
-                />
-              </Link>
-              <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/pricing"}
               >
