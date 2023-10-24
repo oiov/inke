@@ -26,6 +26,7 @@ import {
   CheckSquare,
   Table2,
   PauseCircle,
+  FileImage,
 } from "lucide-react";
 import { LoadingCircle } from "@/ui/icons";
 import { toast } from "sonner";
@@ -35,6 +36,7 @@ import { getPrevText } from "@/lib/editor";
 import { startImageUpload } from "@/ui/editor/plugins/upload-images";
 import { NovelContext } from "../provider";
 import { Youtube } from "lucide-react";
+import { isImageLink } from "@/lib/utils";
 
 interface CommandItemProps {
   title: string;
@@ -211,10 +213,10 @@ const getSuggestionItems = ({
       },
     },
     {
-      title: "Image",
+      title: "Local image",
       description: "Upload an image from your computer.",
-      searchTerms: ["photo", "picture", "media"],
-      icon: <ImageIcon size={18} />,
+      searchTerms: ["photo", "picture", "media", "img"],
+      icon: <FileImage size={18} />,
       command: ({ editor, range }: CommandProps) => {
         editor.chain().focus().deleteRange(range).run();
         // upload image
@@ -229,6 +231,25 @@ const getSuggestionItems = ({
           }
         };
         input.click();
+      },
+    },
+    {
+      title: "Remote image",
+      description: "Render an image from url.",
+      searchTerms: ["photo", "picture", "media", "img"],
+      icon: <ImageIcon size={18} />,
+      command: ({ editor, range }: CommandProps) => {
+        const url = prompt("Enter image url");
+        if (url && isImageLink(url)) {
+          editor
+            .chain()
+            .focus()
+            .deleteRange(range)
+            .setImage({
+              src: url,
+            })
+            .run();
+        }
       },
     },
     {

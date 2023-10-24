@@ -28,8 +28,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
         className="novel-flex novel-h-full novel-items-center novel-space-x-2 novel-px-3 novel-py-1.5 novel-text-sm novel-font-medium novel-text-stone-600 hover:novel-bg-stone-100 active:novel-bg-stone-200"
         onClick={() => {
           setIsOpen(!isOpen);
-        }}
-      >
+        }}>
         <p className="novel-text-base">↗</p>
         <p
           className={cn(
@@ -37,8 +36,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
             {
               "novel-text-blue-500": editor.isActive("link"),
             }
-          )}
-        >
+          )}>
           Link
         </p>
       </button>
@@ -51,8 +49,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
             url && editor.chain().focus().setLink({ href: url }).run();
             setIsOpen(false);
           }}
-          className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-flex novel-w-60 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1"
-        >
+          className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-flex novel-w-60 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
           <input
             ref={inputRef}
             type="text"
@@ -67,8 +64,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
               onClick={() => {
                 editor.chain().focus().unsetLink().run();
                 setIsOpen(false);
-              }}
-            >
+              }}>
               <Trash className="novel-h-4 novel-w-4" />
             </button>
           ) : (

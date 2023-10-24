@@ -24,3 +24,11 @@ export function getUrlFromString(str: string) {
     return null;
   }
 }
+
+export function isImageLink(link: string): boolean {
+  if (!isValidUrl(link)) return false;
+  const imageExtensions = [".jpg", ".jpeg", ".png", "webp", ".gif", ".bmp"];
+  const fileExtension = link.substring(link.lastIndexOf(".")).toLowerCase();
+
+  return imageExtensions.includes(fileExtension);
+}
