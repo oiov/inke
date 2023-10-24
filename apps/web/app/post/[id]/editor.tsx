@@ -21,6 +21,7 @@ import {
 import Menu from "@/ui/menu";
 import UINotFound from "@/ui/layout/not-found";
 import { toPng } from "html-to-image";
+import { usePDF } from "react-to-pdf";
 import { Session } from "next-auth";
 import { IResponse } from "@/lib/types/response";
 import { ShareNote } from "@prisma/client";
@@ -59,6 +60,8 @@ export default function Editor({
 
   const { shares } = useUserShareNotes();
   const { user } = useUserInfoByEmail(session?.user.email);
+
+  const { toPDF, targetRef } = usePDF({ filename: "note.pdf" });
 
   useEffect(() => {
     if (id && contents.length > 0) {
@@ -129,6 +132,10 @@ export default function Editor({
       return;
 
     exportAsMarkdownFile(currentPureContent, contents[currentIndex].title);
+  };
+
+  const handleExportPDF = () => {
+    toPDF();
   };
 
   const handleCreateShare = async () => {
@@ -255,6 +262,7 @@ export default function Editor({
             onExportImage={handleExportImage}
             onExportJson={handleExportJson}
             onExportTxT={handleExportMarkdown}
+            onExportPDF={handleExportPDF}
           />
         </div>
 
@@ -262,25 +270,27 @@ export default function Editor({
 
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
-            <InkeEditor
-              className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
-              storageKey={Content_Storage_Key}
-              debounceDuration={debounceDuration}
-              defaultValue={currentContent}
-              plan={user?.plan || "5"}
-              onUpdate={() => setSaveStatus("Unsaved")}
-              onDebouncedUpdate={(
-                json: JSONContent,
-                text: string,
-                markdown: string,
-              ) => {
-                setSaveStatus("Saving...");
-                if (json) debouncedUpdates(json, text, markdown);
-                setTimeout(() => {
-                  setSaveStatus("Saved");
-                }, 500);
-              }}
-            />
+            <div ref={targetRef}>
+              <InkeEditor
+                className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
+                storageKey={Content_Storage_Key}
+                debounceDuration={debounceDuration}
+                defaultValue={currentContent}
+                plan={user?.plan || "5"}
+                onUpdate={() => setSaveStatus("Unsaved")}
+                onDebouncedUpdate={(
+                  json: JSONContent,
+                  text: string,
+                  markdown: string,
+                ) => {
+                  setSaveStatus("Saving...");
+                  if (json) debouncedUpdates(json, text, markdown);
+                  setTimeout(() => {
+                    setSaveStatus("Saved");
+                  }, 500);
+                }}
+              />
+            </div>
           </div>
         )}
       </div>

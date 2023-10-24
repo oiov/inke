@@ -19,7 +19,7 @@ import {
   SunDim,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FontDefault, FontMono, FontSerif } from "./shared/icons";
 import ImageDown from "./shared/icons/image-down";
 
@@ -56,12 +56,14 @@ export default function Menu({
   onExportImage,
   onExportJson,
   onExportTxT,
+  onExportPDF,
 }: {
   onExportImage: () => void;
   onExportJson: () => void;
   onExportTxT: () => void;
+  onExportPDF: () => void;
 }) {
-  const { font: currentFont, setFont } = useContext(AppContext);
+  // const { font: currentFont, setFont } = useContext(AppContext);
   const { theme: currentTheme, setTheme } = useTheme();
 
   return (
@@ -75,24 +77,33 @@ export default function Menu({
 
           <button
             className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
-            onClick={onExportImage}
+            onClick={() => {
+              onExportImage();
+            }}
           >
             <ImageDown className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
-            <span>Export as image</span>
+            <span>Export as Image</span>
           </button>
           <button
             className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
             onClick={onExportTxT}
           >
             <FileText className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
-            <span>Export as markdown</span>
+            <span>Export as Markdown</span>
           </button>
           <button
             className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
             onClick={onExportJson}
           >
             <FileJson className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
-            <span>Export as json</span>
+            <span>Export as JSON</span>
+          </button>
+          <button
+            className="flex w-full items-center gap-3 rounded px-2 py-1 text-sm text-stone-600 hover:bg-stone-100"
+            onClick={onExportPDF}
+          >
+            <FileJson className="h-6 w-6 rounded-sm border border-stone-100 p-1" />
+            <span>Export as PDF</span>
           </button>
         </div>
 
