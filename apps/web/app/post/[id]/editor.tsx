@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, useRef } from "react";
-import { Editor as InkeEditor } from "inke";
+import { Editor as InkeEditor } from "inkejs";
 import { JSONContent } from "@tiptap/react";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useDebouncedCallback } from "use-debounce";

@@ -10,7 +10,7 @@ import {
 } from "@/lib/consts";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
-import { Editor as InkeEditor } from "inke";
+import { Editor as InkeEditor } from "inkejs";
 import { JSONContent } from "@tiptap/react";
 import UINotFound from "../../../ui/layout/not-found";
 import { LoadingCircle } from "@/ui/shared/icons";

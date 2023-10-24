@@ -6,7 +6,7 @@ import {
   defaultEditorGuideContent,
 } from "@/lib/consts";
 import NewPostButton from "@/ui/new-post-button";
-import { Editor as InkeEditor } from "inke";
+import { Editor as InkeEditor } from "inkejs";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
