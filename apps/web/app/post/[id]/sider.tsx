@@ -19,10 +19,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
+  DownloadCloud,
   Edit,
   ExternalLink,
   Trash2,
+  UploadCloud,
 } from "lucide-react";
+import Tooltip from "@/ui/shared/tooltip";
 
 export default function Sidebar({
   id,
@@ -146,10 +149,6 @@ export default function Sidebar({
     if (!contents) return;
     exportAsJson(contents, "Inke-notes-local");
   };
-  const handleExportJsonPublished = () => {
-    if (!shares.data) return;
-    exportAsJson(shares.data, "Inke-notes-published");
-  };
 
   const handleInputSearch = (value: string) => {
     if (value.length > 0) {
@@ -174,6 +173,26 @@ export default function Sidebar({
       }
     } else {
       setSearchKey("");
+    }
+  };
+
+  const handleClickPublishNote = (publishId: string, localId: string) => {
+    const localIndex = contentsCache.findIndex((i) => i.id === localId);
+    if (localIndex !== -1) {
+      router.push(`/post/${localId}`);
+    } else {
+      router.push(`/publish/${localId}`);
+    }
+  };
+
+  const handleSyncPublisToLocal = (localId: string, remoteDate: string) => {
+    const data = JSON.parse(remoteDate || "{}");
+    if (remoteDate && data) {
+      const newest_list = JSON.parse(
+        localStorage.getItem(Note_Storage_Key) || "[]",
+      );
+      setContents([...newest_list, data]);
+      router.push(`/post/${data.id}`);
     }
   };
 
@@ -223,7 +242,7 @@ export default function Sidebar({
 
           {contentsCache
             .sort((a, b) => b.updated_at - a.updated_at)
-            .map((item, index) => (
+            .map((item) => (
               <div
                 key={item.id}
                 className="group/item my-2 mb-2 flex items-center justify-between gap-2 transition-all"
@@ -280,24 +299,25 @@ export default function Sidebar({
                 <p className="font-mono text-sm font-semibold text-slate-400">
                   Published({shares.data.length})
                 </p>
-                {/* <Download
-                  onClick={handleExportJsonPublished}
-                  className="h-4 w-4 cursor-pointer text-slate-400 hover:text-slate-300"
-                /> */}
               </div>
 
               {sharesCache.map((item) => (
                 <div
                   key={item.id}
-                  className="group/item mt-2 flex items-center justify-start"
+                  className="group/item mt-2 flex items-center justify-between"
                 >
-                  <Link
-                    href={`/publish/${item.localId}`}
-                    className="truncate font-mono text-xs text-gray-500 "
-                    target="_blank"
+                  <button
+                    onClick={() =>
+                      handleClickPublishNote(item.id, item.localId)
+                    }
+                    className={
+                      `${
+                        item.localId === id ? "text-blue-500" : "text-gray-500"
+                      }` + " truncate font-mono text-xs"
+                    }
                   >
                     {JSON.parse(item.data || "{}").title || "Untitled"}
-                  </Link>
+                  </button>
 
                   <button
                     className="ml-auto hidden group-hover/item:block"
@@ -305,6 +325,33 @@ export default function Sidebar({
                   >
                     <Trash2 className="h-4 w-4 text-slate-300" />
                   </button>
+
+                  {contentsCache.findIndex((i) => i.id === item.localId) ===
+                    -1 && (
+                    <Tooltip
+                      content={
+                        <div className="w-64 px-3 py-2 text-sm text-slate-400">
+                          <h1 className="mb-2 font-semibold text-slate-500">
+                            Cross device sync note
+                          </h1>
+                          <p>
+                            Sync your notes from other devices to the current
+                            device (history list).
+                          </p>
+                        </div>
+                      }
+                      fullWidth={false}
+                    >
+                      <button
+                        className="ml-3"
+                        onClick={() =>
+                          handleSyncPublisToLocal(item.localId, item.data)
+                        }
+                      >
+                        <DownloadCloud className="h-4 w-4 text-blue-500" />
+                      </button>
+                    </Tooltip>
+                  )}
                 </div>
               ))}
             </>
