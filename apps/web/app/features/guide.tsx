@@ -38,8 +38,9 @@ export function Landing({ session }: { session: Session | null }) {
             alt={"example"}
             src="/desktop.png"
             placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALjj/4mIh+P+/9Lv/wCn0+xeLxV9cWWUtL0AUz0tKQAAeVU0j4d/y2cTsDiuaawAAAAASUVORK5CYII="
             width={430}
-            height={300}
+            height={280}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
@@ -57,8 +58,9 @@ export function Landing({ session }: { session: Session | null }) {
             alt={"example"}
             src="/e1.png"
             placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALjj/4mIh+P+/9Lv/wCn0+xeLxV9cWWUtL0AUz0tKQAAeVU0j4d/y2cTsDiuaawAAAAASUVORK5CYII="
             width={450}
-            height={300}
+            height={280}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
@@ -77,8 +79,9 @@ export function Landing({ session }: { session: Session | null }) {
             alt={"example"}
             src="/e3.png"
             placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALjj/4mIh+P+/9Lv/wCn0+xeLxV9cWWUtL0AUz0tKQAAeVU0j4d/y2cTsDiuaawAAAAASUVORK5CYII="
             width={460}
-            height={300}
+            height={280}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
