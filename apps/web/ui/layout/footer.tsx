@@ -93,6 +93,12 @@ export default function Footer() {
           >
             Privacy Policy
           </Link>
+          <Link
+            className="mt-2 font-mono text-sm text-slate-200 hover:text-slate-300"
+            href="mailto:team@inke.app"
+          >
+            Contact us
+          </Link>
         </div>
 
         <div className="flex flex-col items-start">

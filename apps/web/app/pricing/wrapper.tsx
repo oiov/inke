@@ -237,7 +237,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             </strong>{" "}
             to{" "}
             <strong>
-              <code>songsonghhhh@gmail.com</code>
+              <code>team@inke.app</code>
             </strong>{" "}
             , please include your registered email address (inke.app) and
             Product Hunt nickname in the email content .
