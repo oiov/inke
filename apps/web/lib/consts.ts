@@ -17,39 +17,39 @@ export const Account_Plans: Plans[] = [
     ai_generate_day: 100,
     ai_generate_chars: 300,
     note_upload_count: 20,
-    image_upload_size: 5, // mb
+    image_upload_size: 1, // mb
   },
   {
     // basic
     ai_generate_day: 500,
     ai_generate_chars: 500,
     note_upload_count: 10000,
-    image_upload_size: 5,
+    image_upload_size: 1,
   },
   {
     // pre
     ai_generate_day: 2000,
     ai_generate_chars: 2000,
     note_upload_count: 10000,
-    image_upload_size: 5,
+    image_upload_size: 10,
   },
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
     note_upload_count: 0,
-    image_upload_size: 5,
+    image_upload_size: 1,
   },
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
     note_upload_count: 0,
-    image_upload_size: 5,
+    image_upload_size: 1,
   },
   {
     ai_generate_day: 50,
     ai_generate_chars: 200,
     note_upload_count: 0,
-    image_upload_size: 3,
+    image_upload_size: 1,
   },
 ];
 

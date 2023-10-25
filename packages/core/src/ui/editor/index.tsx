@@ -20,6 +20,7 @@ import "./styles.css";
 import AIEditorBubble from "./bubble-menu/ai-selectors/edit/ai-edit-bubble";
 import AIGeneratingLoading from "./bubble-menu/ai-selectors/ai-loading";
 import AITranslateBubble from "./bubble-menu/ai-selectors/translate/ai-translate-bubble";
+import { ChatBot } from "./bot/chat-bot";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -34,6 +35,7 @@ export default function Editor({
   disableLocalStorage = false,
   editable = true,
   plan = "5",
+  bot = false,
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -97,7 +99,16 @@ export default function Editor({
    * Defaults to true.
    */
   editable?: boolean;
+  /**
+   * User plan.
+   * Defaults to "5".
+   */
   plan?: string;
+  /**
+   * Bot: chat with note.
+   * Defaults to false.
+   */
+  bot?: boolean;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -217,6 +228,7 @@ export default function Editor({
             <AIGeneratingLoading stop={stop} />
           </div>
         )}
+        {/* {bot && <ChatBot editor={editor} />} */}
       </div>
     </NovelContext.Provider>
   );

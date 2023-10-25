@@ -277,6 +277,7 @@ export default function Editor({
                 debounceDuration={debounceDuration}
                 defaultValue={currentContent}
                 plan={user?.plan || "5"}
+                bot={true}
                 onUpdate={() => setSaveStatus("Unsaved")}
                 onDebouncedUpdate={(
                   json: JSONContent,

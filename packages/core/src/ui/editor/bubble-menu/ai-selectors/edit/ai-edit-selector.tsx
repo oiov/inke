@@ -105,7 +105,7 @@ export const AISelector: FC<AISelectorProps> = ({
   const { completionApi, plan } = useContext(NovelContext);
 
   const { complete, isLoading, stop } = useCompletion({
-    id: "novel-edit",
+    id: "ai-edit",
     api: `${completionApi}/edit`,
     body: { plan },
   });

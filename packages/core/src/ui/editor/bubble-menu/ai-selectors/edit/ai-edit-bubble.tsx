@@ -18,7 +18,7 @@ const AIEditorBubble: React.FC<Props> = ({ editor }: Props) => {
   const { completionApi, plan } = useContext(NovelContext);
 
   const { completion, setCompletion, isLoading, stop } = useCompletion({
-    id: "novel-edit",
+    id: "ai-edit",
     api: `${completionApi}/edit`,
     body: { plan },
     onError: (err) => {

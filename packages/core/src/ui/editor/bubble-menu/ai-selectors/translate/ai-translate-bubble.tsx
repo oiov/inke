@@ -18,7 +18,7 @@ const AITranslateBubble: React.FC<Props> = ({ editor }: Props) => {
   const { completionApi, plan } = useContext(NovelContext);
 
   const { completion, setCompletion, isLoading, stop } = useCompletion({
-    id: "novel-translate",
+    id: "ai-translate",
     api: `${completionApi}/translate`,
     body: { plan },
     onError: (err) => {

@@ -64,7 +64,7 @@ export async function POST(req: Request): Promise<Response> {
       {
         role: "system",
         content:
-          "I hope you can play the role of translator and spell proofreader. I will communicate with you in any language, and you will recognize the language and translate it to answer me.",
+          "As a note assistant, communicate with users based on the input note content.",
       },
       {
         role: "user",

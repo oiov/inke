@@ -1,5 +1,5 @@
 import Nav from "@/ui/layout/nav";
-import { EditorGuide, Welcome } from "./guide";
+import { Landing, Welcome } from "./features/guide";
 import Footer from "@/ui/layout/footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
@@ -11,7 +11,7 @@ export default async function Page() {
       {/* @ts-expect-error Server Component */}
       <Nav />
       <Welcome />
-      <EditorGuide session={session} />
+      <Landing session={session} />
       <Footer />
     </div>
   );

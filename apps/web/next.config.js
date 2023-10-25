@@ -14,6 +14,7 @@ const nextConfig = {
       "api.dicebear.com",
       "api.producthunt.com",
       "gcloud-1303456836.cos.ap-chengdu.myqcloud.com",
+      "img.shields.io",
     ],
   },
   redirects: async () => {
