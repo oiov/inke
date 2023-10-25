@@ -9,6 +9,7 @@ interface Plans {
   ai_generate_chars: number;
   note_upload_count: number;
   image_upload_size: number;
+  pay: number;
 }
 
 export const Account_Plans: Plans[] = [
@@ -18,6 +19,7 @@ export const Account_Plans: Plans[] = [
     ai_generate_chars: 300,
     note_upload_count: 20,
     image_upload_size: 1, // mb
+    pay: 0,
   },
   {
     // basic
@@ -25,6 +27,7 @@ export const Account_Plans: Plans[] = [
     ai_generate_chars: 500,
     note_upload_count: 10000,
     image_upload_size: 1,
+    pay: 8,
   },
   {
     // pre
@@ -32,24 +35,28 @@ export const Account_Plans: Plans[] = [
     ai_generate_chars: 2000,
     note_upload_count: 10000,
     image_upload_size: 10,
+    pay: 16,
   },
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
     note_upload_count: 0,
     image_upload_size: 1,
+    pay: 0,
   },
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
     note_upload_count: 0,
     image_upload_size: 1,
+    pay: 0,
   },
   {
     ai_generate_day: 50,
     ai_generate_chars: 200,
     note_upload_count: 0,
     image_upload_size: 1,
+    pay: 0,
   },
 ];
 

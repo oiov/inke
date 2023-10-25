@@ -4,6 +4,8 @@ import NewPostButton from "@/ui/new-post-button";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
+import Checked from "@/ui/shared/icons/checked";
+import { Account_Plans } from "@/lib/consts";
 
 export function Welcome() {
   return (
@@ -43,7 +45,7 @@ export function Landing({ session }: { session: Session | null }) {
               Rich editing components
             </h3>
             <p className="text-lg">
-              📖 Integrate rich text, Markdown, and render with JSON.
+              📖 Integrate rich text, Markdown, and final render with JSON.
             </p>
           </div>
         </div>
@@ -86,6 +88,149 @@ export function Landing({ session }: { session: Session | null }) {
             <p className="text-lg">
               🍥 One click simple export of PDF, images, Markdown, Json files
             </p>
+          </div>
+        </div>
+
+        <h1 className="my-12 text-center text-4xl font-bold">PLAN</h1>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div
+            className={
+              "dark:bg-zinc-850 relative flex flex-col justify-between rounded-lg border border-gray-300 bg-white p-6 shadow-lg"
+            }
+          >
+            <div>
+              <h3 className="text-center text-2xl font-bold">Free</h3>
+              <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
+                <span className="text-4xl font-bold">
+                  ${Account_Plans[0].pay}
+                </span>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li className="flex items-center">
+                  <Checked />
+                  Unlimited number of local notes
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  {Account_Plans[0].note_upload_count} notes upload to Cloud
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates {Account_Plans[0].ai_generate_day} times per day
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates up to {Account_Plans[0].ai_generate_chars}{" "}
+                  characters per time
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  Less than {Account_Plans[0].image_upload_size}MB for upload
+                  image per time
+                </li>
+              </ul>
+            </div>
+            <div className="mt-6">
+              <button className="w-full rounded-lg bg-black px-3 py-2 font-semibold text-slate-100 shadow-md">
+                Sign in for free
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={
+              "dark:bg-zinc-850 relative flex flex-col justify-between rounded-lg border-2 border-purple-500 bg-white p-6 shadow-lg"
+            }
+          >
+            <div className="absolute left-1/2 top-0 inline-block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-4 py-1 text-sm text-slate-100">
+              Beta for free
+            </div>
+            <div>
+              <h3 className="text-center text-2xl font-bold">Basic</h3>
+              <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
+                <p className="text-4xl font-bold">${Account_Plans[1].pay}</p>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li className="flex items-center">
+                  <Checked />
+                  Unlimited number of local notes
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  Unlimited number of Cloud notes
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates {Account_Plans[1].ai_generate_day} times per day
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates up to {Account_Plans[1].ai_generate_chars}{" "}
+                  characters per time
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  Less than {Account_Plans[1].image_upload_size}MB for upload
+                  image per time
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  All subsequent features will be used for free
+                </li>
+              </ul>
+            </div>
+            <div className="mt-6">
+              <button className="w-full rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 px-3 py-2  font-semibold text-slate-100 shadow-md">
+                <Link href={"/pricing"}>Apply for free</Link>
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={
+              "dark:bg-zinc-850 relative flex flex-col justify-between rounded-lg border border-gray-300 bg-white p-6 shadow-lg"
+            }
+          >
+            <div>
+              <h3 className="text-center text-2xl font-bold">Premium</h3>
+              <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
+                <p className="text-4xl font-bold">${Account_Plans[2].pay}</p>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li className="flex items-center">
+                  <Checked />
+                  Unlimited number of local notes
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  Unlimited number of Cloud notes
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates {Account_Plans[2].ai_generate_day} times per day
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  AI generates up to {Account_Plans[2].ai_generate_chars}{" "}
+                  characters per time
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  Less than {Account_Plans[2].image_upload_size}MB for upload
+                  image per time
+                </li>
+                <li className="flex items-center">
+                  <Checked />
+                  All subsequent features will be used for free
+                </li>
+              </ul>
+            </div>
+            <div className="mt-6">
+              <button className="w-full rounded-lg bg-black px-3 py-2 font-semibold text-slate-100 shadow-md">
+                Coming soon
+              </button>
+            </div>
           </div>
         </div>
       </div>

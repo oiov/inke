@@ -63,7 +63,9 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             <div>
               <h3 className="text-center text-2xl font-bold">Free</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                <span className="text-4xl font-bold">$0</span>
+                <span className="text-4xl font-bold">
+                  ${Account_Plans[0].pay}
+                </span>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-center">
@@ -111,13 +113,13 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               </div>
             ) : (
               <div className="absolute left-1/2 top-0 inline-block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-4 py-1 text-sm text-slate-100">
-                Beta for free now
+                Beta for free
               </div>
             )}
             <div>
               <h3 className="text-center text-2xl font-bold">Basic</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p className="text-4xl font-bold">$9</p>
+                <p className="text-4xl font-bold">${Account_Plans[1].pay}</p>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-center">
@@ -171,7 +173,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             <div>
               <h3 className="text-center text-2xl font-bold">Premium</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p className="text-4xl font-bold">$19</p>
+                <p className="text-4xl font-bold">${Account_Plans[2].pay}</p>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-center">
