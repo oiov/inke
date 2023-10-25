@@ -38,7 +38,7 @@ export function Landing({ session }: { session: Session | null }) {
             alt={"example"}
             src={"/desktop.png"}
             width={430}
-            height={450}
+            height={300}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
@@ -58,14 +58,14 @@ export function Landing({ session }: { session: Session | null }) {
               "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/inke/e1.png"
             }
             width={450}
-            height={450}
+            height={300}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               AI empowering writing
             </h3>
             <p className="text-lg">
-              🎉 Continue writing, editing, translation, Chat with AI, all in
+              🎉 Continue writing, editing, translation, chat with AI, all in
               one.
             </p>
           </div>
@@ -79,7 +79,7 @@ export function Landing({ session }: { session: Session | null }) {
               "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/inke/e3.png"
             }
             width={460}
-            height={450}
+            height={300}
           />
           <div className="grids p-2">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
@@ -181,9 +181,11 @@ export function Landing({ session }: { session: Session | null }) {
               </ul>
             </div>
             <div className="mt-6">
-              <button className="w-full rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 px-3 py-2  font-semibold text-slate-100 shadow-md">
-                <Link href={"/pricing"}>Apply for free</Link>
-              </button>
+              <Link href={"/pricing"}>
+                <button className="w-full rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 px-3 py-2  font-semibold text-slate-100 shadow-md">
+                  Apply for free
+                </button>
+              </Link>
             </div>
           </div>
 
