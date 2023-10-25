@@ -36,7 +36,8 @@ export function Landing({ session }: { session: Session | null }) {
           <Image
             className="rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
             alt={"example"}
-            src={"/desktop.png"}
+            src="/desktop.png"
+            placeholder="blur"
             width={430}
             height={300}
           />
@@ -54,9 +55,8 @@ export function Landing({ session }: { session: Session | null }) {
           <Image
             className="rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
             alt={"example"}
-            src={
-              "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/inke/e1.png"
-            }
+            src="/e1.png"
+            placeholder="blur"
             width={450}
             height={300}
           />
@@ -75,9 +75,8 @@ export function Landing({ session }: { session: Session | null }) {
           <Image
             className="rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
             alt={"example"}
-            src={
-              "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/inke/e3.png"
-            }
+            src="/e3.png"
+            placeholder="blur"
             width={460}
             height={300}
           />
