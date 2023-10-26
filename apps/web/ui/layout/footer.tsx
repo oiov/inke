@@ -4,6 +4,7 @@ import Link from "next/link";
 import Logo from "../shared/icons/logo";
 import { useState } from "react";
 import Image from "next/image";
+import { Github, MessageSquare, Youtube } from "lucide-react";
 
 export default function Footer() {
   const [isShowLocalHunt, setShowLocalHunt] = useState(false);
@@ -76,25 +77,25 @@ export default function Footer() {
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Information</p>
           <Link
-            className="font-mono text-sm text-slate-200 hover:text-slate-300"
+            className="font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/pricing"
           >
             Pricing (beta for free)
           </Link>
           <Link
-            className="my-2 font-mono text-sm text-slate-200 hover:text-slate-300"
+            className="my-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/document"
           >
             Document
           </Link>
           <Link
-            className="font-mono text-sm text-slate-200 hover:text-slate-300"
+            className="font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/privacy"
           >
             Privacy Policy
           </Link>
           <Link
-            className="mt-2 font-mono text-sm text-slate-200 hover:text-slate-300"
+            className="mt-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="mailto:team@inke.app"
           >
             Contact us
@@ -104,25 +105,26 @@ export default function Footer() {
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Community</p>
           <Link
-            className="font-mono text-sm text-slate-200"
+            className="flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/feedback"
             target="_blank"
           >
-            Feedback
+            <MessageSquare className="h-4 w-4" /> Feedback
           </Link>
           <Link
-            className="my-2 font-mono text-sm text-slate-200"
+            className="my-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="https://www.youtube.com/watch?v=Te3Piqtv1NQ"
             target="_blank"
           >
-            Youtube
+            <Youtube className="h-4 w-4" /> Youtube
           </Link>
           <Link
-            className="mb-2 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-300 "
+            className="mb-3 flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-400 "
             href="https://github.com/yesmore/inke"
             target="_blank"
           >
-            Open Source{" "}
+            <Github className="h-4 w-4 text-slate-100" />
+            Open Source
           </Link>
 
           <img

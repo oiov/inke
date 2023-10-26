@@ -4,13 +4,14 @@ import NewPostButton from "@/ui/new-post-button";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
+import { TypeAnimation } from "react-type-animation";
 import Checked from "@/ui/shared/icons/checked";
 import { Account_Plans } from "@/lib/consts";
 
 export function Welcome() {
   return (
     <div className="grids mt-3 flex w-full max-w-6xl flex-col items-center justify-center py-6">
-      <p className="title-font animate-fade-up font-display mb-6 text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:mb-8 md:text-5xl">
+      <p className="title-font animate-fade-up font-display text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Simple
         </span>
@@ -18,6 +19,25 @@ export function Welcome() {
         <span className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-400 bg-clip-text text-transparent ">
           Markdown
         </span>
+      </p>
+
+      <p className="mb-6 mt-3 w-[70%] text-center font-mono text-lg font-semibold text-slate-600 md:mt-5 md:w-full">
+        <TypeAnimation
+          sequence={[
+            "AI notebook, empowering writing.",
+            1000,
+            "AI notebook, continue writing.",
+            1000,
+            "AI notebook, editing assistance.",
+            1000,
+            "AI notebook, translation assistance.",
+            1000,
+            "AI notebook, all in one.",
+            3000,
+          ]}
+          speed={50}
+          repeat={5}
+        />
       </p>
 
       <NewPostButton
@@ -42,7 +62,7 @@ export function Landing({ session }: { session: Session | null }) {
             width={430}
             height={280}
           />
-          <div className="grids p-2">
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               Rich editing components
             </h3>
@@ -62,7 +82,7 @@ export function Landing({ session }: { session: Session | null }) {
             width={450}
             height={280}
           />
-          <div className="grids p-2">
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               AI empowering writing
             </h3>
@@ -83,7 +103,7 @@ export function Landing({ session }: { session: Session | null }) {
             width={460}
             height={280}
           />
-          <div className="grids p-2">
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               Export & Theme
             </h3>
