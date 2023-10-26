@@ -64,11 +64,12 @@ export async function POST(req: Request): Promise<Response> {
       {
         role: "system",
         content:
-          "As a note assistant, communicate with users based on the input note content.",
+          "As a note assistant, communicate with users based on the input note content." +
+          "Do not reply to questions unrelated to the notes. If there are questions unrelated to the notes, please reply 'Please ask questions related to the notes'",
       },
       {
         role: "system",
-        content: system,
+        content: `Analyze note content: \n${system}`,
       },
       ...messages,
     ],

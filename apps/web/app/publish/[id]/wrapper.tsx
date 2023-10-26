@@ -124,6 +124,7 @@ export default function Wrapper({
             debounceDuration={Default_Debounce_Duration}
             defaultValue={currentContent}
             editable={false}
+            bot={true}
           />
         </>
       )}

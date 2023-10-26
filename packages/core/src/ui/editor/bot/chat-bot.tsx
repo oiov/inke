@@ -1,25 +1,26 @@
 import { Editor } from "@tiptap/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { NovelContext } from "../provider";
-import { useChat, useCompletion } from "ai/react";
-import { Baby, Bot, PauseCircle, Send, Trash, XIcon } from "lucide-react";
+import { useChat } from "ai/react";
+import {
+  Baby,
+  Bot,
+  Clipboard,
+  PauseCircle,
+  RefreshCcw,
+  Send,
+  Trash,
+  Trash2,
+  XIcon,
+} from "lucide-react";
 import Magic1 from "@/ui/icons/magic-1";
 import { motion } from "framer-motion";
-
-interface MessageItem {
-  role: string;
-  content: string;
-}
 
 export function ChatBot({ editor }: { editor: Editor }) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const { completionApi, plan } = useContext(NovelContext);
-
-  useEffect(() => {
-    inputRef.current && inputRef.current?.focus();
-  });
 
   const {
     messages,
@@ -33,6 +34,17 @@ export function ChatBot({ editor }: { editor: Editor }) {
     id: "ai-bot",
     api: `${completionApi}/bot`,
     body: { plan, system: editor.getText() },
+    initialMessages: [
+      {
+        id: "start",
+        role: "system",
+        content: "Here, ask me about your note :)",
+      },
+    ],
+  });
+
+  useEffect(() => {
+    inputRef.current && inputRef.current?.focus();
   });
 
   const handleChat = () => {
@@ -41,6 +53,12 @@ export function ChatBot({ editor }: { editor: Editor }) {
       return;
     }
     if (!inputRef.current?.value) return;
+  };
+
+  const handleKeyPress = (e: any) => {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      handleSubmit(e);
+    }
   };
 
   const toggleOpen = () => {
@@ -56,7 +74,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
         animate={{ borderRadius: isOpen ? "0%" : "50%", x: isOpen ? 0 : 35 }}
         transition={{ duration: 0.2 }}>
         {isOpen ? (
-          <div className="chat novel-border novel-max-w-[300px] novel-border-slate-100  novel-bg-white novel-shadow-lg novel-rounded-lg">
+          <div className="chat novel-border novel-w-[350px] novel-border-slate-100  novel-bg-white novel-shadow-lg novel-rounded-lg">
             <div className="msgs novel-p-2">
               <div className="flex novel-mb-2 novel-pb-2 novel-border-slate-100 novel-border-b novel-justify-between novel-items-center">
                 <Magic1 className="novel-h-6 novel-w-6 translate-y-1 novel-text-purple-400" />
@@ -72,31 +90,82 @@ export function ChatBot({ editor }: { editor: Editor }) {
                   />
                 </div>
               </div>
-              <div className=" novel-h-64 novel-overflow-auto">
+              <div className="novel-h-80 novel-relative novel-overflow-auto">
                 {messages.map((m, index) =>
                   m.role === "user" ? (
-                    <div
-                      className="novel-text-sm novel-mb-3 novel-gap-2 novel-w-full novel-flex novel-items-start novel-justify-end"
+                    <motion.div
+                      className="novel-text-sm novel-group novel-mb-3 novel-gap-2 novel-w-full novel-flex novel-items-start novel-justify-end"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
                       key={index}>
-                      <span className="novel-py-1 novel-px-2 novel-bg-slate-200 novel-rounded-md">
+                      <div className="novel-hidden group-hover:novel-block">
+                        <Clipboard
+                          onClick={() =>
+                            navigator.clipboard.writeText(m.content)
+                          }
+                          className="novel-w-3 novel-mb-1 novel-text-slate-400 active:novel-text-green-500 novel-h-3 novel-cursor-pointer hover:novel-text-slate-300 "
+                        />
+                        <Trash2
+                          onClick={() => {
+                            const new_list = messages.filter(
+                              (i) => i.content !== m.content
+                            );
+                            setMessages(new_list);
+                          }}
+                          className="novel-w-3 novel-text-slate-400 active:novel-text-red-500 novel-h-3 novel-cursor-pointer hover:novel-text-slate-300 "
+                        />
+                      </div>
+                      <span className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
                       </span>
-                      <span className="novel-py-1 novel-max-w-[200px] novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
-                        <Baby className="novel-w-5 novel-h-5 novel-text-yellow-400" />
+                      <span className="novel-py-1 novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
+                        <Baby className="novel-w-5 novel-h-5 novel-text-blue-400" />
                       </span>
-                    </div>
+                    </motion.div>
                   ) : (
-                    <div
-                      className="novel-text-sm novel-mb-3 novel-gap-2 novel-w-full novel-flex novel-items-start novel-justify-start"
+                    <motion.div
+                      className="novel-text-sm novel-group novel-mb-3 novel-gap-2 novel-w-full novel-flex novel-items-start novel-justify-start"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
                       key={index}>
                       <span className="novel-py-1 novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
                         <Bot className="novel-w-5 novel-h-5 novel-text-purple-400" />
                       </span>
-                      <span className="novel-py-1 novel-max-w-[200px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
+                      <span className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
                       </span>
-                    </div>
+                      <div className="novel-hidden group-hover:novel-block">
+                        <Clipboard
+                          onClick={() =>
+                            navigator.clipboard.writeText(m.content)
+                          }
+                          className="novel-w-3 novel-mb-1 novel-text-slate-400 active:novel-text-green-500 novel-h-3 novel-cursor-pointer hover:novel-text-slate-300 "
+                        />
+                        <Trash2
+                          onClick={() => {
+                            const new_list = messages.filter(
+                              (i) => i.content !== m.content
+                            );
+                            setMessages(new_list);
+                          }}
+                          className="novel-w-3 novel-text-slate-400 active:novel-text-red-500 novel-h-3 novel-cursor-pointer hover:novel-text-slate-300 "
+                        />
+                      </div>
+                    </motion.div>
                   )
+                )}
+
+                {messages.length >= 2 && !isLoading && (
+                  <div
+                    onClick={() => reload()}
+                    className="novel-absolute novel-cursor-pointer novel-bottom-0 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-2 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 hover:novel-bg-slate-300">
+                    <RefreshCcw className="novel-w-4 novel-h-4 novel-text-slate-500" />
+                    <span className="novel-text-sm novel-text-slate-500">
+                      Regenerate
+                    </span>
+                  </div>
                 )}
               </div>
             </div>
@@ -104,27 +173,28 @@ export function ChatBot({ editor }: { editor: Editor }) {
             <div className="novel-flex novel-p-2 novel-items-end novel-justify-center">
               <Bot
                 onClick={toggleOpen}
-                className="novel-h-5 novel-cursor-pointer novel-mr-2 novel-mb-2 novel-w-5 translate-y-1 novel-text-purple-400"
+                className="novel-h-5 novel-cursor-pointer novel-mr-2 novel-mb-2.5 novel-w-5 translate-y-1 novel-text-purple-400"
               />
               <textarea
                 ref={inputRef}
                 maxLength={300}
-                style={{ maxHeight: "150px", minHeight: "36px" }}
+                style={{ maxHeight: "150px", minHeight: "40px" }}
                 rows={1}
                 className="novel-flex-grow novel-border-l novel-border-y novel-border-gray-100 novel-shadow-inner novel-rounded-l-lg novel-px-4 novel-py-1 focus:novel-outline-none"
                 placeholder="Ask note..."
                 value={input}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyPress}
               />
               <form onSubmit={handleSubmit}>
                 <button
                   onClick={handleChat}
                   type="submit"
-                  className="novel-px-2 novel-py-2 novel-bg-slate-100 novel-text-white novel-rounded-r-lg hover:novel-bg-slate-300">
+                  className="novel-px-3 novel-py-3 novel-bg-slate-100 novel-text-white novel-rounded-r-lg hover:novel-bg-slate-300">
                   {!isLoading ? (
-                    <Send className="novel-h-5 novel-w-5 novel-text-stone-600" />
+                    <Send className="novel-h-4 novel-w-4 novel-text-blue-400" />
                   ) : (
-                    <PauseCircle className="novel-h-5 novel-animate-pulse novel-w-5 novel-text-stone-600" />
+                    <PauseCircle className="novel-h-4 novel-animate-pulse novel-w-4 novel-text-slate-600" />
                   )}
                 </button>
               </form>
@@ -132,7 +202,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
           </div>
         ) : (
           <button
-            className="novel-p-3 hover:-novel-translate-x-6 novel-transition-all novel-bg-white novel-shadow-lg novel-rounded-full"
+            className="novel-p-3.5 hover:-novel-translate-x-6 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-rounded-full"
             onClick={toggleOpen}>
             <Bot className="novel-h-5 novel-w-5 translate-y-1 novel-text-purple-400" />
           </button>
