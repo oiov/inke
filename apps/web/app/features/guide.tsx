@@ -15,7 +15,7 @@ export function Welcome() {
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Simple
         </span>
-        , AI Powered,&nbsp;
+        ,&nbsp;AI&nbsp;Powered,&nbsp;
         <span className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-400 bg-clip-text text-transparent ">
           Markdown
         </span>
