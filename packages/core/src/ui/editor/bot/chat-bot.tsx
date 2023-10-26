@@ -74,7 +74,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
         animate={{ borderRadius: isOpen ? "0%" : "50%", x: isOpen ? 0 : 35 }}
         transition={{ duration: 0.2 }}>
         {isOpen ? (
-          <div className="chat novel-border novel-w-[350px] novel-border-slate-100  novel-bg-white novel-shadow-lg novel-rounded-lg">
+          <div className="chat novel-border novel-relative novel-w-[350px] novel-border-slate-100  novel-bg-white novel-shadow-lg novel-rounded-lg">
             <div className="msgs novel-p-2">
               <div className="flex novel-mb-2 novel-pb-2 novel-border-slate-100 novel-border-b novel-justify-between novel-items-center">
                 <Magic1 className="novel-h-6 novel-w-6 translate-y-1 novel-text-purple-400" />
@@ -90,7 +90,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                   />
                 </div>
               </div>
-              <div className="novel-h-80 novel-relative novel-overflow-auto">
+              <div className="novel-h-80 novel-pb-10 novel-overflow-auto">
                 {messages.map((m, index) =>
                   m.role === "user" ? (
                     <motion.div
@@ -156,17 +156,6 @@ export function ChatBot({ editor }: { editor: Editor }) {
                     </motion.div>
                   )
                 )}
-
-                {messages.length >= 2 && !isLoading && (
-                  <div
-                    onClick={() => reload()}
-                    className="novel-absolute novel-cursor-pointer novel-bottom-0 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-2 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 hover:novel-bg-slate-300">
-                    <RefreshCcw className="novel-w-4 novel-h-4 novel-text-slate-500" />
-                    <span className="novel-text-sm novel-text-slate-500">
-                      Regenerate
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -199,6 +188,17 @@ export function ChatBot({ editor }: { editor: Editor }) {
                 </button>
               </form>
             </div>
+
+            {messages.length >= 2 && !isLoading && (
+              <div
+                onClick={() => reload()}
+                className="novel-absolute novel-cursor-pointer novel-bottom-16 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-2 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 novel-bg-slate-50 hover:novel-bg-slate-300">
+                <RefreshCcw className="novel-w-4 novel-h-4 novel-text-slate-500" />
+                <span className="novel-text-sm novel-text-slate-500">
+                  Regenerate
+                </span>
+              </div>
+            )}
           </div>
         ) : (
           <button
