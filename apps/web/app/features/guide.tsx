@@ -11,11 +11,11 @@ import { Account_Plans } from "@/lib/consts";
 export function Welcome() {
   return (
     <div className="grids mt-3 flex w-full max-w-6xl flex-col items-center justify-center py-6">
-      <p className="title-font animate-fade-up font-display flex text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
+      <p className="title-font animate-fade-up font-display text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Simple
         </span>
-        ,&nbsp;AI&nbsp;Powered,&nbsp;
+        , AI Powered,{" "}
         <span className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-400 bg-clip-text text-transparent ">
           Markdown
         </span>
