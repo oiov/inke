@@ -6,12 +6,12 @@ import {
   Baby,
   Bot,
   Clipboard,
+  Minus,
   PauseCircle,
   RefreshCcw,
   Send,
   Trash,
   Trash2,
-  XIcon,
 } from "lucide-react";
 import Magic1 from "@/ui/icons/magic-1";
 import { motion } from "framer-motion";
@@ -80,14 +80,14 @@ export function ChatBot({ editor }: { editor: Editor }) {
               <div className="flex novel-mb-2 novel-pb-2 novel-border-slate-100 novel-border-b novel-justify-between novel-items-center">
                 <Magic1 className="novel-h-6 novel-w-6 translate-y-1 novel-text-purple-400" />
                 <span className="novel-font-semibold">Chat with note</span>
-                <div className=" novel-flex novel-items-center novel-gap-2">
+                <div className="novel-flex novel-items-center novel-gap-3">
                   <Trash
                     onClick={() => setMessages([])}
-                    className="novel-float-right novel-cursor-pointer novel-w-4 novel-h-4 novel-text-slate-600"
+                    className="novel-float-right novel-cursor-pointer novel-w-3 novel-h-3 novel-text-slate-600"
                   />
-                  <XIcon
+                  <Minus
                     onClick={toggleOpen}
-                    className="novel-float-right novel-cursor-pointer novel-w-4 novel-h-4 novel-text-slate-600"
+                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-4 novel-h-4 hover:novel-bg-slate-200 novel-text-slate-600"
                   />
                 </div>
               </div>
@@ -170,7 +170,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                 maxLength={300}
                 style={{ maxHeight: "150px", minHeight: "40px" }}
                 rows={1}
-                className="novel-flex-grow novel-text-sm novel-border-l novel-border-y novel-border-gray-100 novel-shadow-inner novel-rounded-l-lg novel-px-4 novel-py-1 focus:novel-outline-none"
+                className="novel-flex-grow novel-text-sm novel-border-l novel-border-y novel-border-gray-100 novel-shadow-inner novel-rounded-l-lg novel-px-4 novel-py-2 focus:novel-outline-none"
                 placeholder="Ask note..."
                 value={input}
                 onChange={handleInputChange}
@@ -203,7 +203,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
           </div>
         ) : (
           <button
-            className="novel-p-3.5 hover:-novel-translate-x-6 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-rounded-full"
+            className="novel-p-3.5 -novel-translate-x-7 novel-border novel-border-slate-100 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-rounded-full"
             onClick={toggleOpen}>
             <Bot className="novel-h-5 novel-w-5 translate-y-1 novel-text-purple-400" />
           </button>
