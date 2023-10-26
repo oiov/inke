@@ -228,7 +228,7 @@ export default function Editor({
             <AIGeneratingLoading stop={stop} />
           </div>
         )}
-        {/* {bot && <ChatBot editor={editor} />} */}
+        {bot && editor && <ChatBot editor={editor} />}
       </div>
     </NovelContext.Provider>
   );

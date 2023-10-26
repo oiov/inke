@@ -24,7 +24,7 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  const { prompt, plan } = await req.json();
+  const { prompt, plan, messages, system } = await req.json();
 
   const planN = Number(plan || "5");
 
@@ -66,10 +66,7 @@ export async function POST(req: Request): Promise<Response> {
         content:
           "As a note assistant, communicate with users based on the input note content.",
       },
-      {
-        role: "user",
-        content: prompt,
-      },
+      ...messages,
     ],
     temperature: 0.7,
     top_p: 1,
