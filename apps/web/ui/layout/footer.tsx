@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "../shared/icons/logo";
 import { useState } from "react";
 import Image from "next/image";
 import { Github, MessageSquare, Youtube } from "lucide-react";
+import Box from "@/ui/shared/icons/box";
 
 export default function Footer() {
   const [isShowLocalHunt, setShowLocalHunt] = useState(false);
@@ -29,8 +29,8 @@ export default function Footer() {
           </span>
           <span className="text-slate-100">E</span>
         </Link>
-        <p className="font-mono text-slate-200">
-          AI notebook, empowering writing.
+        <p className="flex items-center gap-1 font-mono text-slate-200">
+          <Box className="h-3 w-3" /> AI notebook, empowering writing.
         </p>
 
         <div className="my-4 flex items-center justify-center gap-1 text-sm text-slate-400">

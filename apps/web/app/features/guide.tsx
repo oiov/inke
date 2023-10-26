@@ -11,26 +11,27 @@ import { Account_Plans } from "@/lib/consts";
 export function Welcome() {
   return (
     <div className="grids mt-3 flex w-full max-w-6xl flex-col items-center justify-center py-6">
-      <p className="title-font animate-fade-up font-display text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
+      <p className="title-font animate-fade-up font-display flex text-center text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Simple
         </span>
-        , AI Powered,{" "}
+        , AI Powered,&nbsp;
         <span className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-400 bg-clip-text text-transparent ">
           Markdown
         </span>
       </p>
 
-      <p className="mb-6 mt-3 w-[70%] text-center font-mono text-lg font-semibold text-slate-600 md:mt-5 md:w-full">
+      <p className="mx-auto mb-6 mt-3 text-center font-mono text-lg font-semibold text-slate-600 md:mt-5 md:w-full">
         <TypeAnimation
+          className="w-[320px]"
           sequence={[
-            "AI notebook, empowering writing.",
+            "AI notebook, writing.",
             1000,
-            "AI notebook, continue writing.",
+            "AI notebook, chating.",
             1000,
-            "AI notebook, editing assistance.",
+            "AI notebook, editing.",
             1000,
-            "AI notebook, translation assistance.",
+            "AI notebook, translation.",
             1000,
             "AI notebook, all in one.",
             3000,
