@@ -190,6 +190,14 @@ export function ChatBot({ editor }: { editor: Editor }) {
               </form>
             </div>
 
+            {isLoading && (
+              <div
+                onClick={stop}
+                className="novel-absolute novel-cursor-pointer novel-bottom-16 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-4 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 novel-bg-slate-50 hover:novel-bg-slate-300">
+                <PauseCircle className="novel-w-4 novel-h-4 novel-text-slate-500" />
+                <span className="novel-text-sm novel-text-slate-500">Stop</span>
+              </div>
+            )}
             {messages.length >= 2 && !isLoading && (
               <div
                 onClick={() => reload()}
