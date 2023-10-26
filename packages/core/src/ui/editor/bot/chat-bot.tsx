@@ -26,12 +26,12 @@ export function ChatBot({ editor }: { editor: Editor }) {
     setMessages,
     input,
     isLoading,
+    reload,
     handleInputChange,
     handleSubmit,
   } = useChat({
     id: "ai-bot",
     api: `${completionApi}/bot`,
-    initialInput: editor.getText(),
     body: { plan, system: editor.getText() },
   });
 
@@ -82,7 +82,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                         {m.content}
                       </span>
                       <span className="novel-py-1 novel-max-w-[200px] novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
-                        <Baby className="novel-w-5 novel-h-5 novel-text-purple-400" />
+                        <Baby className="novel-w-5 novel-h-5 novel-text-yellow-400" />
                       </span>
                     </div>
                   ) : (
@@ -92,7 +92,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                       <span className="novel-py-1 novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
                         <Bot className="novel-w-5 novel-h-5 novel-text-purple-400" />
                       </span>
-                      <span className="novel-py-1novel-max-w-[200px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
+                      <span className="novel-py-1 novel-max-w-[200px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
                       </span>
                     </div>

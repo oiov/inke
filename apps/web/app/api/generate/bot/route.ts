@@ -66,6 +66,10 @@ export async function POST(req: Request): Promise<Response> {
         content:
           "As a note assistant, communicate with users based on the input note content.",
       },
+      {
+        role: "system",
+        content: system,
+      },
       ...messages,
     ],
     temperature: 0.7,
