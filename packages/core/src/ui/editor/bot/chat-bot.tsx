@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Magic1 from "@/ui/icons/magic-1";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 export function ChatBot({ editor }: { editor: Editor }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -116,9 +117,9 @@ export function ChatBot({ editor }: { editor: Editor }) {
                           className="novel-w-3 novel-text-slate-400 active:novel-text-red-500 novel-h-3 novel-cursor-pointer hover:novel-text-slate-300 "
                         />
                       </div>
-                      <span className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
+                      <ReactMarkdown className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
-                      </span>
+                      </ReactMarkdown>
                       <span className="novel-py-1 novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
                         <Baby className="novel-w-5 novel-h-5 novel-text-blue-400" />
                       </span>
@@ -133,9 +134,9 @@ export function ChatBot({ editor }: { editor: Editor }) {
                       <span className="novel-py-1 novel-px-2 novel-font-semibold novel-bg-slate-100 novel-rounded-full">
                         <Bot className="novel-w-5 novel-h-5 novel-text-purple-400" />
                       </span>
-                      <span className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
+                      <ReactMarkdown className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
-                      </span>
+                      </ReactMarkdown>
                       <div className="novel-hidden group-hover:novel-block">
                         <Clipboard
                           onClick={() =>
@@ -169,7 +170,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                 maxLength={300}
                 style={{ maxHeight: "150px", minHeight: "40px" }}
                 rows={1}
-                className="novel-flex-grow novel-border-l novel-border-y novel-border-gray-100 novel-shadow-inner novel-rounded-l-lg novel-px-4 novel-py-1 focus:novel-outline-none"
+                className="novel-flex-grow novel-text-sm novel-border-l novel-border-y novel-border-gray-100 novel-shadow-inner novel-rounded-l-lg novel-px-4 novel-py-1 focus:novel-outline-none"
                 placeholder="Ask note..."
                 value={input}
                 onChange={handleInputChange}

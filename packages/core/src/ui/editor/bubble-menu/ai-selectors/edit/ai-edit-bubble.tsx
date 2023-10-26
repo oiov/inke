@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
 import { NovelContext } from "../../../provider";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   editor: Editor;
@@ -83,7 +84,9 @@ const AIEditorBubble: React.FC<Props> = ({ editor }: Props) => {
           </div>
         </div>
         {completion.length > 0 && (
-          <div className="novel-text-sm mt-2">{completion}</div>
+          <ReactMarkdown className="novel-text-sm mt-2">
+            {completion}
+          </ReactMarkdown>
         )}
       </div>
     </div>
