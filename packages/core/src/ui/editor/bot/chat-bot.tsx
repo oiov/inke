@@ -91,7 +91,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                   />
                   <Minus
                     onClick={toggleOpen}
-                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-4 novel-h-4 hover:novel-bg-slate-200 novel-text-slate-600"
+                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-5 novel-h-6 hover:novel-bg-slate-200 novel-text-slate-600"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
                       <ReactMarkdown className="novel-py-1 novel-text-slate-700 novel-max-w-[260px] novel-px-2 novel-bg-slate-200 novel-rounded-md">
                         {m.content}
                       </ReactMarkdown>
-                      <div className="novel-hidden group-hover:novel-block">
+                      <div className="novel-hidden novel-h-full novel-mt-auto group-hover:novel-block">
                         <Clipboard
                           onClick={() =>
                             navigator.clipboard.writeText(m.content)
@@ -197,9 +197,11 @@ export function ChatBot({ editor }: { editor: Editor }) {
             {isLoading && (
               <div
                 onClick={stop}
-                className="novel-absolute novel-cursor-pointer novel-bottom-16 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-4 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 novel-bg-slate-50 hover:novel-bg-slate-300">
+                className="novel-absolute novel-animate-pulse novel-cursor-pointer novel-bottom-16 novel-z-10 novel-left-1/2 novel-transform novel--translate-x-1/2 novel-px-4 novel-py-1 novel-flex novel-justify-center novel-items-center novel-gap-1 novel-border novel-rounded-md novel-border-slate-200 novel-bg-slate-50 hover:novel-bg-slate-300">
                 <PauseCircle className="novel-w-4 novel-h-4 novel-text-slate-500" />
-                <span className="novel-text-sm novel-text-slate-500">Stop</span>
+                <span className="novel-text-sm novel-text-slate-500">
+                  Abort
+                </span>
               </div>
             )}
             {messages.length >= 2 && !isLoading && (
@@ -215,7 +217,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
           </div>
         ) : (
           <button
-            className="novel-p-3.5 -novel-translate-x-7 novel-border novel-border-slate-100 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-opacity-75 hover:novel-opacity-100 novel-rounded-full"
+            className="novel-p-3.5 hover:-novel-translate-x-6 novel-border novel-border-slate-100 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-opacity-75 hover:novel-opacity-100 novel-rounded-full"
             onClick={toggleOpen}>
             <Bot className="novel-h-5 novel-w-5 translate-y-1 novel-text-purple-400" />
           </button>
