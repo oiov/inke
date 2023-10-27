@@ -224,7 +224,7 @@ export default function Editor({
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
         {isLoadingOutside && isLoading && (
-          <div className="novel-fixed novel-bottom-3 novel-left-3">
+          <div className="novel-fixed novel-bottom-3 novel-right-3">
             <AIGeneratingLoading stop={stop} />
           </div>
         )}

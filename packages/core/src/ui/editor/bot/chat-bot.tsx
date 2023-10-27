@@ -68,7 +68,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
   };
 
   return (
-    <div className="novel-fixed z-[1009] novel-bottom-3 novel-right-3 novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
+    <div className="novel-fixed z-[1009] novel-bottom-16 novel-right-3 novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
       <motion.div
         className="novel-rounded-full"
         initial={{ borderRadius: "50%", x: 0 }}
@@ -211,7 +211,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
           </div>
         ) : (
           <button
-            className="novel-p-3.5 -novel-translate-x-7 novel-border novel-border-slate-100 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-rounded-full"
+            className="novel-p-3.5 -novel-translate-x-7 novel-border novel-border-slate-100 novel-transition-all novel-bg-white novel-shadow-lg novel-shadow-purple-100 novel-opacity-75 hover:novel-opacity-100 novel-rounded-full"
             onClick={toggleOpen}>
             <Bot className="novel-h-5 novel-w-5 translate-y-1 novel-text-purple-400" />
           </button>
