@@ -25,13 +25,13 @@ export function Welcome() {
         <TypeAnimation
           className="w-[320px]"
           sequence={[
-            "AI notebook, writing.",
+            "AI notebook, empowering writing.",
             1000,
-            "AI notebook, chating.",
+            "AI notebook, empowering editing.",
             1000,
-            "AI notebook, editing.",
+            "AI notebook, empowering translation.",
             1000,
-            "AI notebook, translation.",
+            "AI notebook, chat with note.",
             1000,
             "AI notebook, all in one.",
             3000,

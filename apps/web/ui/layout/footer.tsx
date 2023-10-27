@@ -30,7 +30,7 @@ export default function Footer() {
           <span className="text-slate-100">E</span>
         </Link>
         <p className="flex items-center gap-1 font-mono text-slate-200">
-          <Box className="h-3 w-3" /> AI notebook, empowering writing.
+          AI notebook, empowering writing.
         </p>
 
         <div className="my-4 flex items-center justify-center gap-1 text-sm text-slate-400">
