@@ -49,7 +49,7 @@ export function Welcome() {
         text="Start writing now"
       />
 
-      <div className="flex w-full items-center justify-center gap-8 pb-6 pt-10 md:gap-16 md:pt-16">
+      <div className="flex w-full items-center justify-center gap-8 pb-6 pt-10 md:gap-14 md:pt-16">
         <CardItem
           bgColor="bg-cyan-400"
           rotate="rotate-12 origin-top-left"
@@ -77,19 +77,14 @@ export function Landing({ session }: { session: Session | null }) {
             width={430}
             height={280}
           />
-          <motion.div
-            className="grids px-2 py-4"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               Rich editing components
             </h3>
             <p className="text-lg">
               📖 Integrate rich text, Markdown, and final render with JSON.
             </p>
-          </motion.div>
+          </div>
         </div>
 
         <div className="my-14 flex flex-col items-center justify-around gap-10 md:flex-row-reverse">
@@ -102,12 +97,7 @@ export function Landing({ session }: { session: Session | null }) {
             width={450}
             height={280}
           />
-          <motion.div
-            className="grids px-2 py-4"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               AI empowering writing
             </h3>
@@ -115,7 +105,7 @@ export function Landing({ session }: { session: Session | null }) {
               🎉 Continue writing, editing, translation, chat with AI, all in
               one.
             </p>
-          </motion.div>
+          </div>
         </div>
 
         <div className="flex flex-col items-center justify-around gap-10 md:flex-row">
@@ -128,19 +118,14 @@ export function Landing({ session }: { session: Session | null }) {
             width={460}
             height={280}
           />
-          <motion.div
-            className="grids px-2 py-4"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="grids px-2 py-4">
             <h3 className="mb-6 text-xl font-bold md:text-3xl">
               Export & Theme
             </h3>
             <p className="text-lg">
               🍥 One click simple export of PDF, images, Markdown, Json files
             </p>
-          </motion.div>
+          </div>
         </div>
 
         <h1 className="my-12 text-center text-4xl font-bold">PLAN</h1>
