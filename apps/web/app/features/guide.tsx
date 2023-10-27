@@ -48,17 +48,6 @@ export function Welcome() {
         className="h-10 w-36 py-2 font-medium shadow-md md:h-12 md:w-44 md:px-3 md:text-lg"
         text="Start writing now"
       />
-
-      <div className="flex w-full items-center justify-center gap-8 pb-6 pt-10 md:gap-14 md:pt-16">
-        <CardItem
-          bgColor="bg-cyan-400"
-          rotate="rotate-12 origin-top-left"
-          icon={"✏️"}
-        />
-        <CardItem bgColor="bg-orange-400" rotate="rotate-45" icon="👻" />
-        <CardItem rotate="rotate-12 origin-top-left" icon={"💯"} />
-        <CardItem bgColor="bg-pink-400" rotate="-rotate-12" icon="🎓" />
-      </div>
     </div>
   );
 }
@@ -128,7 +117,7 @@ export function Landing({ session }: { session: Session | null }) {
           </div>
         </div>
 
-        <h1 className="my-12 text-center text-4xl font-bold">PLAN</h1>
+        <h1 className="my-12 text-center text-3xl font-bold">PLAN</h1>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div
@@ -272,6 +261,17 @@ export function Landing({ session }: { session: Session | null }) {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="grids mt-10 flex w-full items-center justify-center gap-8 pb-6 pt-6 md:gap-14 md:pb-10 md:pt-10">
+        <CardItem
+          bgColor="bg-cyan-400"
+          rotate="rotate-12 origin-top-left"
+          icon={"✏️"}
+        />
+        <CardItem bgColor="bg-orange-400" rotate="rotate-45" icon="👻" />
+        <CardItem rotate="rotate-12 origin-top-left" icon={"💯"} />
+        <CardItem bgColor="bg-pink-400" rotate="-rotate-12" icon="🎓" />
       </div>
 
       <NewPostButton
