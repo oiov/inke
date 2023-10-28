@@ -34,7 +34,7 @@ export function useCollaborationExt(
   active: boolean,
   id: string,
   userName: string
-) {
+): any {
   const collaborationData = useMemo(() => {
     if (!active) return {};
 
