@@ -80,7 +80,7 @@ export default function Footer() {
             className="font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/pricing"
           >
-            Pricing (beta for free)
+            Pricing
           </Link>
           <Link
             className="my-2 font-mono text-sm text-slate-200 hover:text-slate-400"
