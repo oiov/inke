@@ -5,7 +5,6 @@ import { useCompletion } from "ai/react";
 import { X, Clipboard, Replace } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import va from "@vercel/analytics";
 import { NovelContext } from "../../../provider";
 import ReactMarkdown from "react-markdown";
 
@@ -24,9 +23,6 @@ const AITranslateBubble: React.FC<Props> = ({ editor }: Props) => {
     body: { plan },
     onError: (err) => {
       toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
-      }
     },
   });
 

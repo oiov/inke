@@ -18,6 +18,7 @@ import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
 import { NovelContext } from "../../../provider";
+import { toast } from "sonner";
 
 interface AISelectorProps {
   editor: Editor;

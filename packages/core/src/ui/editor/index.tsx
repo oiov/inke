@@ -172,9 +172,6 @@ export default function Editor({
     },
     onError: (err) => {
       toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
-      }
     },
   });
 

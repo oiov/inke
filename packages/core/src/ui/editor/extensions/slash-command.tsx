@@ -337,9 +337,10 @@ const CommandList = ({
       });
     },
     onError: (e) => {
-      if (e.message !== "Failed to fetch") {
-        toast.error(e.message);
-      }
+      toast.error(e.message);
+      // if (e.message !== "Failed to fetch") {
+      //   toast.error(e.message);
+      // }
     },
   });
 

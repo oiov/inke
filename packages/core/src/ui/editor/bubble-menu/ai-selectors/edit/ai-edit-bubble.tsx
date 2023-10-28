@@ -24,9 +24,6 @@ const AIEditorBubble: React.FC<Props> = ({ editor }: Props) => {
     body: { plan },
     onError: (err) => {
       toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
-      }
     },
   });
 
