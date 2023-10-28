@@ -44,7 +44,12 @@ export function ChatBot({ editor }: { editor: Editor }) {
       },
     ],
     onError: (err) => {
-      toast.error(err.message);
+      if (
+        err.message !== "Failed to fetch" &&
+        err.message !== "network error"
+      ) {
+        toast.error(err.message);
+      }
     },
   });
 
@@ -91,11 +96,11 @@ export function ChatBot({ editor }: { editor: Editor }) {
                 <div className="novel-flex novel-items-center novel-gap-3">
                   <Trash
                     onClick={() => setMessages([])}
-                    className="novel-float-right novel-cursor-pointer novel-w-3 novel-h-3 novel-text-slate-600"
+                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-4 novel-h-4 hover:novel-text-red-300 novel-text-slate-600"
                   />
                   <Minus
                     onClick={toggleOpen}
-                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-5 novel-h-6 hover:novel-bg-slate-200 novel-text-slate-600"
+                    className="novel-float-right novel-rounded-md novel-cursor-pointer novel-w-6 novel-h-6 novel-px-1 hover:novel-bg-slate-200 novel-text-slate-600"
                   />
                 </div>
               </div>
