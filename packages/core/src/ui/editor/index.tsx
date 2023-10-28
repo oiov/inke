@@ -136,11 +136,7 @@ export default function Editor({
     }
   }, debounceDuration);
 
-  const { collaborates, provider } = useCollaborationExt(
-    collaboration,
-    id,
-    userName
-  );
+  const { collaborates } = useCollaborationExt(collaboration, id, userName);
 
   const editor = useEditor({
     extensions: [
