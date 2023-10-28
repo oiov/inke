@@ -26,11 +26,12 @@ import { Session } from "next-auth";
 import { IResponse } from "@/lib/types/response";
 import { ShareNote } from "@prisma/client";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
-import { BadgeInfo, ExternalLink, UploadCloud } from "lucide-react";
+import { BadgeInfo, ExternalLink, Shapes, UploadCloud } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useUserInfoByEmail, useUserShareNotes } from "./request";
 import Link from "next/link";
 import Tooltip from "@/ui/shared/tooltip";
+import { useSearchParams } from "next/navigation";
 
 export default function Editor({
   id,
@@ -39,6 +40,9 @@ export default function Editor({
   id?: string;
   session: Session | null;
 }) {
+  const params = useSearchParams();
+  const [collaboration, setCollaboration] = useState(false);
+
   const ref = useRef<HTMLDivElement>(null);
   const [debounceDuration, setDebounceDuration] = useState(
     Default_Debounce_Duration,
@@ -63,17 +67,38 @@ export default function Editor({
 
   const { toPDF, targetRef } = usePDF({ filename: "note.pdf" });
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
-    if (id && contents.length > 0) {
-      setLoading(true);
-      const index = contents.findIndex((item) => item.id === id);
-      if (index !== -1 && contents[index]) {
-        setCurrentContent(contents[index].content ?? {});
-        setCurrentIndex(index);
+    const isOpenCollaboration = params.get("work");
+    const isSync = isOpenCollaboration && isOpenCollaboration === "1";
+
+    if (isSync) {
+      setCollaboration(true);
+      if (id && contents.length === 0) {
+        // handleNewPost();
+      } else if (id && contents.length > 0) {
+        const index = contents.findIndex((item) => item.id === id);
+        if (index === -1) {
+          handleNewPost();
+        } else if (index !== -1 && contents[index]) {
+          setCurrentContent({});
+          setCurrentIndex(index);
+        }
+      }
+    } else {
+      if (id && contents.length > 0) {
+        setLoading(true);
+        const index = contents.findIndex((item) => item.id === id);
+        if (index !== -1 && contents[index]) {
+          setCurrentContent(contents[index].content ?? {});
+          setCurrentIndex(index);
+        }
       }
     }
+
     setLoading(false);
-  }, [id, contents]);
+  }, [id, contents, user]);
 
   const debouncedUpdates = useDebouncedCallback(
     async (value, text, markdown) => {
@@ -82,6 +107,24 @@ export default function Editor({
     },
     debounceDuration,
   );
+
+  const handleNewPost = () => {
+    const newest_list = JSON.parse(
+      localStorage.getItem(Note_Storage_Key) || "[]",
+    );
+    const date = new Date();
+    const newItem: ContentItem = {
+      id,
+      title: `Untitled-${id.slice(0, 6)}-${
+        date.getMonth() + 1
+      }/${date.getDate()}`,
+      content: {},
+      tag: "",
+      created_at: date.getTime(),
+      updated_at: date.getTime(),
+    };
+    setContents([...newest_list, newItem]);
+  };
 
   const handleUpdateItem = (id: string, updatedContent: JSONContent) => {
     if (currentIndex !== -1) {
@@ -202,6 +245,36 @@ export default function Editor({
             </span>
           </div>
 
+          {collaboration && (
+            <Tooltip
+              content={
+                <div className="w-64 px-3 py-2 text-sm text-slate-400">
+                  <h1 className="mb-2 font-semibold text-slate-500">
+                    Collaborative editing
+                  </h1>
+                  <p>
+                    You have enabled multi person collaborative editing, share
+                    this link and let others join your writing.
+                    <br />{" "}
+                    <a
+                      className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                      href={`/post/${id}?work=1`}
+                      target="_blank"
+                    >
+                      Share Link
+                    </a>
+                    .
+                  </p>
+                </div>
+              }
+              fullWidth={false}
+            >
+              <button className="">
+                <Shapes className="h-4 w-4 text-purple-400 hover:text-slate-500" />
+              </button>
+            </Tooltip>
+          )}
+
           {((shares &&
             shares.data &&
             shares.data.find((i) => i.localId === id)) ||
@@ -220,7 +293,7 @@ export default function Editor({
               <LoadingDots color="#fff" />
             ) : (
               <span className="bg-gradient-to-r from-red-100 via-yellow-200 to-orange-200 bg-clip-text font-semibold text-transparent">
-                Share
+                Publish
               </span>
             )}
           </button>
@@ -232,7 +305,7 @@ export default function Editor({
                   Publish and Share
                 </h1>
                 <p>
-                  Click the <code>`Share`</code> button to save your note
+                  Click the <code>`Publish`</code> button to save your note
                   remotely and generate a sharing link, allowing you to share
                   your notes with others. Your notes will be uploaded after
                   serialization. e.g{" "}
@@ -253,7 +326,7 @@ export default function Editor({
             }
             fullWidth={false}
           >
-            <button className="">
+            <button className="hidden sm:block">
               <BadgeInfo className="h-4 w-4 text-slate-400 hover:text-slate-500" />
             </button>
           </Tooltip>
@@ -271,26 +344,31 @@ export default function Editor({
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
             <div ref={targetRef}>
-              <InkeEditor
-                className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
-                storageKey={Content_Storage_Key}
-                debounceDuration={debounceDuration}
-                defaultValue={currentContent}
-                plan={user?.plan || "5"}
-                bot={true}
-                onUpdate={() => setSaveStatus("Unsaved")}
-                onDebouncedUpdate={(
-                  json: JSONContent,
-                  text: string,
-                  markdown: string,
-                ) => {
-                  setSaveStatus("Saving...");
-                  if (json) debouncedUpdates(json, text, markdown);
-                  setTimeout(() => {
-                    setSaveStatus("Saved");
-                  }, 500);
-                }}
-              />
+              {((collaboration && user?.email) || !collaboration) && (
+                <InkeEditor
+                  className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
+                  storageKey={Content_Storage_Key}
+                  debounceDuration={debounceDuration}
+                  defaultValue={currentContent}
+                  plan={user?.plan || "5"}
+                  bot={true}
+                  id={id}
+                  collaboration={collaboration}
+                  userName={user?.name}
+                  onUpdate={() => setSaveStatus("Unsaved")}
+                  onDebouncedUpdate={(
+                    json: JSONContent,
+                    text: string,
+                    markdown: string,
+                  ) => {
+                    setSaveStatus("Saving...");
+                    if (json) debouncedUpdates(json, text, markdown);
+                    setTimeout(() => {
+                      setSaveStatus("Saved");
+                    }, 500);
+                  }}
+                />
+              )}
             </div>
           </div>
         )}

@@ -13,6 +13,7 @@ export default function UINotFound() {
           width="250"
           height="250"
           className="ml-4 rounded-sm"
+          priority
         />
         <Link
           href="/"

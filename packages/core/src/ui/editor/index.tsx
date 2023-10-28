@@ -21,6 +21,7 @@ import AIEditorBubble from "./bubble-menu/ai-selectors/edit/ai-edit-bubble";
 import AIGeneratingLoading from "./bubble-menu/ai-selectors/ai-loading";
 import AITranslateBubble from "./bubble-menu/ai-selectors/translate/ai-translate-bubble";
 import { ChatBot } from "./bot/chat-bot";
+import { useCollaborationExt } from "./extensions/collaboration";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -36,6 +37,9 @@ export default function Editor({
   editable = true,
   plan = "5",
   bot = false,
+  collaboration = false,
+  id = "",
+  userName = "unkown",
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -109,6 +113,9 @@ export default function Editor({
    * Defaults to false.
    */
   bot?: boolean;
+  id?: string;
+  collaboration?: boolean;
+  userName?: string;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -129,8 +136,18 @@ export default function Editor({
     }
   }, debounceDuration);
 
+  const { collaborates, provider } = useCollaborationExt(
+    collaboration,
+    id,
+    userName
+  );
+
   const editor = useEditor({
-    extensions: [...defaultExtensions, ...extensions],
+    extensions: [
+      ...defaultExtensions,
+      ...extensions,
+      ...(collaboration && collaborates ? collaborates : []),
+    ],
     editorProps: {
       ...defaultEditorProps,
       ...editorProps,
