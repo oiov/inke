@@ -19,7 +19,7 @@ export default function FooterPublish() {
           <span className="bg-gradient-to-r from-slate-400 via-slate-600 to-slate-800 bg-clip-text text-transparent ">
             INK
           </span>
-          <span>E & AI</span>
+          <span>E & Note AI</span>
         </Link>
       </div>
       {/* <p>Thanks A Note</p> */}

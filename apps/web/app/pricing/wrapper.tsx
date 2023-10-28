@@ -171,7 +171,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
               </div>
             )}
             <div>
-              <h3 className="text-center text-2xl font-bold">Premium</h3>
+              <h3 className="text-center text-2xl font-bold">Pro</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                 <p className="text-4xl font-bold">${Account_Plans[2].pay}</p>
               </div>

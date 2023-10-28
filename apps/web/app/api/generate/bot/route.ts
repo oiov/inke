@@ -30,6 +30,15 @@ export async function POST(req: Request): Promise<Response> {
 
   const planN = Number(plan || "5");
 
+  if (
+    messages &&
+    messages.length > Account_Plans[planN].ai_bot_history_length
+  ) {
+    return new Response("You have reached the history message limit.", {
+      status: 429,
+    });
+  }
+
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     const ip = req.headers.get("x-forwarded-for");
     const ratelimit = new Ratelimit({
@@ -71,7 +80,7 @@ export async function POST(req: Request): Promise<Response> {
       },
       {
         role: "system",
-        content: `Analyze note content: \n${system}`,
+        content: `Note content: \n${system}`,
       },
       ...messages,
     ],

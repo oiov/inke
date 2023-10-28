@@ -35,7 +35,7 @@ export function Welcome() {
             // 1000,
             // "AI notebook, thinking with note.",
             1000,
-            "AI notebook, all in ai.",
+            "AI notebook, empowering anything.",
             3000,
           ]}
           preRenderFirstString={true}
@@ -221,7 +221,7 @@ export function Landing({ session }: { session: Session | null }) {
             }
           >
             <div>
-              <h3 className="text-center text-2xl font-bold">Premium</h3>
+              <h3 className="text-center text-2xl font-bold">Pro</h3>
               <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                 <p className="text-4xl font-bold">${Account_Plans[2].pay}</p>
               </div>
@@ -263,7 +263,7 @@ export function Landing({ session }: { session: Session | null }) {
         </div>
       </div>
 
-      <div className="grids mt-10 flex w-full items-center justify-center gap-8 pb-6 pt-6 md:gap-14 md:pb-10 md:pt-10">
+      <div className="grids mt-10 flex w-full max-w-6xl items-center justify-center gap-8 pb-6 pt-6 md:gap-14 md:pb-10 md:pt-10">
         <CardItem
           bgColor="bg-cyan-400"
           rotate="rotate-12 origin-top-left"

@@ -9,6 +9,7 @@ interface Plans {
   ai_generate_chars: number;
   note_upload_count: number;
   image_upload_size: number;
+  ai_bot_history_length: number;
   pay: number;
 }
 
@@ -17,6 +18,7 @@ export const Account_Plans: Plans[] = [
     // sign for free
     ai_generate_day: 100,
     ai_generate_chars: 300,
+    ai_bot_history_length: 10,
     note_upload_count: 20,
     image_upload_size: 1, // mb
     pay: 0,
@@ -25,14 +27,16 @@ export const Account_Plans: Plans[] = [
     // basic
     ai_generate_day: 500,
     ai_generate_chars: 500,
+    ai_bot_history_length: 32,
     note_upload_count: 10000,
     image_upload_size: 1,
     pay: 8,
   },
   {
-    // pre
+    // pro
     ai_generate_day: 2000,
     ai_generate_chars: 2000,
+    ai_bot_history_length: 100,
     note_upload_count: 10000,
     image_upload_size: 10,
     pay: 16,
@@ -40,6 +44,7 @@ export const Account_Plans: Plans[] = [
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
+    ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
     pay: 0,
@@ -47,6 +52,7 @@ export const Account_Plans: Plans[] = [
   {
     ai_generate_day: 10,
     ai_generate_chars: 10,
+    ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
     pay: 0,
@@ -54,6 +60,7 @@ export const Account_Plans: Plans[] = [
   {
     ai_generate_day: 50,
     ai_generate_chars: 200,
+    ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
     pay: 0,
