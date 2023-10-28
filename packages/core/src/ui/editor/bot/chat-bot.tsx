@@ -16,6 +16,7 @@ import {
 import Magic1 from "@/ui/icons/magic-1";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
 
 export function ChatBot({ editor }: { editor: Editor }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,9 @@ export function ChatBot({ editor }: { editor: Editor }) {
         content: "Here, ask me about your note :)",
       },
     ],
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
 
   useEffect(() => {

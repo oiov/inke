@@ -111,7 +111,7 @@ export default function Wrapper({
                   }
                   fullWidth={false}
                 >
-                  <button>
+                  <button className="hidden sm:block">
                     <BadgeInfo className="h-4 w-4 text-slate-400 hover:text-slate-500" />
                   </button>
                 </Tooltip>
