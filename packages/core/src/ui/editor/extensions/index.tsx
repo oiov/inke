@@ -5,6 +5,8 @@ import TiptapImage from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import TiptapUnderline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
+import TextAlign from "@tiptap/extension-text-align";
+import CharacterCount from "@tiptap/extension-character-count";
 import { Color } from "@tiptap/extension-color";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
@@ -41,7 +43,7 @@ lowlight.register({ ts });
 export const defaultExtensions = [
   StarterKit.configure({
     heading: {
-      levels: [1, 2, 3],
+      levels: [1, 2, 3, 4, 5, 6],
     },
     bulletList: {
       HTMLAttributes: {
@@ -134,6 +136,11 @@ export const defaultExtensions = [
     },
     includeChildren: true,
   }),
+  TextAlign.configure({
+    defaultAlignment: "left",
+    types: ["heading", "paragraph"],
+    alignments: ["left", "center", "right"],
+  }),
   SlashCommand,
   TiptapUnderline,
   TextStyle,
@@ -157,6 +164,7 @@ export const defaultExtensions = [
     transformCopiedText: true,
     transformPastedText: true,
   }),
+  CharacterCount.configure({}),
   CodeBlockLowlight.configure({
     lowlight,
   }),

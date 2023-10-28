@@ -120,6 +120,7 @@ export default function Editor({
     const json = editor.getJSON();
     const text = editor.getText();
     const markdown = editor.storage.markdown.getMarkdown();
+    // const count = editor.storage.characterCount.characters();
 
     onDebouncedUpdate(json, text, markdown, editor);
 

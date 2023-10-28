@@ -5,12 +5,14 @@ import {
   Heading1,
   Heading2,
   Heading3,
-  Heading4,
   TextQuote,
   ListOrdered,
   TextIcon,
   Code,
   CheckSquare,
+  AlignCenter,
+  AlignRight,
+  AlignLeft,
 } from "lucide-react";
 import * as Popover from "@radix-ui/react-popover";
 import { Dispatch, FC, SetStateAction } from "react";
@@ -92,6 +94,24 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
       icon: Code,
       command: () => editor.chain().focus().toggleCodeBlock().run(),
       isActive: () => editor.isActive("codeBlock"),
+    },
+    {
+      name: "Center align",
+      icon: AlignCenter,
+      command: () => editor.chain().focus().setTextAlign("center").run(),
+      isActive: () => false,
+    },
+    {
+      name: "Right align",
+      icon: AlignRight,
+      command: () => editor.chain().focus().setTextAlign("right").run(),
+      isActive: () => false,
+    },
+    {
+      name: "Left align",
+      icon: AlignLeft,
+      command: () => editor.commands.setTextAlign("left"),
+      isActive: () => false,
     },
   ];
 

@@ -89,6 +89,12 @@ export default function Footer() {
             Document
           </Link>
           <Link
+            className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
+            href="/shortcuts"
+          >
+            Keyboard shortcuts
+          </Link>
+          <Link
             className="font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/privacy"
           >
