@@ -42,6 +42,7 @@ export default function Wrapper({
   }, [contents, room]);
 
   const handleJoin = async () => {
+    setClickJoin(true);
     const localId = uuidv4();
     const res = await fetcher<IResponse<Collaboration | null>>(
       "/api/collaboration",
@@ -66,6 +67,7 @@ export default function Wrapper({
       newPost(localId);
       router.push(`/post/${localId}?work=${room.data.roomId}`);
     }
+    setClickJoin(false);
   };
 
   const newPost = (localId: string) => {
