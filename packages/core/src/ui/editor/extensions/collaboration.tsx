@@ -1,33 +1,8 @@
 import Collaboration from "@tiptap/extension-collaboration";
 import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
 import { HocuspocusProvider } from "@hocuspocus/provider";
-// import { WebrtcProvider } from "y-webrtc";
-// import * as Y from "yjs";
-
-// export function useCollaborationExt(
-//   active: boolean,
-//   id: string,
-//   maxConns: number = 10
-// ) {
-//   const collaborateRef = useRef<Extension<CollaborationOptions, any>>();
-//   const providerRef = useRef<WebrtcProvider>();
-
-//   useEffect(() => {
-//     if (!active) return;
-
-//     const name = `inke-${id}`;
-//     const ydoc = new Y.Doc();
-//     const provider = new WebrtcProvider(name, ydoc, {
-//       maxConns: 20 + Math.floor(Math.random() * 15),
-//     });
-
-//     collaborateRef.current = Collaboration.configure({ document: ydoc });
-//     providerRef.current = provider;
-//   }, []);
-
-//   return { collaborate: collaborateRef.current, provider: providerRef.current };
-// }
-
+import * as Y from "yjs";
+import { TiptapCollabProvider } from "@hocuspocus/provider";
 import { useMemo } from "react";
 
 export function useCollaborationExt(
@@ -37,25 +12,33 @@ export function useCollaborationExt(
 ): any {
   const collaborationData = useMemo(() => {
     if (!active) return {};
+    console.log("激活", id, userName);
 
     const name = `inke-${id}`;
-    const provider = new HocuspocusProvider({
-      url: "ws://127.0.0.1:1234",
+    // const provider = new HocuspocusProvider({
+    //   url: "ws://127.0.0.1:1234",
+    //   name,
+    // });
+
+    const ydoc = new Y.Doc();
+    const wsprovider = new TiptapCollabProvider({
+      appId: "7j9y6m10", // 89jn14k7
       name,
+      document: ydoc,
     });
 
     return {
       collaborates: [
-        Collaboration.configure({ document: provider.document }),
+        Collaboration.configure({ document: wsprovider.document }),
         CollaborationCursor.configure({
-          provider: provider,
+          provider: wsprovider,
           user: {
             name: userName,
             color: generateRandomColorCode(),
           },
         }),
       ],
-      provider: provider.document,
+      provider: wsprovider, // provider.document
     };
   }, [active, id]);
 

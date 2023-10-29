@@ -1,7 +1,7 @@
 import { fetcher } from "@/lib/utils";
 import useSWR from "swr";
 import { User } from "@/lib/types/user";
-import { ShareNote } from "@prisma/client";
+import { Collaboration, ShareNote } from "@prisma/client";
 import { IResponse } from "@/lib/types/response";
 
 export function useUserInfoByEmail(email: string) {
@@ -71,6 +71,41 @@ export function useShareNoteByLocalId(id: string) {
 
   return {
     share: data,
+    isLoading,
+    isError: error,
+  };
+}
+
+export function useCollaborationRoomId(id: string) {
+  const api = `/api/collaboration/room?roomId=${id}`;
+  const { data, error, isLoading } = useSWR<IResponse<Collaboration>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "GET",
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    room: data,
+    isLoading,
+    isError: error,
+  };
+}
+export function useCollaborationById(id: string) {
+  const api = `/api/collaboration/id?id=${id}`;
+  const { data, error, isLoading } = useSWR<IResponse<Collaboration>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "GET",
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    room: data,
     isLoading,
     isError: error,
   };

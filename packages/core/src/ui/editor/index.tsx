@@ -140,7 +140,7 @@ export default function Editor({
 
   const editor = useEditor({
     extensions: [
-      ...defaultExtensions,
+      ...defaultExtensions(collaboration),
       ...extensions,
       ...(collaboration && collaborates ? collaborates : []),
     ],

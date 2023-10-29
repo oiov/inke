@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useState, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { Editor as InkeEditor } from "inkejs";
 import { JSONContent } from "@tiptap/react";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
@@ -24,11 +31,15 @@ import { toPng } from "html-to-image";
 import { usePDF } from "react-to-pdf";
 import { Session } from "next-auth";
 import { IResponse } from "@/lib/types/response";
-import { ShareNote } from "@prisma/client";
+import { Collaboration, ShareNote } from "@prisma/client";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
-import { BadgeInfo, ExternalLink, Shapes, UploadCloud } from "lucide-react";
+import { BadgeInfo, ExternalLink, Shapes, Clipboard } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { useUserInfoByEmail, useUserShareNotes } from "./request";
+import {
+  useCollaborationRoomId,
+  useUserInfoByEmail,
+  useUserShareNotes,
+} from "./request";
 import Link from "next/link";
 import Tooltip from "@/ui/shared/tooltip";
 import { useSearchParams } from "next/navigation";
@@ -36,9 +47,11 @@ import { useSearchParams } from "next/navigation";
 export default function Editor({
   id,
   session,
+  setShowRoomModal,
 }: {
   id?: string;
   session: Session | null;
+  setShowRoomModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const params = useSearchParams();
   const [collaboration, setCollaboration] = useState(false);
@@ -51,6 +64,7 @@ export default function Editor({
   const [isLoading, setLoading] = useState(true);
   const [isSharing, setSharing] = useState(false);
   const [isShowShareLink, setShowShareLink] = useState(false);
+  const [currentRoomId, setCurrentRoomId] = useState("");
   const [contents, setContents] = useLocalStorage<ContentItem[]>(
     Note_Storage_Key,
     [],
@@ -64,24 +78,22 @@ export default function Editor({
 
   const { shares } = useUserShareNotes();
   const { user } = useUserInfoByEmail(session?.user.email);
+  const { room, isLoading: isLoadingRoom } = useCollaborationRoomId(
+    params.get("work"),
+  );
 
   const { toPDF, targetRef } = usePDF({ filename: "note.pdf" });
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
-    const isOpenCollaboration = params.get("work");
-    const isSync = isOpenCollaboration && isOpenCollaboration === "1";
-
-    if (isSync) {
-      setCollaboration(true);
-      if (id && contents.length === 0) {
-        // handleNewPost();
-      } else if (id && contents.length > 0) {
+    const roomId = params.get("work");
+    if (roomId) {
+      if (room && room.code === 200) {
+        setCurrentRoomId(roomId);
+        setCollaboration(true);
+      }
+      if (id && contents.length > 0) {
         const index = contents.findIndex((item) => item.id === id);
-        if (index === -1) {
-          handleNewPost();
-        } else if (index !== -1 && contents[index]) {
+        if (index !== -1 && contents[index]) {
           setCurrentContent({});
           setCurrentIndex(index);
         }
@@ -96,9 +108,8 @@ export default function Editor({
         }
       }
     }
-
     setLoading(false);
-  }, [id, contents, user]);
+  }, [id, contents, room]);
 
   const debouncedUpdates = useDebouncedCallback(
     async (value, text, markdown) => {
@@ -107,24 +118,6 @@ export default function Editor({
     },
     debounceDuration,
   );
-
-  const handleNewPost = () => {
-    const newest_list = JSON.parse(
-      localStorage.getItem(Note_Storage_Key) || "[]",
-    );
-    const date = new Date();
-    const newItem: ContentItem = {
-      id,
-      title: `Untitled-${id.slice(0, 6)}-${
-        date.getMonth() + 1
-      }/${date.getDate()}`,
-      content: {},
-      tag: "",
-      created_at: date.getTime(),
-      updated_at: date.getTime(),
-    };
-    setContents([...newest_list, newItem]);
-  };
 
   const handleUpdateItem = (id: string, updatedContent: JSONContent) => {
     if (currentIndex !== -1) {
@@ -203,11 +196,42 @@ export default function Editor({
     setSharing(false);
   };
 
-  if (isLoading)
+  const handleCreateCollaboration = async () => {
+    if (!currentRoomId) {
+      setShowRoomModal(true);
+    } else if (currentRoomId && !collaboration) {
+      // url有roomid但是没有加入
+      console.log("url有roomid但是没有加入", room);
+    } else if (currentRoomId && collaboration) {
+      // url有roomid且已经加入
+      return;
+    }
+  };
+
+  if (isLoading || (params.get("work") && isLoadingRoom))
     return (
       <div className="m-6 ">
         <LoadingCircle className="h-6 w-6" />
       </div>
+    );
+
+  if (params.get("work") && room.code !== 200)
+    return (
+      <>
+        <div className="relative mx-auto mt-10 h-screen w-full overflow-auto px-10">
+          <Shapes className="mx-auto h-12 w-12 text-purple-400 hover:text-slate-500" />
+          <h1 className="my-4 text-center text-2xl font-semibold">
+            Wrong collaboration space
+          </h1>
+          <p className="">
+            You are accessing a multiplayer collaboration space, but there seems
+            to be an unexpected issue:{" "}
+            <span className=" font-bold text-slate-800">{room.msg}</span>.
+            Please check your space id (<strong>{params.get("work")}</strong>)
+            and try it again.
+          </p>
+        </div>
+      </>
     );
 
   return (
@@ -216,7 +240,7 @@ export default function Editor({
       <div className="relative flex h-screen w-full justify-center overflow-auto">
         <div className="bg-white/50 absolute z-10 mb-5 flex w-full items-center justify-end gap-2 px-3 py-2 backdrop-blur-xl">
           <span className="hidden text-xs text-slate-400 md:block">
-            Created at{" "}
+            Created at
             {currentIndex !== -1 &&
               fomatTmpDate(contents[currentIndex].created_at)}
           </span>
@@ -245,35 +269,56 @@ export default function Editor({
             </span>
           </div>
 
-          {collaboration && (
-            <Tooltip
-              content={
-                <div className="w-64 px-3 py-2 text-sm text-slate-400">
-                  <h1 className="mb-2 font-semibold text-slate-500">
-                    Collaborative editing
+          <Tooltip
+            content={
+              <div className="w-72 px-3 py-2 text-sm text-slate-400">
+                <div className="flex items-center justify-between">
+                  <h1 className="font-semibold text-slate-500">
+                    Collaborative Space (Beta)
                   </h1>
-                  <p>
-                    You have enabled multi person collaborative editing, share
-                    this link and let others join your writing.
-                    <br />{" "}
+
+                  {collaboration && room && room.data && (
+                    <Clipboard
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          `https://inke.app/invite/${room.data.id}`,
+                        )
+                      }
+                      className="novel-w-4 active:novel-text-green-500 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
+                    />
+                  )}
+                </div>
+
+                {collaboration && room && room.data ? (
+                  <p className="mt-2 hyphens-manual">
+                    This note has enabled multi person collaboration, Copy the{" "}
                     <a
                       className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
-                      href={`/post/${id}?work=1`}
+                      href={`/invite/${room.data.id}`}
                       target="_blank"
                     >
-                      Share Link
-                    </a>
-                    .
+                      invite link
+                    </a>{" "}
+                    to invite others to join the collaboration.
                   </p>
-                </div>
-              }
-              fullWidth={false}
-            >
-              <button className="">
-                <Shapes className="h-4 w-4 text-purple-400 hover:text-slate-500" />
-              </button>
-            </Tooltip>
-          )}
+                ) : (
+                  <p className="mt-2 hyphens-manual">
+                    Now, Inke supports collaborative editing of docs by multiple
+                    team members. Start by creating collaborative space (click
+                    on the{" "}
+                    <Shapes className="inline h-3 w-3 text-purple-400 hover:text-slate-500" />{" "}
+                    icon). <br />
+                    Of course, You need to sign in first to try this feature.
+                  </p>
+                )}
+              </div>
+            }
+            fullWidth={false}
+          >
+            <button onClick={handleCreateCollaboration}>
+              <Shapes className="h-5 w-5 text-purple-400 hover:text-slate-500" />
+            </button>
+          </Tooltip>
 
           {((shares &&
             shares.data &&
@@ -344,7 +389,7 @@ export default function Editor({
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
             <div ref={targetRef}>
-              {((collaboration && user?.email) || !collaboration) && (
+              {params.get("work") ? (
                 <InkeEditor
                   className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
                   storageKey={Content_Storage_Key}
@@ -352,9 +397,30 @@ export default function Editor({
                   defaultValue={currentContent}
                   plan={user?.plan || "5"}
                   bot={true}
-                  id={id}
-                  collaboration={collaboration}
-                  userName={user?.name}
+                  id={params.get("work")}
+                  collaboration={true}
+                  userName={user?.name || "unknown"}
+                  onUpdate={() => setSaveStatus("Unsaved")}
+                  onDebouncedUpdate={(
+                    json: JSONContent,
+                    text: string,
+                    markdown: string,
+                  ) => {
+                    setSaveStatus("Saving...");
+                    if (json) debouncedUpdates(json, text, markdown);
+                    setTimeout(() => {
+                      setSaveStatus("Saved");
+                    }, 500);
+                  }}
+                />
+              ) : (
+                <InkeEditor
+                  className="relative min-h-screen overflow-y-auto overflow-x-hidden border-stone-200 bg-white pt-1"
+                  storageKey={Content_Storage_Key}
+                  debounceDuration={debounceDuration}
+                  defaultValue={currentContent}
+                  plan={user?.plan || "5"}
+                  bot={true}
                   onUpdate={() => setSaveStatus("Unsaved")}
                   onDebouncedUpdate={(
                     json: JSONContent,

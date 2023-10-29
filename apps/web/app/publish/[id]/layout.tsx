@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 const title = "Share | Inke Note";
 const description =
-  "Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.";
+  "Inke is a WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.";
 
 export const metadata: Metadata = {
   title,

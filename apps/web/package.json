@@ -61,6 +61,7 @@
     "react-markdown": "^8.0.5",
     "react-to-pdf": "^1.0.1",
     "react-type-animation": "^3.2.0",
+    "shortid": "^2.2.16",
     "sonner": "^0.7.0",
     "swr": "^2.2.1",
     "tippy.js": "^6.3.7",
@@ -71,6 +72,7 @@
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.11",
+    "@types/shortid": "^0.0.31",
     "prisma": "^4.13.0",
     "tailwind-config": "workspace:*"
   }

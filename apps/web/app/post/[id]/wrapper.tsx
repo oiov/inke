@@ -2,6 +2,7 @@
 
 import Editor from "@/app/post/[id]/editor";
 import Sidebar from "@/app/post/[id]/sider";
+import { useCreatRoomModal } from "@/ui/layout/create-room-modal";
 import { useEditNicknameModal } from "@/ui/layout/edit-nickname-modal";
 import { useSignInModal } from "@/ui/layout/sign-in-modal";
 import { Session } from "next-auth";
@@ -15,11 +16,13 @@ export default function Wrapper({
 }) {
   const { EditModal, setShowEditModal } = useEditNicknameModal(session);
   const { SignInModal, setShowSignInModal } = useSignInModal();
+  const { RoomModal, setShowRoomModal } = useCreatRoomModal(session, "", id);
 
   return (
     <>
       <SignInModal />
       <EditModal />
+      <RoomModal />
 
       <div className="flex">
         <Sidebar
@@ -28,7 +31,7 @@ export default function Wrapper({
           setShowEditModal={setShowEditModal}
           setShowSignInModal={setShowSignInModal}
         />
-        <Editor id={id} session={session} />
+        <Editor id={id} session={session} setShowRoomModal={setShowRoomModal} />
       </div>
     </>
   );

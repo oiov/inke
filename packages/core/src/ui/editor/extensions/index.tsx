@@ -40,7 +40,7 @@ lowlight.register({ css });
 lowlight.register({ js });
 lowlight.register({ ts });
 
-export const defaultExtensions = [
+export const defaultExtensions = (collaboration: boolean) => [
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
@@ -79,7 +79,7 @@ export const defaultExtensions = [
       width: 4,
     },
     gapcursor: false,
-    history: false,
+    history: !collaboration as any,
   }),
   // patch to fix horizontal rule bug: https://github.com/ueberdosis/tiptap/pull/3859#issuecomment-1536799740
   HorizontalRule.extend({

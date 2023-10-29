@@ -55,6 +55,7 @@ model User {
   sessions           Session[]
   ActiveCodeWithUser ActiveCodeWithUser[]
   ShareNote          ShareNote[]
+  Collaboration      Collaboration[]
 }
 
 model VerificationToken {
@@ -87,6 +88,22 @@ model ShareNote {
   click   Int    @default(0)
   keeps   Int    @default(0)
 
+  createdAt DateTime
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Collaboration {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @db.ObjectId
+  localId String
+  roomId  String
+  title   String
+  click   Int    @default(0)
+
+  expired   DateTime?
   createdAt DateTime
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
