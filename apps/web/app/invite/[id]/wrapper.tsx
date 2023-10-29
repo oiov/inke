@@ -7,7 +7,7 @@ import { ContentItem } from "@/lib/types/note";
 import { IResponse } from "@/lib/types/response";
 import { fetcher } from "@/lib/utils";
 import UINotFound from "@/ui/layout/not-found";
-import { LoadingDots } from "@/ui/shared/icons";
+import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { Collaboration } from "@prisma/client";
 import { Shapes } from "lucide-react";
 import { Session } from "next-auth";
@@ -67,7 +67,7 @@ export default function Wrapper({
       newPost(localId);
       router.push(`/post/${localId}?work=${room.data.roomId}`);
     }
-    setClickJoin(false);
+    // setClickJoin(false);
   };
 
   const newPost = (localId: string) => {
@@ -89,9 +89,13 @@ export default function Wrapper({
   };
 
   if (isLoading)
-    return <div className="mx-auto h-screen max-w-3xl px-6 py-6">loading</div>;
+    return (
+      <div className="flex h-screen max-w-3xl justify-center px-6 py-6 text-center">
+        <LoadingCircle className="h-6 w-6" />
+      </div>
+    );
 
-  if (!id || !room) return <UINotFound />;
+  if (!id || room.code !== 200) return <UINotFound />;
 
   return (
     <>

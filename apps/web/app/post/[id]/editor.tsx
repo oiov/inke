@@ -210,7 +210,7 @@ export default function Editor({
 
   if (isLoading || (params.get("work") && isLoadingRoom))
     return (
-      <div className="m-6 ">
+      <div className="m-6">
         <LoadingCircle className="h-6 w-6" />
       </div>
     );

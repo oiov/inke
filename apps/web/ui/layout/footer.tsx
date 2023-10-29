@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="flex h-full min-h-[256px] w-screen flex-col items-start justify-between gap-4 bg-slate-800 px-5 py-8 sm:flex-row sm:px-16">
+    <div className="mt-6 flex h-full min-h-[256px] w-screen flex-col items-start justify-between gap-4 bg-slate-800 px-5 py-8 sm:flex-row sm:px-16">
       <div className="flex flex-col items-start justify-start">
         <Link href="/" className="mb-4 flex items-center text-3xl font-bold">
           <Image
