@@ -101,7 +101,7 @@ export default function Wrapper({
         </h1>
         <p>
           You are being invited to join the collaboration space:{" "}
-          <strong className=" text-blue-500">{room.data.title}</strong>{" "}
+          <strong className=" text-blue-500">{room?.data?.title}</strong>
         </p>
 
         {isJoined ? (
@@ -122,7 +122,7 @@ export default function Wrapper({
           </button>
         ) : (
           <button
-            className="mx-auto mt-6 flex h-10 w-20 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
+            className="mx-auto mt-6 flex h-10 w-24 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
             onClick={handleJoin}
           >
             {isClickJoin ? <LoadingDots color="#f6f6f6" /> : "Join Now"}
