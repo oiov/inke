@@ -1,6 +1,9 @@
 "use client";
 
-import { useCollaborationById } from "@/app/post/[id]/request";
+import {
+  useCollaborationById,
+  useCollaborationInviteCount,
+} from "@/app/post/[id]/request";
 import { Note_Storage_Key } from "@/lib/consts";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
@@ -9,7 +12,7 @@ import { fetcher } from "@/lib/utils";
 import UINotFound from "@/ui/layout/not-found";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { Collaboration } from "@prisma/client";
-import { Shapes } from "lucide-react";
+import { Shapes, Users } from "lucide-react";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,6 +27,7 @@ export default function Wrapper({
   id: string;
 }) {
   const { room, isLoading } = useCollaborationById(id);
+  const { count } = useCollaborationInviteCount(room?.data?.roomId);
   const router = useRouter();
   const [contents, setContents] = useLocalStorage<ContentItem[]>(
     Note_Storage_Key,
@@ -90,7 +94,7 @@ export default function Wrapper({
 
   if (isLoading)
     return (
-      <div className="flex h-screen max-w-3xl justify-center px-6 py-6 text-center">
+      <div className="flex h-screen w-full max-w-3xl justify-center px-6 py-6 text-center">
         <LoadingCircle className="h-6 w-6" />
       </div>
     );
@@ -107,7 +111,11 @@ export default function Wrapper({
         </h1>
         <p>
           You are being invited to join the collaboration space:{" "}
-          <strong className=" text-blue-500">{room?.data?.title}</strong>
+          <strong className="text-blue-500">{room?.data?.title}</strong>
+        </p>
+        <p className="mt-2 flex items-center justify-center gap-2">
+          <Users className="h-5 w-5 text-blue-500" /> Number of joined this
+          space: <strong>{count?.data || 0}</strong>
         </p>
 
         {isJoined ? (

@@ -127,3 +127,20 @@ export function useCollaborationByLocalId(id: string) {
     isError: error,
   };
 }
+export function useCollaborationInviteCount(roomId: string) {
+  const api = `/api/collaboration/count?id=${roomId}`;
+  const { data, error, isLoading } = useSWR<IResponse<number>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "GET",
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    count: data,
+    isLoading,
+    isError: error,
+  };
+}

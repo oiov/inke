@@ -74,7 +74,7 @@ export async function findCollaborationByDBId(id: string) {
 export async function findCollaborationInviteCount(id: string) {
   return await prisma.collaboration.count({
     where: {
-      id,
+      roomId: id,
       deletedAt: null,
       expired: null,
     },

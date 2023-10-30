@@ -223,7 +223,7 @@ export default function Editor({
   if (params.get("work") && room.code !== 200)
     return (
       <>
-        <div className="relative mx-auto mt-10 h-screen w-full overflow-auto px-10">
+        <div className="relative mx-auto mt-12 h-screen w-full overflow-auto px-12">
           <Shapes className="mx-auto h-12 w-12 text-purple-400 hover:text-slate-500" />
           <h1 className="my-4 text-center text-2xl font-semibold">
             Wrong collaboration space
