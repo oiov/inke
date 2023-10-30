@@ -9,10 +9,10 @@ import { useRouter } from "next/navigation";
 import NewPostButton from "@/ui/new-post-button";
 import UserDropdown from "@/ui/layout/user-dropdown";
 import { Session } from "next-auth";
-import { useUserShareNotes } from "./request";
+import { useCollaborationByUserId, useUserShareNotes } from "./request";
 import Link from "next/link";
 import { exportAsJson, fetcher } from "@/lib/utils";
-import { ShareNote } from "@prisma/client";
+import { Collaboration, ShareNote } from "@prisma/client";
 import SearchInput from "@/ui/search-input";
 import {
   Check,
@@ -22,11 +22,14 @@ import {
   DownloadCloud,
   Edit,
   ExternalLink,
+  Minus,
+  Plus,
   Trash2,
   UploadCloud,
 } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
 import useWindowSize from "@/lib/hooks/use-window-size";
+import toast from "react-hot-toast";
 
 export default function Sidebar({
   id,
@@ -54,9 +57,16 @@ export default function Sidebar({
     [],
   );
   const [contentsCache, setContentsCache] = useState<ContentItem[]>([]);
-  // const { user } = useUserInfoByEmail(session?.user?.email || "");
+
   const { shares, isLoading } = useUserShareNotes();
   const [sharesCache, setSharesCache] = useState<ShareNote[]>([]);
+
+  const { rooms } = useCollaborationByUserId();
+  const [roomsCache, setRoomsCache] = useState<Collaboration[]>([]);
+
+  const [openHistory, setOpenHistory] = useState(true);
+  const [openShares, setOpenShares] = useState(false);
+  const [openRooms, setOpenRooms] = useState(false);
 
   const showMore = () => {
     controls.start({
@@ -116,6 +126,12 @@ export default function Sidebar({
       setSharesCache(shares.data);
     }
   }, [shares]);
+
+  useEffect(() => {
+    if (rooms && rooms.data) {
+      setRoomsCache(rooms.data);
+    }
+  }, [rooms]);
 
   const handleDeleteItem = (_id: string) => {
     const updatedList = contents.filter((item) => item.id !== _id);
@@ -204,6 +220,16 @@ export default function Sidebar({
     }
   };
 
+  const handleQuitSpace = async (id: string, roomId: string) => {
+    const res = await fetcher(`/api/collaboration?id=${id}`, {
+      method: "DELETE",
+    });
+
+    if (res && res.code === 200) {
+      toast("Exit space");
+    }
+  };
+
   return (
     <div className="relative">
       <motion.div
@@ -238,130 +264,215 @@ export default function Sidebar({
         <div className="border-b border-slate-200/70" />
 
         <div className="h-[40%] w-full grow overflow-y-auto px-3">
-          <div className="flex items-center justify-between">
+          <div
+            className="flex cursor-pointer items-center justify-between"
+            onClick={() => {
+              setOpenHistory(!openHistory);
+            }}
+          >
             <p className="font-mono text-sm font-semibold text-slate-400">
               History({contents.length})
             </p>
-            <Download
-              onClick={handleExportJson}
-              className="h-4 w-4 cursor-pointer text-slate-400 hover:text-slate-300"
-            />
+            <button className="rounded bg-slate-100 hover:bg-slate-200">
+              {openHistory ? (
+                <Minus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
+              ) : (
+                <Plus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
+              )}
+            </button>
           </div>
 
-          {contentsCache
-            .sort((a, b) => b.updated_at - a.updated_at)
-            .map((item) => (
-              <div
-                key={item.id}
-                className="group/item my-2 mb-2 flex items-center justify-between gap-2 transition-all"
-              >
-                {showEditInput && id === item.id ? (
-                  <input
-                    type="text"
-                    className="rounded border px-2 py-1 text-xs text-slate-500"
-                    defaultValue={item.title}
-                    onChange={(e) => handleChangeTitle(e.target.value)}
-                    onKeyDown={(e) => handleKeydown(e.key)}
-                  />
-                ) : (
-                  <p
-                    className={
-                      "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs " +
-                      `${id === item.id ? "text-blue-500" : "text-gray-500"}`
-                    }
-                    onClick={() => router.push(`/post/${item.id}`)}
-                  >
-                    {item.title.length > 0 ? item.title : "Untitled"}
-                  </p>
-                )}
-
-                <div className="ml-auto hidden group-hover/item:block">
-                  <div className="flex items-center justify-end gap-2">
-                    {id === item.id && (
-                      <button onClick={() => handleEditTitle(item.id)}>
-                        {showEditInput ? (
-                          <Check className="h-4 w-4 text-green-500" />
-                        ) : (
-                          <Edit className="h-4 w-4 text-slate-300" />
-                        )}
-                      </button>
-                    )}
-                    <button onClick={() => handleDeleteItem(item.id)}>
-                      <Trash2 className="h-4 w-4 text-slate-300" />
-                    </button>
-                  </div>
-                </div>
-
-                {sharesCache.length > 0 &&
-                  sharesCache.find((i) => i.localId === item.id) && (
-                    <Link href={`/publish/${item.id}`} target="_blank">
-                      <ExternalLink className="h-4 w-4 text-blue-500" />
-                    </Link>
+          {openHistory &&
+            contentsCache
+              .sort((a, b) => b.updated_at - a.updated_at)
+              .map((item) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  key={item.id}
+                  className="group/item my-2 mb-2 flex items-center justify-between gap-2 transition-all"
+                >
+                  {showEditInput && id === item.id ? (
+                    <input
+                      type="text"
+                      className="rounded border px-2 py-1 text-xs text-slate-500"
+                      defaultValue={item.title}
+                      onChange={(e) => handleChangeTitle(e.target.value)}
+                      onKeyDown={(e) => handleKeydown(e.key)}
+                    />
+                  ) : (
+                    <p
+                      className={
+                        "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs hover:opacity-80 " +
+                        `${id === item.id ? "text-blue-500" : "text-gray-500"}`
+                      }
+                      onClick={() => router.push(`/post/${item.id}`)}
+                    >
+                      {item.title.length > 0 ? item.title : "Untitled"}
+                    </p>
                   )}
-              </div>
-            ))}
+
+                  <div className="ml-auto hidden group-hover/item:block">
+                    <div className="flex items-center justify-end gap-2">
+                      {id === item.id && (
+                        <button onClick={() => handleEditTitle(item.id)}>
+                          {showEditInput ? (
+                            <Check className="h-4 w-4 text-green-500" />
+                          ) : (
+                            <Edit className="h-4 w-4 text-slate-300" />
+                          )}
+                        </button>
+                      )}
+                      <button onClick={() => handleDeleteItem(item.id)}>
+                        <Trash2 className="h-4 w-4 text-slate-300" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {sharesCache.length > 0 &&
+                    sharesCache.find((i) => i.localId === item.id) && (
+                      <Link href={`/publish/${item.id}`} target="_blank">
+                        <ExternalLink className="h-4 w-4 text-blue-500" />
+                      </Link>
+                    )}
+                </motion.div>
+              ))}
 
           {sharesCache.length > 0 && (
             <>
-              <div className="mt-4 flex items-center justify-between border-t border-slate-200/70 pt-4">
+              <div
+                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/70 pt-3"
+                onClick={() => {
+                  setOpenShares(!openShares);
+                }}
+              >
                 <p className="font-mono text-sm font-semibold text-slate-400">
                   Published({shares.data.length})
                 </p>
+                <button className="rounded bg-slate-100 hover:bg-slate-200">
+                  {openShares ? (
+                    <Minus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
+                  ) : (
+                    <Plus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
+                  )}
+                </button>
               </div>
 
-              {sharesCache.map((item) => (
-                <div
-                  key={item.id}
-                  className="group/item mt-2 flex items-center justify-between"
-                >
-                  <button
-                    onClick={() =>
-                      handleClickPublishNote(item.id, item.localId)
-                    }
-                    className={
-                      `${
-                        item.localId === id ? "text-blue-500" : "text-gray-500"
-                      }` + " truncate font-mono text-xs"
-                    }
+              {openShares &&
+                sharesCache.map((item) => (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    key={item.id}
+                    className="group/item mt-2 flex items-center justify-between"
                   >
-                    {JSON.parse(item.data || "{}").title || "Untitled"}
-                  </button>
-
-                  <button
-                    className="ml-auto hidden group-hover/item:block"
-                    onClick={() => handleDeletePublicItem(item.id)}
-                  >
-                    <Trash2 className="h-4 w-4 text-slate-300" />
-                  </button>
-
-                  {contentsCache.findIndex((i) => i.id === item.localId) ===
-                    -1 && (
-                    <Tooltip
-                      content={
-                        <div className="w-64 px-3 py-2 text-sm text-slate-400">
-                          <h1 className="mb-2 font-semibold text-slate-500">
-                            Cross device sync note
-                          </h1>
-                          <p>
-                            Sync your notes from other devices to the current
-                            device (history list).
-                          </p>
-                        </div>
+                    <button
+                      onClick={() =>
+                        handleClickPublishNote(item.id, item.localId)
                       }
-                      fullWidth={false}
+                      className={
+                        `${
+                          item.localId === id
+                            ? "text-blue-500"
+                            : "text-gray-500"
+                        }` + " truncate font-mono text-xs hover:opacity-80"
+                      }
                     >
-                      <button
-                        className="ml-2"
-                        onClick={() =>
-                          handleSyncPublisToLocal(item.localId, item.data)
+                      {JSON.parse(item.data || "{}").title || "Untitled"}
+                    </button>
+
+                    <button
+                      className="ml-auto hidden group-hover/item:block"
+                      onClick={() => handleDeletePublicItem(item.id)}
+                    >
+                      <Trash2 className="h-4 w-4 text-slate-300" />
+                    </button>
+
+                    {contentsCache.findIndex((i) => i.id === item.localId) ===
+                      -1 && (
+                      <Tooltip
+                        content={
+                          <div className="w-64 px-3 py-2 text-sm text-slate-400">
+                            <h1 className="mb-2 font-semibold text-slate-500">
+                              Cross device sync note
+                            </h1>
+                            <p>
+                              Sync your notes from other devices to the current
+                              device (history list).
+                            </p>
+                          </div>
                         }
+                        fullWidth={false}
                       >
-                        <DownloadCloud className="h-4 w-4 text-slate-400" />
-                      </button>
-                    </Tooltip>
+                        <button
+                          className="ml-2"
+                          onClick={() =>
+                            handleSyncPublisToLocal(item.localId, item.data)
+                          }
+                        >
+                          <DownloadCloud className="h-4 w-4 text-slate-400" />
+                        </button>
+                      </Tooltip>
+                    )}
+                  </motion.div>
+                ))}
+            </>
+          )}
+
+          {roomsCache.length > 0 && (
+            <>
+              <div
+                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/70 pt-3"
+                onClick={() => {
+                  setOpenRooms(!openRooms);
+                }}
+              >
+                <p className="font-mono text-sm font-semibold text-slate-400">
+                  Collaborations({rooms.data.length})
+                </p>
+                <button className="rounded bg-slate-100 hover:bg-slate-200">
+                  {openRooms ? (
+                    <Minus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
+                  ) : (
+                    <Plus className="h-5 w-5 cursor-pointer p-1 text-slate-500" />
                   )}
-                </div>
-              ))}
+                </button>
+              </div>
+
+              {openRooms &&
+                roomsCache.map((item) => (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    key={item.id}
+                    className="group/item mt-2 flex items-center justify-between"
+                  >
+                    <button
+                      onClick={() =>
+                        router.push(`/post/${item.localId}?work=${item.roomId}`)
+                      }
+                      className={
+                        `${
+                          item.localId === id
+                            ? "text-blue-500"
+                            : "text-gray-500"
+                        }` + " truncate font-mono text-xs hover:opacity-80"
+                      }
+                    >
+                      {item.title}
+                    </button>
+
+                    <button
+                      className="ml-auto hidden group-hover/item:block"
+                      onClick={() => handleQuitSpace(item.id, item.roomId)}
+                    >
+                      <Trash2 className="h-4 w-4 text-slate-300" />
+                    </button>
+                  </motion.div>
+                ))}
             </>
           )}
         </div>

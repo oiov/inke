@@ -144,3 +144,20 @@ export function useCollaborationInviteCount(roomId: string) {
     isError: error,
   };
 }
+export function useCollaborationByUserId() {
+  const api = `/api/collaboration`;
+  const { data, error, isLoading } = useSWR<IResponse<Collaboration[]>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "GET",
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    rooms: data,
+    isLoading,
+    isError: error,
+  };
+}

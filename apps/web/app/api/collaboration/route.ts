@@ -6,62 +6,52 @@ import {
   createCollaboration,
   deleteCollaborationNote,
   findCollaborationByRoomId,
+  findUserCollaborations,
 } from "@/lib/db/collaboration";
 
-// export async function GET(
-//   req: NextRequest,
-//   { params }: { params: Record<string, string | string | undefined[]> },
-// ) {
-//   try {
-//     const session = await getServerSession(authOptions);
-//     if (!session?.user) {
-//       return NextResponse.json({
-//         code: 401,
-//         msg: "Unauthorized! Please login",
-//         data: null,
-//       });
-//     }
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Record<string, string | string | undefined[]> },
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({
+        code: 401,
+        msg: "Unauthorized! Please login",
+        data: null,
+      });
+    }
 
-//     const user = await getUserByEmail(session.user.email);
+    const user = await getUserByEmail(session.user.email);
 
-//     if (!user) {
-//       return NextResponse.json({
-//         code: 403,
-//         msg: "Something wrong",
-//         data: null,
-//       });
-//     }
+    if (!user) {
+      return NextResponse.json({
+        code: 403,
+        msg: "Something wrong",
+        data: null,
+      });
+    }
 
-//     const { searchParams } = new URL(req.url);
-//     const id = searchParams.get("roomId");
-//     if (!id) {
-//       return NextResponse.json({
-//         code: 403,
-//         msg: "Empty roomId",
-//         data: null,
-//       });
-//     }
+    const res = await findUserCollaborations(user.id);
 
-//     // 查询用户是否已经加入了这个协作（已经创建了这个room记录）
-//     const res = await findCollaborationByRoomId(id, user.id);
+    if (res) {
+      return NextResponse.json({
+        code: 200,
+        msg: "Successed!",
+        data: res,
+      });
+    }
 
-//     if (res) {
-//       return NextResponse.json({
-//         code: 200,
-//         msg: "Successed!",
-//         data: res,
-//       });
-//     }
-
-//     return NextResponse.json({
-//       code: 404,
-//       msg: "Not joined collaboration",
-//       data: null,
-//     });
-//   } catch (error) {
-//     return NextResponse.json(error);
-//   }
-// }
+    return NextResponse.json({
+      code: 404,
+      msg: "Not joined collaboration",
+      data: null,
+    });
+  } catch (error) {
+    return NextResponse.json(error);
+  }
+}
 
 export async function POST(
   req: NextRequest,
@@ -137,6 +127,25 @@ export async function DELETE(
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({
+        code: 401,
+        msg: "Unauthorized! Please login",
+        data: null,
+      });
+    }
+
+    const user = await getUserByEmail(session.user.email);
+
+    if (!user) {
+      return NextResponse.json({
+        code: 403,
+        msg: "Something wrong",
+        data: null,
+      });
+    }
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) {

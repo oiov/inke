@@ -81,10 +81,10 @@ export async function findCollaborationInviteCount(id: string) {
   });
 }
 // 用户所有参与的协作分享
-export async function findUserCollaborations(uid: string) {
-  return await prisma.shareNote.findMany({
+export async function findUserCollaborations(userId: string) {
+  return await prisma.collaboration.findMany({
     where: {
-      userId: uid,
+      userId,
       deletedAt: null,
     },
   });
