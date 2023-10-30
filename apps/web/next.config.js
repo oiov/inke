@@ -31,6 +31,12 @@ const nextConfig = {
           "https://inke.app/publish/2d582b88-293a-4dd5-b592-855c6509ff39",
         permanent: true,
       },
+      {
+        source: "/shortcuts",
+        destination:
+          "https://inke.app/publish/b842b60f-29be-49b5-9c7e-44860c8d2df3",
+        permanent: true,
+      },
     ];
   },
   productionBrowserSourceMaps: true,

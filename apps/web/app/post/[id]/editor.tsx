@@ -353,7 +353,7 @@ export default function Editor({
                   Invite
                 </button>
               )}
-              <button className="" onClick={handleCreateCollaboration}>
+              <button className="mr-2" onClick={handleCreateCollaboration}>
                 <Shapes className="h-5 w-5 text-purple-400 hover:text-purple-300" />
               </button>
             </div>
@@ -364,7 +364,7 @@ export default function Editor({
             shares.data.find((i) => i.localId === id)) ||
             isShowShareLink) && (
             <Link href={`/publish/${id}`} target="_blank">
-              <ExternalLink className="h-4 w-4 text-blue-500 hover:text-blue-300" />
+              <ExternalLink className="h-5 w-5 text-blue-500 hover:text-blue-300" />
             </Link>
           )}
 
