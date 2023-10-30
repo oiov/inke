@@ -17,13 +17,13 @@ export default function Footer() {
     <div className="mt-6 flex h-full min-h-[256px] w-screen flex-col items-start justify-between gap-4 bg-slate-800 px-5 py-8 sm:flex-row sm:px-16">
       <div className="flex flex-col items-start justify-start">
         <Link href="/" className="mb-4 flex items-center text-3xl font-bold">
-          <Image
+          {/* <Image
             className="mr-2"
             src="/logo.png"
             width="25"
             height="25"
             alt="logo"
-          ></Image>
+          ></Image> */}
           <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-600 bg-clip-text text-transparent ">
             INK
           </span>
@@ -39,7 +39,7 @@ export default function Footer() {
             <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-600 bg-clip-text text-transparent ">
               INK
             </span>
-            <span className="text-slate-200">E</span>
+            <span className="text-slate-200">E</span>.
           </Link>
           All rights reserved. - Inke.app
         </div>
@@ -139,12 +139,12 @@ export default function Footer() {
             Open Source
           </Link>
 
-          <img
+          {/* <img
             src="https://img.shields.io/github/stars/yesmore/inke?style=social"
             alt="Github star"
             width="86"
             height="32"
-          />
+          /> */}
         </div>
       </div>
     </div>
