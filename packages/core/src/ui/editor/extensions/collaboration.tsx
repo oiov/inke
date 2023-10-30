@@ -16,7 +16,7 @@ export function useCollaborationExt(
     const name = `inke-${id}`;
     const provider = new HocuspocusProvider({
       // ws://107.172.87.158:1234 wss://ws.taoist.fun:1234 ws://127.0.0.1:1234
-      url: "wss://ws.taoist.fun:1234",
+      url: "wss://ws.taoist.fun",
       name,
     });
 
