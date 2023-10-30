@@ -10,6 +10,7 @@ interface Plans {
   note_upload_count: number;
   image_upload_size: number;
   ai_bot_history_length: number;
+  space_user_count: number
   pay: number;
 }
 
@@ -21,6 +22,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 10,
     note_upload_count: 20,
     image_upload_size: 1, // mb
+    space_user_count: 10,
     pay: 0,
   },
   {
@@ -30,6 +32,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 32,
     note_upload_count: 10000,
     image_upload_size: 1,
+    space_user_count: 10,
     pay: 8,
   },
   {
@@ -39,6 +42,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 100,
     note_upload_count: 10000,
     image_upload_size: 10,
+    space_user_count: 10,
     pay: 16,
   },
   {
@@ -47,6 +51,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
+    space_user_count: 10,
     pay: 0,
   },
   {
@@ -55,6 +60,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
+    space_user_count: 10,
     pay: 0,
   },
   {
@@ -63,6 +69,7 @@ export const Account_Plans: Plans[] = [
     ai_bot_history_length: 10,
     note_upload_count: 0,
     image_upload_size: 1,
+    space_user_count: 10,
     pay: 0,
   },
 ];

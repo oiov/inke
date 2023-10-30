@@ -5,7 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { Note_Storage_Key } from "@/lib/consts";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import NewPostButton from "@/ui/new-post-button";
 import UserDropdown from "@/ui/layout/user-dropdown";
 import { Session } from "next-auth";
@@ -25,7 +25,7 @@ import {
   Minus,
   Plus,
   Trash2,
-  UploadCloud,
+  Shapes,
 } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
 import useWindowSize from "@/lib/hooks/use-window-size";
@@ -36,13 +36,16 @@ export default function Sidebar({
   session,
   setShowSignInModal,
   setShowEditModal,
+  setShowRoomModal
 }: {
   id?: string;
   session: Session | null;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
   setShowEditModal: Dispatch<SetStateAction<boolean>>;
+  setShowRoomModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const router = useRouter();
+  const params = useSearchParams();
   const { isMobile } = useWindowSize();
 
   const [active, setActive] = useState(false);
@@ -230,6 +233,12 @@ export default function Sidebar({
     }
   };
 
+  const handleCreateSpace = () => {
+    if (!params.get("work")) {
+      setShowRoomModal(true)
+    }
+  }
+
   return (
     <div className="relative">
       <motion.div
@@ -256,9 +265,14 @@ export default function Sidebar({
           </button>
         )}
 
-        <div className="mx-3 flex items-center justify-between gap-2">
+        <div className="mx-3 flex flex-col gap-2">
           <SearchInput onChange={handleInputSearch} />
-          <NewPostButton className="h-9 w-1/3" text="New" from="post" />
+          <div className="flex items-center justify-between gap-2">
+            <NewPostButton isShowIcon={true} className="h-9 w-full shadow" text="Note" from="post" />
+            <button className="w-full shadow h-9 flex items-center justify-center gap-1 rounded-md bg-blue-500 px-3 text-center text-sm text-slate-100 transition-all hover:bg-blue-300" onClick={handleCreateSpace}>
+              <Shapes className="inline h-4 w-4 text-slate-50" /> Space
+            </button>
+          </div>
         </div>
 
         <div className="border-b border-slate-200/70" />
