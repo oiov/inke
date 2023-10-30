@@ -279,7 +279,7 @@ export default function Editor({
               <div className="w-72 px-3 py-2 text-sm text-slate-400">
                 <div className="flex items-center justify-between">
                   <h1 className="font-semibold text-slate-500">
-                    Collaborative Space (Beta)
+                    Collaborative Space
                   </h1>
 
                   {collaboration && room && room.data && (
@@ -330,6 +330,11 @@ export default function Editor({
                     try this feature.
                   </p>
                 )}
+                <p className="mt-2 hyphens-manual font-semibold">
+                  Please note that once you connect to the collaboration space,
+                  your note content will be overwritten by the latest content in
+                  the space.
+                </p>
               </div>
             }
             fullWidth={false}
