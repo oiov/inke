@@ -19,6 +19,8 @@ import { Note_Storage_Key, defaultEditorContent } from "@/lib/consts";
 import { v4 as uuidv4 } from "uuid";
 import { ContentItem } from "@/lib/types/note";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
+import { Shapes } from "lucide-react";
+import Link from "next/link";
 
 const CreatRoomModal = ({
   initTitle,
@@ -33,7 +35,6 @@ const CreatRoomModal = ({
   showEditModal: boolean;
   setShowEditModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { user } = useUserInfoByEmail(session?.user?.email || "");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [isSendSuccess, setIsSendSuccess] = useState(false);
@@ -45,8 +46,14 @@ const CreatRoomModal = ({
   );
 
   const handleSubmit = async () => {
-    if (!session?.user || !user || !title) return;
-    if (title.length < 3 || title.length > 20) return;
+    if (!session?.user) {
+      toast("Please login first")
+      return
+    }
+    if (!title || title.length < 3 || title.length > 20) {
+      toast("Invalid space name")
+      return
+    }
 
     setLoading(true);
 
@@ -105,26 +112,17 @@ const CreatRoomModal = ({
     <Modal showModal={showEditModal} setShowModal={setShowEditModal}>
       <div className="w-full overflow-hidden bg-gray-50 shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-10">
+          <Shapes className="inline h-12 w-12 text-purple-500" />
           <h3 className="font-display text-2xl font-bold">
             Collaboration space
           </h3>
-          <p className="text-start text-sm text-gray-600">
-            You are creating a collaboration space, just enter the space name
-            and click <strong className="text-blue-500">Create</strong>.
-          </p>
-          <p className="text-start text-sm text-gray-600">
-            Once created successfully, it will automatically jump to your
-            collaboration space and generate an{" "}
-            <strong className="text-blue-500">invitation link</strong>, which
-            allows you to invite your team to join the collaboration.
-          </p>
         </div>
 
         <div className="px-14 py-10">
           <input
             className="shadow-blue-gray-200 mb-4 w-full rounded-md border border-slate-200 bg-[#f8f8f8a1] px-3 py-3 text-sm placeholder-gray-400 shadow-inner"
             type="text"
-            placeholder={"Enter space name"}
+            placeholder={"Enter space name (3-20 characters)"}
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={(e) => handleKeydown(e.key)}
           />
@@ -151,6 +149,24 @@ const CreatRoomModal = ({
               </div>
             )}
           </button>
+
+          <p className="text-start text-sm text-gray-600 mt-6">
+            You are creating a collaboration space, just enter the space name
+            and click <strong className="text-blue-500">Create</strong>. See more about{" "}
+            <Link
+              className="text-blue-600 after:content-['_↗'] hover:text-blue-300"
+              href={`/collaboration`}
+              target="_blank"
+            >
+              Collaboration space
+            </Link>. 
+          </p>
+          <p className="text-start text-sm text-gray-600">
+            Once created successfully, it will automatically jump to your
+            collaboration space and generate an{" "}
+            <strong className="text-blue-500">invitation link</strong>, which
+            allows you to invite your team to join the collaboration.
+          </p>
         </div>
       </div>
     </Modal>

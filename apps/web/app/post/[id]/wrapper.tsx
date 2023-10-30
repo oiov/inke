@@ -30,6 +30,7 @@ export default function Wrapper({
           session={session}
           setShowEditModal={setShowEditModal}
           setShowSignInModal={setShowSignInModal}
+          setShowRoomModal={setShowRoomModal}
         />
         <Editor id={id} session={session} setShowRoomModal={setShowRoomModal} />
       </div>

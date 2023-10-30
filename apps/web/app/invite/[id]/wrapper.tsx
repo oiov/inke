@@ -64,6 +64,7 @@ export default function Wrapper({
       toast(res.msg, {
         icon: "😅",
       });
+      setClickJoin(false);
     } else if (res.code === 200) {
       toast.success(res.msg, {
         icon: "🎉",
@@ -121,6 +122,7 @@ export default function Wrapper({
         {isJoined ? (
           <button
             className="mx-auto mt-6 flex h-10 min-w-[200px] items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
+            disabled={isClickJoin}
             onClick={() => {
               setClickJoin(true);
               router.push(
@@ -138,6 +140,7 @@ export default function Wrapper({
           <button
             className="mx-auto mt-6 flex h-10 w-24 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
             onClick={handleJoin}
+            disabled={isClickJoin}
           >
             {isClickJoin ? <LoadingDots color="#f6f6f6" /> : "Join Now"}
           </button>

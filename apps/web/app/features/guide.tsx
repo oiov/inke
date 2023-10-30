@@ -32,8 +32,8 @@ export function Welcome() {
             "AI notebook, empowering editing.",
             1000,
             "AI notebook, empowering translation.",
-            // 1000,
-            // "AI notebook, thinking with note.",
+            1000,
+            "AI notebook, empowering collaboration.",
             1000,
             "AI notebook, empowering anything.",
             3000,
@@ -97,7 +97,27 @@ export function Landing({ session }: { session: Session | null }) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-around gap-10 md:flex-row">
+        <div className="my-14 flex flex-col items-center justify-around gap-10 md:flex-row">
+          <Image
+            className="rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
+            alt={"example"}
+            src="/e2.png"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAACCSURBVBhXZYzBCgIxDEQnTdPau+hveBB/XtiLn+NJQdoNS2Orq6zuO0zgZRhSVbvegeAJGx7hvUeMAUSEzu1RUesEKuNkIgyrFaoFzB4i8i1+cDEwXHOuRc65lbVpe38XuPm+YMdIKa3WOj9F60vWcj0IOg8Xy7ngdDxgv9vO+h/gCZNAKuSRdQ2rAAAAAElFTkSuQmCC"
+            width={430}
+            height={280}
+          />
+          <div className="grids px-2 py-4">
+            <h3 className="mb-6 text-xl font-bold md:text-3xl">
+              Online Collaboration
+            </h3>
+            <p className="text-lg">
+              👨‍👩‍👦 One click to start real-time online collaboration among multiple people.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-around gap-10 md:flex-row-reverse">
           <Image
             className="rounded-lg shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
             alt={"example"}
