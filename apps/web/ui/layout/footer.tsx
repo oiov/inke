@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-import { Github, MessageSquare, Youtube } from "lucide-react";
+import { Github, Mail, MessageSquare, Youtube } from "lucide-react";
 import Box from "@/ui/shared/icons/box";
 
 export default function Footer() {
@@ -106,45 +106,38 @@ export default function Footer() {
           >
             Privacy Policy
           </Link>
-          <Link
-            className="mt-2 font-mono text-sm text-slate-200 hover:text-slate-400"
-            href="mailto:team@inke.app"
-          >
-            Contact us
-          </Link>
         </div>
 
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Community</p>
           <Link
-            className="flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
+            className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/feedback"
             target="_blank"
           >
             <MessageSquare className="h-4 w-4" /> Feedback
           </Link>
           <Link
-            className="my-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
+            className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="https://www.youtube.com/watch?v=Te3Piqtv1NQ"
             target="_blank"
           >
             <Youtube className="h-4 w-4" /> Youtube
           </Link>
           <Link
-            className="mb-3 flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-400 "
+            className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
+            href="mailto:team@inke.app"
+          >
+            <Mail className="h-4 w-4" /> Contact Mail
+          </Link>
+          <Link
+            className="mb-2 flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-400 "
             href="https://github.com/yesmore/inke"
             target="_blank"
           >
             <Github className="h-4 w-4 text-slate-100" />
             Open Source
           </Link>
-
-          {/* <img
-            src="https://img.shields.io/github/stars/yesmore/inke?style=social"
-            alt="Github star"
-            width="86"
-            height="32"
-          /> */}
         </div>
       </div>
     </div>
