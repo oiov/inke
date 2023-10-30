@@ -126,7 +126,7 @@ export default function Editor({
       const updatedList = [...contents];
       updatedList[currentIndex] = {
         id: id,
-        title: updatedList[currentIndex].title,
+        title: updatedList[currentIndex].title, // bug: 与sider不同步导致更新覆盖
         content: updatedContent,
         updated_at: new Date().getTime(),
         created_at: updatedList[currentIndex].created_at,
