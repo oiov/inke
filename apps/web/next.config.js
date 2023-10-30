@@ -25,6 +25,12 @@ const nextConfig = {
           "https://inke.app/publish/0e1be533-ae66-4ffa-9725-bd6b84899e78",
         permanent: true,
       },
+      {
+        source: "/collaboration",
+        destination:
+          "https://inke.app/publish/2d582b88-293a-4dd5-b592-855c6509ff39",
+        permanent: true,
+      },
     ];
   },
   productionBrowserSourceMaps: true,

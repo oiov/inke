@@ -77,22 +77,28 @@ export default function Footer() {
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Information</p>
           <Link
-            className="font-mono text-sm text-slate-200 hover:text-slate-400"
+            className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/pricing"
           >
             Pricing
           </Link>
           <Link
-            className="my-2 font-mono text-sm text-slate-200 hover:text-slate-400"
+            className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/document"
           >
             Document
           </Link>
           <Link
             className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
+            href="/collaboration"
+          >
+            Collaboration
+          </Link>
+          <Link
+            className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/shortcuts"
           >
-            Keyboard shortcuts
+            Shortcuts Reference
           </Link>
           <Link
             className="font-mono text-sm text-slate-200 hover:text-slate-400"

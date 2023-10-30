@@ -2,11 +2,7 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getUserByEmail } from "@/lib/db/user";
-import {
-  createCollaboration,
-  deleteCollaborationNote,
-  findCollaborationByRoomId,
-} from "@/lib/db/collaboration";
+import { findCollaborationByRoomId } from "@/lib/db/collaboration";
 
 // post页面获取详情时调用，需要用户id查询是否已经加入，加入才开启协作模式
 export async function GET(
