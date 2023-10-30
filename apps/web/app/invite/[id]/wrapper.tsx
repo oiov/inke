@@ -94,7 +94,7 @@ export default function Wrapper({
 
   if (isLoading)
     return (
-      <div className="flex h-screen w-full max-w-3xl justify-center px-6 py-6 text-center">
+      <div className="flex h-screen w-full justify-center px-6 py-6 text-center">
         <LoadingCircle className="h-6 w-6" />
       </div>
     );
