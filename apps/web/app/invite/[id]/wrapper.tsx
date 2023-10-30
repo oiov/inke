@@ -120,7 +120,7 @@ export default function Wrapper({
 
         {isJoined ? (
           <button
-            className="mx-auto mt-6 flex h-10 w-60 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
+            className="mx-auto mt-6 flex h-10 min-w-[200px] items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
             onClick={() => {
               setClickJoin(true);
               router.push(
