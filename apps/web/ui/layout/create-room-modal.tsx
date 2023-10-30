@@ -15,6 +15,10 @@ import { IResponse } from "@/lib/types/response";
 import { Collaboration } from "@prisma/client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Note_Storage_Key, defaultEditorContent } from "@/lib/consts";
+import { v4 as uuidv4 } from "uuid";
+import { ContentItem } from "@/lib/types/note";
+import useLocalStorage from "@/lib/hooks/use-local-storage";
 
 const CreatRoomModal = ({
   initTitle,
@@ -35,11 +39,33 @@ const CreatRoomModal = ({
   const [isSendSuccess, setIsSendSuccess] = useState(false);
   const router = useRouter();
 
+  const [contents, setContents] = useLocalStorage<ContentItem[]>(
+    Note_Storage_Key,
+    [],
+  );
+
   const handleSubmit = async () => {
     if (!session?.user || !user || !title) return;
     if (title.length < 3 || title.length > 20) return;
 
     setLoading(true);
+
+    const new_localId = uuidv4();
+    const newest_list = JSON.parse(
+      localStorage.getItem(Note_Storage_Key) || "[]",
+    );
+    const date = new Date();
+    const newItem: ContentItem = {
+      id: new_localId,
+      title: `Untitled-${new_localId.slice(0, 6)}-${
+        date.getMonth() + 1
+      }/${date.getDate()}`,
+      content: defaultEditorContent,
+      tag: "",
+      created_at: date.getTime(),
+      updated_at: date.getTime(),
+    };
+    setContents([...newest_list, newItem]);
 
     const roomId = shortid.generate().replace("_", "A").replace("-", "a");
     const res = await fetcher<IResponse<Collaboration | null>>(
@@ -48,7 +74,7 @@ const CreatRoomModal = ({
         method: "POST",
         body: JSON.stringify({
           roomId,
-          localId,
+          localId: new_localId, // 本地创建新笔记关联空间
           title,
         }),
       },
@@ -61,7 +87,7 @@ const CreatRoomModal = ({
       toast.success(res.msg, {
         icon: "🎉",
       });
-      router.push(`/post/${localId}?work=${roomId}`);
+      router.push(`/post/${new_localId}?work=${roomId}`);
     }
     if (res) {
       setLoading(false);
