@@ -78,11 +78,20 @@ const CreatRoomModal = ({
   return (
     <Modal showModal={showEditModal} setShowModal={setShowEditModal}>
       <div className="w-full overflow-hidden bg-gray-50 shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
-        <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
+        <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-10">
           <h3 className="font-display text-2xl font-bold">
-            Create collaboration space
+            Collaboration space
           </h3>
-          {/* <p className="text-sm text-gray-500"></p> */}
+          <p className="text-start text-sm text-gray-600">
+            You are creating a collaboration space, just enter the space name
+            and click <strong className="text-blue-500">Create</strong>.
+          </p>
+          <p className="text-start text-sm text-gray-600">
+            Once created successfully, it will automatically jump to your
+            collaboration space and generate an{" "}
+            <strong className="text-blue-500">invitation link</strong>, which
+            allows you to invite your team to join the collaboration.
+          </p>
         </div>
 
         <div className="px-14 py-10">
@@ -112,7 +121,7 @@ const CreatRoomModal = ({
               <LoadingDots color="gray" />
             ) : (
               <div className="flex items-center justify-center">
-                {isSendSuccess && !loading ? "Success!" : "Submit"}
+                {isSendSuccess && !loading ? "Success!" : "Create"}
               </div>
             )}
           </button>

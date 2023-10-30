@@ -36,6 +36,7 @@ import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { BadgeInfo, ExternalLink, Shapes, Clipboard } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import {
+  useCollaborationByLocalId,
   useCollaborationRoomId,
   useUserInfoByEmail,
   useUserShareNotes,
@@ -81,6 +82,7 @@ export default function Editor({
   const { room, isLoading: isLoadingRoom } = useCollaborationRoomId(
     params.get("work"),
   );
+  const { room: localRoom } = useCollaborationByLocalId(id);
 
   const { toPDF, targetRef } = usePDF({ filename: "note.pdf" });
 
@@ -197,6 +199,9 @@ export default function Editor({
   };
 
   const handleCreateCollaboration = async () => {
+    // 用户当前本地笔记是否已加入协作
+    if (localRoom.code === 200) return;
+
     if (!currentRoomId) {
       setShowRoomModal(true);
     } else if (currentRoomId && !collaboration) {
@@ -223,12 +228,12 @@ export default function Editor({
           <h1 className="my-4 text-center text-2xl font-semibold">
             Wrong collaboration space
           </h1>
-          <p className="">
+          <p>
             You are accessing a multiplayer collaboration space, but there seems
             to be an unexpected issue:{" "}
-            <span className=" font-bold text-slate-800">{room.msg}</span>.
-            Please check your space id (<strong>{params.get("work")}</strong>)
-            and try it again.
+            <span className="font-bold text-slate-800">{room.msg}</span>. Please
+            check your space id (<strong>{params.get("work")}</strong>) and try
+            it again.
           </p>
         </div>
       </>
@@ -284,7 +289,7 @@ export default function Editor({
                           `https://inke.app/invite/${room.data.id}`,
                         )
                       }
-                      className="novel-w-4 active:novel-text-green-500 novel-h-4 novel-cursor-pointer hover:novel-text-slate-300 "
+                      className="h-4 w-4 cursor-pointer text-purple-500 hover:text-slate-300 active:text-green-500 "
                     />
                   )}
                 </div>
@@ -292,14 +297,26 @@ export default function Editor({
                 {collaboration && room && room.data ? (
                   <p className="mt-2 hyphens-manual">
                     This note has enabled multi person collaboration, Copy the{" "}
-                    <a
+                    <Link
                       className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
                       href={`/invite/${room.data.id}`}
                       target="_blank"
                     >
                       invite link
-                    </a>{" "}
+                    </Link>{" "}
                     to invite others to join the collaboration.
+                  </p>
+                ) : localRoom && localRoom.code === 200 ? (
+                  <p className="mt-2 hyphens-manual">
+                    This local note is already associated with a collaboration
+                    space. Click the link below to jump to the collaboration:{" "}
+                    <Link
+                      className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                      href={`/post/${id}?work=${localRoom.data.roomId}`}
+                      target="_blank"
+                    >
+                      space-{localRoom.data.roomId}
+                    </Link>
                   </p>
                 ) : (
                   <p className="mt-2 hyphens-manual">
@@ -308,16 +325,33 @@ export default function Editor({
                     on the{" "}
                     <Shapes className="inline h-3 w-3 text-purple-400 hover:text-slate-500" />{" "}
                     icon). <br />
-                    Of course, You need to sign in first to try this feature.
+                    Of course, You need to{" "}
+                    <strong className="text-slate-900">sign in first</strong> to
+                    try this feature.
                   </p>
                 )}
               </div>
             }
             fullWidth={false}
           >
-            <button onClick={handleCreateCollaboration}>
-              <Shapes className="h-5 w-5 text-purple-400 hover:text-slate-500" />
-            </button>
+            <div className=" flex items-center justify-center gap-2">
+              {collaboration && room && room.data && (
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `https://inke.app/invite/${room.data.id}`,
+                    );
+                    toast("Copied to clipboard");
+                  }}
+                  className="text-sm text-purple-400 hover:text-purple-300"
+                >
+                  Invite
+                </button>
+              )}
+              <button className="" onClick={handleCreateCollaboration}>
+                <Shapes className="h-5 w-5 text-purple-400 hover:text-purple-300" />
+              </button>
+            </div>
           </Tooltip>
 
           {((shares &&

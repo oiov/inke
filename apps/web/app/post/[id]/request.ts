@@ -110,3 +110,20 @@ export function useCollaborationById(id: string) {
     isError: error,
   };
 }
+export function useCollaborationByLocalId(id: string) {
+  const api = `/api/collaboration/local-id?localId=${id}`;
+  const { data, error, isLoading } = useSWR<IResponse<Collaboration>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "GET",
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    room: data,
+    isLoading,
+    isError: error,
+  };
+}

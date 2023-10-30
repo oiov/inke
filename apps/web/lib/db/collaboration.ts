@@ -45,14 +45,17 @@ export async function findCollaborationByRoomId(roomId: string, uid?: string) {
 // 用户当前本地笔记是否已加入协作
 export async function findCollaborationBylocalId(
   localId: string,
-  uid?: string,
+  userId: string,
 ) {
   return await prisma.collaboration.findFirst({
     where: {
-      userId: uid,
+      userId,
       localId,
       deletedAt: null,
       expired: null,
+    },
+    select: {
+      roomId: true,
     },
   });
 }
