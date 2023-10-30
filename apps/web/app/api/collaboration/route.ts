@@ -93,7 +93,7 @@ export async function POST(
     if (find_res) {
       return NextResponse.json({
         code: 200,
-        msg: "Joined, redirecting...",
+        msg: "Joined! Redirecting...",
         data: find_res,
       });
     }
@@ -103,7 +103,7 @@ export async function POST(
     if (res) {
       return NextResponse.json({
         code: 200,
-        msg: "Successfully！redirecting...",
+        msg: "Successfully！Redirecting...",
         data: res,
       });
     }

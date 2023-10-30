@@ -12,12 +12,11 @@ export function useCollaborationExt(
 ): any {
   const collaborationData = useMemo(() => {
     if (!active) return {};
-    console.log("激活", id, userName);
 
     const name = `inke-${id}`;
     const provider = new HocuspocusProvider({
       // ws://107.172.87.158:1234 ws://ws.taoist.fun ws://127.0.0.1:1234
-      url: "ws://ws.taoist.fun:1234",
+      url: "ws://107.172.87.158:1234",
       name,
     });
 
