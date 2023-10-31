@@ -237,6 +237,28 @@ export default function Sidebar({
     setShowRoomModal(true);
   };
 
+  const renderList = (list: ContentItem[]) => {
+    const categorizedData = list.reduce((acc, item) => {
+      const tag = item.tag || ""; // If tag is undefined, default it to an empty string
+      if (!acc[tag]) {
+        acc[tag] = [];
+      }
+      acc[tag].push(item);
+      return acc;
+    }, {} as { [key: string]: ContentItem[] });
+
+    return Object.keys(categorizedData).map((tag) => (
+      <div key={tag}>
+        {/* Render tag name */}
+        <h2>{tag || "Uncategorized"}</h2>
+        {/* Render items under this tag */}
+        {categorizedData[tag].map((item) => (
+          <div key={item.id}>{item.title}</div>
+        ))}
+      </div>
+    ));
+  };
+
   return (
     <div className="relative">
       <motion.div
@@ -358,6 +380,8 @@ export default function Sidebar({
                     )}
                 </motion.div>
               ))}
+
+          {/* {contentsCache && renderList(contentsCache)} */}
 
           {sharesCache.length > 0 && (
             <>
