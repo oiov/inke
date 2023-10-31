@@ -62,8 +62,7 @@ const EditNicknameModal = ({
           <input
             className="shadow-blue-gray-200 mb-4 w-full rounded-md border border-slate-200 bg-[#f8f8f8a1] px-3 py-3 text-sm placeholder-gray-400 shadow-inner"
             type="text"
-            // value={user?.name}
-            placeholder={user?.name || "Enter nickname"}
+            placeholder={user?.name || "Enter nickname (3-20 characters)"}
             onChange={(e) => setNickname(e.target.value)}
             onKeyDown={(e) => handleKeydown(e.key)}
           />

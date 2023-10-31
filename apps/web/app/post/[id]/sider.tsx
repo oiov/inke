@@ -36,7 +36,7 @@ export default function Sidebar({
   session,
   setShowSignInModal,
   setShowEditModal,
-  setShowRoomModal
+  setShowRoomModal,
 }: {
   id?: string;
   session: Session | null;
@@ -234,10 +234,8 @@ export default function Sidebar({
   };
 
   const handleCreateSpace = () => {
-    if (!params.get("work")) {
-      setShowRoomModal(true)
-    }
-  }
+    setShowRoomModal(true);
+  };
 
   return (
     <div className="relative">
@@ -268,8 +266,16 @@ export default function Sidebar({
         <div className="mx-3 flex flex-col gap-2">
           <SearchInput onChange={handleInputSearch} />
           <div className="flex items-center justify-between gap-2">
-            <NewPostButton isShowIcon={true} className="h-9 w-full shadow" text="Note" from="post" />
-            <button className="w-full shadow h-9 flex items-center justify-center gap-1 rounded-md bg-blue-500 px-3 text-center text-sm text-slate-100 transition-all hover:bg-blue-300" onClick={handleCreateSpace}>
+            <NewPostButton
+              isShowIcon={true}
+              className="h-9 w-full shadow"
+              text="Note"
+              from="post"
+            />
+            <button
+              className="flex h-9 w-full items-center justify-center gap-1 rounded-md bg-blue-500 px-3 text-center text-sm text-slate-100 shadow transition-all hover:bg-blue-300"
+              onClick={handleCreateSpace}
+            >
               <Shapes className="inline h-4 w-4 text-slate-50" /> Space
             </button>
           </div>
