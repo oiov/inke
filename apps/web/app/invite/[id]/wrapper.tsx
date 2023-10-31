@@ -107,6 +107,11 @@ export default function Wrapper({
       });
       newPost(localId);
       router.push(`/post/${localId}?work=${room.data.roomId}`);
+    } else if (res.code === 301) {
+      toast.success(res.msg, {
+        icon: "🎉",
+      });
+      router.push(`/post/${localId}?work=${room.data.roomId}`);
     }
     // setClickJoin(false);
   };

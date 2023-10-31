@@ -92,7 +92,7 @@ export async function POST(
 
     if (find_res) {
       return NextResponse.json({
-        code: 200,
+        code: 301,
         msg: "Joined! Redirecting...",
         data: find_res,
       });
