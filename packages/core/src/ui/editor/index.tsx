@@ -45,7 +45,6 @@ export default function Editor({
   collaboration = false,
   id = "",
   userName = "unkown",
-  onConnectUserChange = () => {},
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -122,7 +121,6 @@ export default function Editor({
   id?: string;
   collaboration?: boolean;
   userName?: string;
-  onConnectUserChange: (statu: string, count: number) => void;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
