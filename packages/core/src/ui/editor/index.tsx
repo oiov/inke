@@ -190,12 +190,14 @@ export default function Editor({
   });
 
   useEffect(() => {
-    // Update status changes
-    provider.on("status", (event: any) => {
-      setStatus(event.status);
-      editor?.chain().focus().updateUser(user).run();
-      console.log("status changes", event.status);
-    });
+    if (collaboration) {
+      // Update status changes
+      provider.on("status", (event: any) => {
+        setStatus(event.status);
+        editor?.chain().focus().updateUser(user).run();
+        console.log("status changes", event.status);
+      });
+    }
   }, [editor]);
 
   const { complete, completion, isLoading, stop } = useCompletion({
@@ -266,7 +268,7 @@ export default function Editor({
                 </span>
               </div>
             ) : (
-              <span className="novel-text-sm novel-text-yellow-500">
+              <span className="novel-text-sm novel-animate-pulse novel-text-slate-500">
                 connecting...
               </span>
             )}
