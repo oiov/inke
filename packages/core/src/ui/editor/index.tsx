@@ -21,7 +21,12 @@ import AIEditorBubble from "./bubble-menu/ai-selectors/edit/ai-edit-bubble";
 import AIGeneratingLoading from "./bubble-menu/ai-selectors/ai-loading";
 import AITranslateBubble from "./bubble-menu/ai-selectors/translate/ai-translate-bubble";
 import { ChatBot } from "./bot/chat-bot";
-import { useCollaborationExt } from "./extensions/collaboration";
+import {
+  User,
+  generateRandomColorCode,
+  useCollaborationExt,
+} from "./extensions/collaboration";
+import { Users } from "lucide-react";
 
 export default function Editor({
   completionApi = "/api/generate",
@@ -40,6 +45,7 @@ export default function Editor({
   collaboration = false,
   id = "",
   userName = "unkown",
+  onConnectUserChange = () => {},
 }: {
   /**
    * The API route to use for the OpenAI completion API.
@@ -116,6 +122,7 @@ export default function Editor({
   id?: string;
   collaboration?: boolean;
   userName?: string;
+  onConnectUserChange: (statu: string, count: number) => void;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
 
@@ -136,7 +143,17 @@ export default function Editor({
     }
   }, debounceDuration);
 
-  const { collaborates } = useCollaborationExt(collaboration, id, userName);
+  const [status, setStatus] = useState("connecting");
+  const user = {
+    name: userName,
+    color: generateRandomColorCode(),
+  };
+
+  const { collaborates, provider } = useCollaborationExt(
+    collaboration,
+    id,
+    user
+  );
 
   const editor = useEditor({
     extensions: [
@@ -173,6 +190,15 @@ export default function Editor({
     },
     autofocus: false,
   });
+
+  useEffect(() => {
+    // Update status changes
+    provider.on("status", (event: any) => {
+      setStatus(event.status);
+      editor?.chain().focus().updateUser(user).run();
+      console.log("status changes", event.status);
+    });
+  }, [editor]);
 
   const { complete, completion, isLoading, stop } = useCompletion({
     id: "ai-continue",
@@ -232,6 +258,23 @@ export default function Editor({
             <AITranslateBubble editor={editor} />
           </>
         )}
+        {editor && collaboration && (
+          <div className="novel-fixed novel-bottom-2 novel-right-2">
+            {status === "connected" ? (
+              <div className="novel-flex novel-font-semibold novel-gap-1 novel-items-center novel-justify-center">
+                <Users className="novel-h-4 novel-animate-pulse novel-text-green-500 novel-w-4" />
+                <span className="novel-text-xs novel-text-slate-500">
+                  {editor.storage?.collaborationCursor?.users?.length}
+                </span>
+              </div>
+            ) : (
+              <span className="novel-text-sm novel-text-yellow-500">
+                connecting...
+              </span>
+            )}
+          </div>
+        )}
+
         {editor?.isActive("image") && <ImageResizer editor={editor} />}
         <EditorContent editor={editor} />
         {isLoadingOutside && isLoading && (
