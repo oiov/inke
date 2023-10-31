@@ -161,3 +161,22 @@ export function useCollaborationByUserId() {
     isError: error,
   };
 }
+// 查询第一个空间创建者
+export function useCollaborationByRoomId(roomId: string) {
+  const api = `/api/collaboration/room`;
+  const { data, error, isLoading } = useSWR<IResponse<Collaboration>>(
+    api,
+    () =>
+      fetcher(api, {
+        method: "POST",
+        body: JSON.stringify({ roomId }),
+      }),
+    { revalidateOnFocus: false },
+  );
+
+  return {
+    room_creator: data,
+    isLoading,
+    isError: error,
+  };
+}

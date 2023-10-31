@@ -259,10 +259,10 @@ export default function Editor({
           </>
         )}
         {editor && collaboration && (
-          <div className="novel-fixed novel-bottom-2 novel-right-2">
+          <div className="novel-fixed novel-bottom-3 novel-right-3">
             {status === "connected" ? (
               <div className="novel-flex novel-font-semibold novel-gap-1 novel-items-center novel-justify-center">
-                <Users className="novel-h-4 novel-animate-pulse novel-text-green-500 novel-w-4" />
+                <Users className="novel-h-4 novel-animate-pulse novel-text-cyan-500 novel-w-4" />
                 <span className="novel-text-xs novel-text-slate-500">
                   {editor.storage?.collaborationCursor?.users?.length}
                 </span>

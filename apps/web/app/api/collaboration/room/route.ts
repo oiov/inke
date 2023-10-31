@@ -56,7 +56,50 @@ export async function GET(
       data: null,
     });
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json({
+      code: 500,
+      msg: error,
+      data: null,
+    });
+  }
+}
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Record<string, string | string | undefined[]> },
+) {
+  try {
+    const { roomId } = await req.json();
+
+    if (!roomId) {
+      return NextResponse.json({
+        code: 403,
+        msg: "Empty roomId",
+        data: null,
+      });
+    }
+
+    const res = await findCollaborationByRoomId(roomId);
+
+    if (res) {
+      return NextResponse.json({
+        code: 200,
+        msg: "Successed!",
+        data: res,
+      });
+    }
+
+    return NextResponse.json({
+      code: 404,
+      msg: "Not found",
+      data: null,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      code: 500,
+      msg: error,
+      data: null,
+    });
   }
 }
 

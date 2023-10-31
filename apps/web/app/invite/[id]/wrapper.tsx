@@ -2,6 +2,7 @@
 
 import {
   useCollaborationById,
+  useCollaborationByRoomId,
   useCollaborationInviteCount,
 } from "@/app/post/[id]/request";
 import { Note_Storage_Key } from "@/lib/consts";
@@ -11,7 +12,8 @@ import { IResponse } from "@/lib/types/response";
 import { fetcher } from "@/lib/utils";
 import UINotFound from "@/ui/layout/not-found";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
-import { Collaboration } from "@prisma/client";
+import { Collaboration, User } from "@prisma/client";
+import { motion } from "framer-motion";
 import { Shapes, Users } from "lucide-react";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
@@ -28,6 +30,7 @@ export default function Wrapper({
 }) {
   const { room, isLoading } = useCollaborationById(id);
   const { count } = useCollaborationInviteCount(room?.data?.roomId);
+
   const router = useRouter();
   const [contents, setContents] = useLocalStorage<ContentItem[]>(
     Note_Storage_Key,
@@ -35,17 +38,52 @@ export default function Wrapper({
   );
   const [isJoined, setIsJoined] = useState(false);
   const [isClickJoin, setClickJoin] = useState(false);
+  const [creator, setCreator] = useState<User>();
+  const [firstCreatedRoom, setFirstCreatedRoom] = useState<Collaboration>();
 
   useEffect(() => {
+    if (room && room.code === 200) {
+      // 查询第一个空间创建者
+      onRequestCreator(room.data.roomId);
+    }
+  }, [room]);
+
+  useEffect(() => {
+    console.log(room?.data);
+
     if (room && room.data) {
       const index = contents.findIndex((item) => item.id === room.data.localId);
+      console.log("index", index);
+
       if (index !== -1) {
         setIsJoined(true);
       }
     }
   }, [contents, room]);
 
+  const onRequestCreator = async (roomId: string) => {
+    const res = await fetcher<IResponse<Collaboration>>(
+      "/api/collaboration/room",
+      {
+        method: "POST",
+        body: JSON.stringify({ roomId }),
+      },
+    );
+    if (res.code === 200) {
+      setFirstCreatedRoom(res.data);
+      const user = await fetcher<User>(`/api/users?id=${res.data.userId}`);
+      if (user) {
+        setCreator(user);
+      }
+    }
+  };
+
   const handleJoin = async () => {
+    if (firstCreatedRoom && firstCreatedRoom.deletedAt) {
+      toast("Space has been deleted");
+      return;
+    }
+
     setClickJoin(true);
     const localId = uuidv4();
     const res = await fetcher<IResponse<Collaboration | null>>(
@@ -61,9 +99,7 @@ export default function Wrapper({
     );
 
     if (res.code !== 200) {
-      toast(res.msg, {
-        icon: "😅",
-      });
+      toast(res.msg);
       setClickJoin(false);
     } else if (res.code === 200) {
       toast.success(res.msg, {
@@ -114,10 +150,54 @@ export default function Wrapper({
           You are being invited to join the collaboration space:{" "}
           <strong className="text-blue-500">{room?.data?.title}</strong>
         </p>
-        <p className="mt-2 flex items-center justify-center gap-2">
-          <Users className="h-5 w-5 text-blue-500" /> Number of joined this
-          space: <strong>{count?.data || 0}</strong>
-        </p>
+
+        <motion.div
+          className="mx-auto mb-4 mt-6 w-80 rounded-lg border border-slate-100 p-3 text-sm shadow-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <li className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <span>Space name</span>
+            <span className="font-semibold">{room?.data?.title}</span>
+          </li>
+          <li className="flex items-center justify-between border-b border-slate-100 py-2">
+            <span>Joined members</span>
+            <span className="font-semibold">{count?.data || "-"}</span>
+          </li>
+          {creator && (
+            <>
+              <li className="flex items-center justify-between border-b border-slate-100 py-2">
+                <span>Space owner</span>
+                <span className="font-semibold">{creator.name}</span>
+              </li>
+            </>
+          )}
+          {firstCreatedRoom && (
+            <>
+              <li className="flex items-center justify-between border-b border-slate-100 py-2">
+                <span>Created at</span>
+                <span className="font-semibold">
+                  {firstCreatedRoom.createdAt.toString().slice(0, 10)}
+                </span>
+              </li>
+              <li className="flex items-center justify-between pt-2">
+                <span>Space status</span>
+                <span
+                  className={
+                    `${
+                      firstCreatedRoom.deletedAt
+                        ? "text-yellow-500"
+                        : "text-green-500"
+                    }` + " font-semibold"
+                  }
+                >
+                  {firstCreatedRoom.deletedAt ? "Deleted" : "Active"}
+                </span>
+              </li>
+            </>
+          )}
+        </motion.div>
 
         {isJoined ? (
           <button
@@ -138,7 +218,7 @@ export default function Wrapper({
           </button>
         ) : (
           <button
-            className="mx-auto mt-6 flex h-10 w-24 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
+            className="mx-auto mt-6 flex h-10 w-64 items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-slate-50 shadow-md hover:bg-blue-400"
             onClick={handleJoin}
             disabled={isClickJoin}
           >

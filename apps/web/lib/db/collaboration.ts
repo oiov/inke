@@ -36,8 +36,8 @@ export async function findCollaborationByRoomId(roomId: string, uid?: string) {
     return await prisma.collaboration.findFirst({
       where: {
         roomId,
-        deletedAt: null,
-        expired: null,
+        // deletedAt: null,
+        // expired: null,
       },
     });
   }
@@ -49,6 +49,13 @@ export async function findFirstCollaborationByRoomId(roomId: string) {
       deletedAt: null,
       expired: null,
     },
+    // select: {
+    //   userId: true,
+    //   roomId: true,
+    //   title: true,
+    //   createdAt: true
+
+    // }
   });
 }
 // 用户当前本地笔记是否已加入协作
