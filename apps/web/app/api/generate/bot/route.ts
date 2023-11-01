@@ -102,7 +102,7 @@ export async function POST(req: Request): Promise<Response> {
     // Respond with the stream
     return new StreamingTextResponse(stream);
   } catch (error) {
-    return new Response("Server error", {
+    return new Response(`Server error\n${error}`, {
       status: 500,
     });
   }
