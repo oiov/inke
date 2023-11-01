@@ -48,10 +48,14 @@ import { useSearchParams } from "next/navigation";
 export default function Editor({
   id,
   session,
+  contents,
+  setContents,
   setShowRoomModal,
 }: {
   id?: string;
   session: Session | null;
+  contents: ContentItem[];
+  setContents: Dispatch<SetStateAction<ContentItem[]>>;
   setShowRoomModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const params = useSearchParams();
@@ -66,10 +70,7 @@ export default function Editor({
   const [isSharing, setSharing] = useState(false);
   const [isShowShareLink, setShowShareLink] = useState(false);
   const [currentRoomId, setCurrentRoomId] = useState("");
-  const [contents, setContents] = useLocalStorage<ContentItem[]>(
-    Note_Storage_Key,
-    [],
-  );
+
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [currentContent, setCurrentContent] = useLocalStorage<JSONContent>(
     Content_Storage_Key,
@@ -128,6 +129,7 @@ export default function Editor({
         id: id,
         title: updatedList[currentIndex].title, // bug: 与sider不同步导致更新覆盖
         content: updatedContent,
+        tag: updatedList[currentIndex].tag,
         updated_at: new Date().getTime(),
         created_at: updatedList[currentIndex].created_at,
       };

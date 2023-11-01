@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useEffect, Suspense, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useEffect,
+  Suspense,
+  Dispatch,
+  SetStateAction,
+  useRef,
+} from "react";
 import { motion, useAnimation } from "framer-motion";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
@@ -26,6 +33,9 @@ import {
   Plus,
   Trash2,
   Shapes,
+  FolderClosed,
+  FolderOpen,
+  FolderEdit,
 } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
 import useWindowSize from "@/lib/hooks/use-window-size";
@@ -34,12 +44,16 @@ import toast from "react-hot-toast";
 export default function Sidebar({
   id,
   session,
+  contents,
+  setContents,
   setShowSignInModal,
   setShowEditModal,
   setShowRoomModal,
 }: {
   id?: string;
   session: Session | null;
+  contents: ContentItem[];
+  setContents: Dispatch<SetStateAction<ContentItem[]>>;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
   setShowEditModal: Dispatch<SetStateAction<boolean>>;
   setShowRoomModal: Dispatch<SetStateAction<boolean>>;
@@ -50,16 +64,17 @@ export default function Sidebar({
 
   const [active, setActive] = useState(false);
   const [showEditInput, setShowEditInput] = useState(false);
+  const [showEditCate, setShowEditCate] = useState(false);
   const [searchKey, setSearchKey] = useState("");
 
   const controls = useAnimation();
   const controlText = useAnimation();
   const controlTitleText = useAnimation();
-  const [contents, setContents] = useLocalStorage<ContentItem[]>(
-    Note_Storage_Key,
-    [],
-  );
+
   const [contentsCache, setContentsCache] = useState<ContentItem[]>([]);
+  const [categorizedData, setCategorizedData] = useState<{
+    [key: string]: ContentItem[];
+  }>();
 
   const { shares, isLoading } = useUserShareNotes();
   const [sharesCache, setSharesCache] = useState<ShareNote[]>([]);
@@ -70,6 +85,8 @@ export default function Sidebar({
   const [openHistory, setOpenHistory] = useState(true);
   const [openShares, setOpenShares] = useState(false);
   const [openRooms, setOpenRooms] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const showMore = () => {
     controls.start({
@@ -108,6 +125,10 @@ export default function Sidebar({
   };
 
   useEffect(() => {
+    // inputRef.current && inputRef.current?.focus();
+  });
+
+  useEffect(() => {
     showMore();
   }, []);
 
@@ -121,6 +142,18 @@ export default function Sidebar({
     if (searchKey === "") {
       setContentsCache(contents);
       setSharesCache(shares?.data || []);
+      setCategorizedData(() => {
+        return contents
+          .sort((a, b) => b.updated_at - a.updated_at)
+          .reduce((acc, item) => {
+            const tag = item.tag || ""; // If tag is undefined, default it to an empty string
+            if (!acc[tag]) {
+              acc[tag] = [];
+            }
+            acc[tag].push(item);
+            return acc;
+          }, {} as { [key: string]: ContentItem[] });
+      });
     }
   }, [searchKey, contents, shares]);
 
@@ -166,9 +199,20 @@ export default function Sidebar({
       setContents(updatedList);
     }
   };
-  const handleKeydown = (key: string) => {
-    if (key === "Enter") {
-      setShowEditInput(false);
+  const handleEditCate = (itemId: string) => {
+    if (showEditCate && id === itemId) {
+      setShowEditCate(false);
+      const index = contents.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        const updatedList = [...contents];
+        updatedList[index] = {
+          ...updatedList[index],
+          tag: inputRef.current.value,
+        };
+        setContents(updatedList);
+      }
+    } else {
+      setShowEditCate(true);
     }
   };
 
@@ -183,12 +227,25 @@ export default function Sidebar({
       const local_res = contents.filter((item) => {
         if (
           item.title.includes(value) ||
-          JSON.stringify(item.content).includes(value)
+          JSON.stringify(item.content).includes(value) ||
+          (item.tag && item.tag.includes(value))
         ) {
           return item;
         }
       });
       setContentsCache(local_res);
+      setCategorizedData(() => {
+        return local_res
+          .sort((a, b) => b.updated_at - a.updated_at)
+          .reduce((acc, item) => {
+            const tag = item.tag || ""; // If tag is undefined, default it to an empty string
+            if (!acc[tag]) {
+              acc[tag] = [];
+            }
+            acc[tag].push(item);
+            return acc;
+          }, {} as { [key: string]: ContentItem[] });
+      });
 
       if (shares && shares.data) {
         const publish_res = shares.data.filter((item) => {
@@ -237,26 +294,14 @@ export default function Sidebar({
     setShowRoomModal(true);
   };
 
-  const renderList = (list: ContentItem[]) => {
-    const categorizedData = list.reduce((acc, item) => {
-      const tag = item.tag || ""; // If tag is undefined, default it to an empty string
-      if (!acc[tag]) {
-        acc[tag] = [];
-      }
-      acc[tag].push(item);
-      return acc;
-    }, {} as { [key: string]: ContentItem[] });
-
-    return Object.keys(categorizedData).map((tag) => (
-      <div key={tag}>
-        {/* Render tag name */}
-        <h2>{tag || "Uncategorized"}</h2>
-        {/* Render items under this tag */}
-        {categorizedData[tag].map((item) => (
-          <div key={item.id}>{item.title}</div>
-        ))}
-      </div>
-    ));
+  const handleToggleCollapse = (tag: string) => {
+    setCategorizedData((prevData) => {
+      const updatedData = { ...prevData };
+      updatedData[tag].forEach((item) => {
+        item.collapsed = !item.collapsed;
+      });
+      return updatedData;
+    });
   };
 
   return (
@@ -325,6 +370,107 @@ export default function Sidebar({
           </div>
 
           {openHistory &&
+            categorizedData &&
+            Object.keys(categorizedData).map((tag) => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                key={tag}
+              >
+                <h2
+                  className={
+                    `${
+                      categorizedData[tag].findIndex((i) => i.id === id) !== -1
+                        ? "text-blue-500"
+                        : "text-gray-500"
+                    }` +
+                    " flex cursor-pointer items-center justify-start gap-1 pt-2 font-mono text-xs font-semibold transition-all  hover:text-slate-300"
+                  }
+                  onClick={() => handleToggleCollapse(tag)}
+                >
+                  {categorizedData[tag][0].collapsed ? (
+                    <FolderOpen className="h-3 w-3 text-slate-400" />
+                  ) : (
+                    <FolderClosed className="h-3 w-3 text-slate-400" />
+                  )}
+                  {tag || "Uncategorized"}
+                </h2>
+                {categorizedData[tag][0].collapsed &&
+                  categorizedData[tag].map((item) => (
+                    <div
+                      className="group/item my-2 mb-2 flex items-center justify-between gap-2 pl-4 transition-all"
+                      key={item.id}
+                    >
+                      {showEditInput && id === item.id ? (
+                        <input
+                          type="text"
+                          className="rounded border px-2 py-1 text-xs text-slate-500"
+                          defaultValue={item.title}
+                          onChange={(e) => handleChangeTitle(e.target.value)}
+                          placeholder="Enter note title"
+                        />
+                      ) : showEditCate && id === item.id ? (
+                        <input
+                          ref={inputRef}
+                          type="text"
+                          className="rounded border px-2 py-1 text-xs text-slate-500"
+                          defaultValue={item.tag}
+                          // onChange={(e) => handleChangeCate(e.target.value)}
+                          placeholder="Enter note category"
+                        />
+                      ) : (
+                        <p
+                          className={
+                            "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs hover:opacity-80 " +
+                            `${
+                              id === item.id ? "text-blue-500" : "text-gray-500"
+                            }`
+                          }
+                          onClick={() => router.push(`/post/${item.id}`)}
+                        >
+                          {item.title.length > 0 ? item.title : "Untitled"}
+                        </p>
+                      )}
+
+                      <div className="ml-auto hidden group-hover/item:block">
+                        <div className="flex items-center justify-end gap-2">
+                          {id === item.id && (
+                            <button onClick={() => handleEditTitle(item.id)}>
+                              {showEditInput ? (
+                                <Check className="h-4 w-4 text-green-500" />
+                              ) : (
+                                <Edit className="h-4 w-4 text-slate-300 hover:text-slate-500" />
+                              )}
+                            </button>
+                          )}
+                          {id === item.id && (
+                            <button onClick={() => handleEditCate(item.id)}>
+                              {showEditCate ? (
+                                <Check className="h-4 w-4 text-green-500" />
+                              ) : (
+                                <FolderEdit className="h-4 w-4 text-slate-300 hover:text-slate-500" />
+                              )}
+                            </button>
+                          )}
+                          <button onClick={() => handleDeleteItem(item.id)}>
+                            <Trash2 className="h-4 w-4 text-slate-300" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {sharesCache.length > 0 &&
+                        sharesCache.find((i) => i.localId === item.id) && (
+                          <Link href={`/publish/${item.id}`} target="_blank">
+                            <ExternalLink className="h-4 w-4 text-blue-500" />
+                          </Link>
+                        )}
+                    </div>
+                  ))}
+              </motion.div>
+            ))}
+
+          {/* {openHistory &&
             contentsCache
               .sort((a, b) => b.updated_at - a.updated_at)
               .map((item) => (
@@ -379,9 +525,7 @@ export default function Sidebar({
                       </Link>
                     )}
                 </motion.div>
-              ))}
-
-          {/* {contentsCache && renderList(contentsCache)} */}
+              ))} */}
 
           {sharesCache.length > 0 && (
             <>
