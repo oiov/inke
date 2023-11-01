@@ -143,16 +143,18 @@ export default function Sidebar({
       setContentsCache(contents);
       setSharesCache(shares?.data || []);
       setCategorizedData(() => {
-        return contents
-          .sort((a, b) => b.updated_at - a.updated_at)
-          .reduce((acc, item) => {
-            const tag = item.tag || ""; // If tag is undefined, default it to an empty string
-            if (!acc[tag]) {
-              acc[tag] = [];
-            }
-            acc[tag].push(item);
-            return acc;
-          }, {} as { [key: string]: ContentItem[] });
+        return (
+          contents
+            // .sort((a, b) => b.updated_at - a.updated_at)
+            .reduce((acc, item) => {
+              const tag = item.tag || ""; // If tag is undefined, default it to an empty string
+              if (!acc[tag]) {
+                acc[tag] = [];
+              }
+              acc[tag].push(item);
+              return acc;
+            }, {} as { [key: string]: ContentItem[] })
+        );
       });
     }
   }, [searchKey, contents, shares]);
@@ -235,16 +237,18 @@ export default function Sidebar({
       });
       setContentsCache(local_res);
       setCategorizedData(() => {
-        return local_res
-          .sort((a, b) => b.updated_at - a.updated_at)
-          .reduce((acc, item) => {
-            const tag = item.tag || ""; // If tag is undefined, default it to an empty string
-            if (!acc[tag]) {
-              acc[tag] = [];
-            }
-            acc[tag].push(item);
-            return acc;
-          }, {} as { [key: string]: ContentItem[] });
+        return (
+          local_res
+            // .sort((a, b) => b.updated_at - a.updated_at)
+            .reduce((acc, item) => {
+              const tag = item.tag || ""; // If tag is undefined, default it to an empty string
+              if (!acc[tag]) {
+                acc[tag] = [];
+              }
+              acc[tag].push(item);
+              return acc;
+            }, {} as { [key: string]: ContentItem[] })
+        );
       });
 
       if (shares && shares.data) {

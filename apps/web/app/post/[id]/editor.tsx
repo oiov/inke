@@ -124,14 +124,13 @@ export default function Editor({
 
   const handleUpdateItem = (id: string, updatedContent: JSONContent) => {
     if (currentIndex !== -1) {
+      // console.log(id, contents[currentIndex].title);
+
       const updatedList = [...contents];
       updatedList[currentIndex] = {
-        id: id,
-        title: updatedList[currentIndex].title, // bug: 与sider不同步导致更新覆盖
+        ...updatedList[currentIndex],
         content: updatedContent,
-        tag: updatedList[currentIndex].tag,
         updated_at: new Date().getTime(),
-        created_at: updatedList[currentIndex].created_at,
       };
       setContents(updatedList);
     }
