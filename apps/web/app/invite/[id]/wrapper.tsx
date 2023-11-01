@@ -49,12 +49,10 @@ export default function Wrapper({
   }, [room]);
 
   useEffect(() => {
-    console.log(room?.data);
+    // console.log(room?.data);
 
     if (room && room.data) {
       const index = contents.findIndex((item) => item.id === room.data.localId);
-      console.log("index", index);
-
       if (index !== -1) {
         setIsJoined(true);
       }
@@ -98,10 +96,7 @@ export default function Wrapper({
       },
     );
 
-    if (res.code !== 200) {
-      toast(res.msg);
-      setClickJoin(false);
-    } else if (res.code === 200) {
+    if (res.code === 200) {
       toast.success(res.msg, {
         icon: "🎉",
       });
@@ -111,9 +106,18 @@ export default function Wrapper({
       toast.success(res.msg, {
         icon: "🎉",
       });
-      router.push(`/post/${localId}?work=${room.data.roomId}`);
+      // 其他设备加入了
+      const index = contents.findIndex((item) => item.id === room.data.localId);
+      if (index === -1) {
+        newPost(room.data.localId);
+        router.push(`/post/${room.data.localId}?work=${room.data.roomId}`);
+      } else {
+        router.push(`/post/${localId}?work=${room.data.roomId}`);
+      }
+    } else {
+      toast(res.msg);
+      setClickJoin(false);
     }
-    // setClickJoin(false);
   };
 
   const newPost = (localId: string) => {
