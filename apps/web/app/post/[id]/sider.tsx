@@ -457,9 +457,11 @@ export default function Sidebar({
                               )}
                             </button>
                           )}
-                          <button onClick={() => handleDeleteItem(item.id)}>
-                            <Trash2 className="h-4 w-4 text-slate-300" />
-                          </button>
+                          {id !== item.id && (
+                            <button onClick={() => handleDeleteItem(item.id)}>
+                              <Trash2 className="h-4 w-4 text-slate-300" />
+                            </button>
+                          )}
                         </div>
                       </div>
 
