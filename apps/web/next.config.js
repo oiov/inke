@@ -28,7 +28,7 @@ const nextConfig = {
       {
         source: "/collaboration",
         destination:
-          "https://inke.app/publish/2d582b88-293a-4dd5-b592-855c6509ff39",
+          "https://inke.app/publish/5f099bdd-b2a1-4f88-bbcb-eb2292447d2c",
         permanent: true,
       },
       {

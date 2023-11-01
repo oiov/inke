@@ -248,7 +248,7 @@ export default function Editor({
           <span className="hidden text-xs text-slate-400 md:block">
             Created at
             {currentIndex !== -1 &&
-              fomatTmpDate(contents[currentIndex].created_at)}
+              fomatTmpDate(contents[currentIndex]?.created_at || 0)}
           </span>
 
           <div className="mr-auto flex items-center justify-center gap-2 rounded-lg bg-stone-100 px-2 py-1 text-sm ">
