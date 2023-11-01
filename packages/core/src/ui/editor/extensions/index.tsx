@@ -32,6 +32,7 @@ import UpdatedImage from "./updated-image";
 import CustomKeymap from "./custom-keymap";
 import DragAndDrop from "./drag-and-drop";
 import Glyphs from "./glyphs";
+import { ColorHighlighter } from "./color-highlighter";
 
 const lowlight = createLowlight(common);
 lowlight.register({ markdown });
@@ -146,6 +147,7 @@ export const defaultExtensions = (collaboration: boolean) => [
   TiptapUnderline,
   TextStyle,
   Color,
+  ColorHighlighter,
   Highlight.configure({
     multicolor: true,
   }),
