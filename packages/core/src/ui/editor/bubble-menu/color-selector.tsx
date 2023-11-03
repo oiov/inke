@@ -120,7 +120,7 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
             A
           </span>
 
-          {/* <ChevronDown className="novel-h-4 novel-w-4" /> */}
+          <ChevronDown className="novel-h-4 novel-w-4" />
         </Popover.Trigger>
 
         <Popover.Content

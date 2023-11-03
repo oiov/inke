@@ -84,7 +84,9 @@ export default function NewPostButton({
           <LoadingDots color="#fff" />
         ) : (
           <>
-            {isShowIcon && <Plus className="inline h-5 w-5 text-slate-50" />}
+            {isShowIcon && (
+              <Plus className="inline h-5 w-5 scale-95 text-slate-50" />
+            )}
             {text}
           </>
         )}

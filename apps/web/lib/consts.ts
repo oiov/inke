@@ -10,7 +10,7 @@ interface Plans {
   note_upload_count: number;
   image_upload_size: number;
   ai_bot_history_length: number;
-  space_user_count: number
+  space_user_count: number;
   pay: number;
 }
 
@@ -27,8 +27,8 @@ export const Account_Plans: Plans[] = [
   },
   {
     // basic
-    ai_generate_day: 500,
-    ai_generate_chars: 500,
+    ai_generate_day: 300,
+    ai_generate_chars: 300,
     ai_bot_history_length: 32,
     note_upload_count: 10000,
     image_upload_size: 1,
@@ -37,8 +37,8 @@ export const Account_Plans: Plans[] = [
   },
   {
     // pro
-    ai_generate_day: 2000,
-    ai_generate_chars: 2000,
+    ai_generate_day: 1000,
+    ai_generate_chars: 1000,
     ai_bot_history_length: 100,
     note_upload_count: 10000,
     image_upload_size: 10,

@@ -31,7 +31,7 @@ import { toPng } from "html-to-image";
 import { usePDF } from "react-to-pdf";
 import { Session } from "next-auth";
 import { IResponse } from "@/lib/types/response";
-import { Collaboration, ShareNote } from "@prisma/client";
+import { ShareNote } from "@prisma/client";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { BadgeInfo, ExternalLink, Shapes, Clipboard } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
@@ -201,7 +201,7 @@ export default function Editor({
 
   const handleCreateCollaboration = async () => {
     // 用户当前本地笔记是否已加入协作
-    if (localRoom.code === 200) return;
+    if (localRoom && localRoom.code === 200) return;
 
     if (!currentRoomId) {
       setShowRoomModal(true);
@@ -246,7 +246,7 @@ export default function Editor({
       <div className="relative flex h-screen w-full justify-center overflow-auto">
         <div className="bg-white/50 absolute z-10 mb-5 flex w-full items-center justify-end gap-2 px-3 py-2 backdrop-blur-xl">
           <span className="hidden text-xs text-slate-400 md:block">
-            Created at
+            Created at{" "}
             {currentIndex !== -1 &&
               fomatTmpDate(contents[currentIndex]?.created_at || 0)}
           </span>
@@ -299,7 +299,7 @@ export default function Editor({
                   <p className="mt-2 hyphens-manual">
                     This note has enabled multi person collaboration, Copy the{" "}
                     <Link
-                      className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                      className="text-purple-500 after:content-['_↗'] hover:text-blue-300"
                       href={`/invite/${room.data.id}`}
                       target="_blank"
                     >
@@ -322,26 +322,27 @@ export default function Editor({
                 ) : (
                   <p className="mt-2 hyphens-manual">
                     Now, Inke supports collaborative editing of docs by multiple
-                    team members. Start by creating collaborative space (click
-                    on the{" "}
-                    <Shapes className="inline h-3 w-3 text-purple-400 hover:text-slate-500" />{" "}
-                    icon). <br />
-                    Of course, You need to{" "}
+                    team members. Start by creating collaborative space. Learn
+                    more about{" "}
+                    <Link
+                      className="text-blue-600 after:content-['_↗'] hover:text-blue-300"
+                      href={`/collaboration`}
+                      target="_blank"
+                    >
+                      collaboration space
+                    </Link>
+                    . <br />
+                    Note: You need to{" "}
                     <strong className="text-slate-900">sign in first</strong> to
                     try this feature.
                   </p>
                 )}
-                <p className="mt-2 hyphens-manual font-semibold">
-                  Please note that once you connect to the collaboration space,
-                  your note content will be overwritten by the latest content in
-                  the space.
-                </p>
               </div>
             }
             fullWidth={false}
           >
-            <div className=" flex items-center justify-center gap-2">
-              {collaboration && room && room.data && (
+            <div className="flex items-center justify-center gap-2">
+              {collaboration && room && room.data ? (
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(
@@ -349,14 +350,23 @@ export default function Editor({
                     );
                     toast("Copied to clipboard");
                   }}
-                  className="text-sm text-purple-400 hover:text-purple-300"
+                  className="mr-2 text-sm text-purple-400 hover:text-purple-300"
                 >
                   Invite
                 </button>
+              ) : (
+                <button className="mr-2" onClick={handleCreateCollaboration}>
+                  <Shapes
+                    className={
+                      `${
+                        localRoom && localRoom.code === 200
+                          ? "text-cyan-500"
+                          : "text-purple-400"
+                      }` + " h-5 w-5 hover:opacity-80"
+                    }
+                  />
+                </button>
               )}
-              <button className="mr-2" onClick={handleCreateCollaboration}>
-                <Shapes className="h-5 w-5 text-purple-400 hover:text-purple-300" />
-              </button>
             </div>
           </Tooltip>
 

@@ -18,7 +18,8 @@ import NewPostButton from "@/ui/new-post-button";
 import Image from "next/image";
 import { BadgeInfo } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
-import { fetcher } from "@/lib/utils";
+import { fetcher, timeAgo } from "@/lib/utils";
+import { ContentItem } from "@/lib/types/note";
 
 export default function Wrapper({
   id,
@@ -29,6 +30,7 @@ export default function Wrapper({
 }) {
   const { share, isLoading } = useShareNoteByLocalId(id);
   const [canRenderGuide, setCanRenderGuide] = useState(false);
+  const [parseContent, setParseContent] = useState<ContentItem>();
   const [currentContent, setCurrentContent] = useState<JSONContent>({});
 
   const { user } = useUserInfoById(share?.data.userId);
@@ -42,6 +44,7 @@ export default function Wrapper({
   useEffect(() => {
     if (share && share.data && share.data.data) {
       const parsed = JSON.parse(share.data.data || "{}");
+      setParseContent(parsed);
       setCurrentContent(parsed.content);
       setCanRenderGuide(true);
       const title = parsed.title || "Untitled";
@@ -81,10 +84,11 @@ export default function Wrapper({
                     <strong>{share.data.click}</strong>
                     &nbsp;clicks,&nbsp;
                     <strong>{share.data.keeps}</strong>&nbsp;keeps
-                    <span className="ml-2 hidden border-l border-slate-300 pl-2 text-xs text-slate-500 sm:block">
-                      published at{" "}
-                      {share.data.updatedAt.toString().slice(5, 10)}
-                    </span>
+                    {parseContent.created_at && (
+                      <span className="ml-2 hidden border-l border-slate-300 pl-2 text-xs text-slate-500 sm:block">
+                        Updated {timeAgo(parseContent.updated_at)}
+                      </span>
+                    )}
                   </p>
                 </div>
               </div>
