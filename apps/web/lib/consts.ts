@@ -33,7 +33,7 @@ export const Account_Plans: Plans[] = [
     note_upload_count: 10000,
     image_upload_size: 1,
     space_user_count: 10,
-    pay: 8,
+    pay: 0,
   },
   {
     // pro
@@ -43,7 +43,7 @@ export const Account_Plans: Plans[] = [
     note_upload_count: 10000,
     image_upload_size: 10,
     space_user_count: 10,
-    pay: 16,
+    pay: 0,
   },
   {
     ai_generate_day: 10,

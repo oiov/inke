@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { Github, Mail, MessageSquare, Youtube } from "lucide-react";
 import ProductHunt from "../shared/icons/product-hunt";
+import pkg from "../../package.json";
 
 export default function Footer() {
   return (
     <div className="mt-6 flex h-full min-h-[256px] w-screen flex-col items-start justify-between gap-4 bg-slate-800 px-5 py-8 sm:flex-row sm:px-16">
       <div className="flex flex-col items-start justify-start">
-        <Link href="/" className="mb-4 flex items-center text-3xl font-bold">
+        <Link href="/" className="mb-4 flex items-end text-3xl font-bold">
           <span className="bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-800 bg-clip-text text-transparent ">
             INKE
           </span>
@@ -66,10 +67,16 @@ export default function Footer() {
             Shortcuts Reference
           </Link>
           <Link
-            className="font-mono text-sm text-slate-200 hover:text-slate-400"
+            className="mb-2 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/privacy"
           >
             Privacy Policy
+          </Link>
+          <Link
+            className="flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
+            href="mailto:team@inke.app"
+          >
+            Contact Mail
           </Link>
         </div>
 
@@ -90,12 +97,6 @@ export default function Footer() {
             <Youtube className="h-4 w-4" /> Youtube
           </Link>
           <Link
-            className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
-            href="mailto:team@inke.app"
-          >
-            <Mail className="h-4 w-4" /> Contact Mail
-          </Link>
-          <Link
             className="mb-2 flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-400 "
             href="https://github.com/yesmore/inke"
             target="_blank"
@@ -103,6 +104,9 @@ export default function Footer() {
             <Github className="h-4 w-4 text-slate-100" />
             Open Source
           </Link>
+          <span className="text-sm font-semibold text-slate-300">
+            v{pkg.version}
+          </span>
         </div>
       </div>
     </div>

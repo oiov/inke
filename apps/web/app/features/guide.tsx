@@ -112,7 +112,8 @@ export function Landing({ session }: { session: Session | null }) {
               Online Collaboration
             </h3>
             <p className="text-lg">
-              👨‍👩‍👦 One click to start real-time online collaboration among multiple people.
+              👨‍👩‍👦 One click to start real-time online collaboration among
+              multiple people.
             </p>
           </div>
         </div>
