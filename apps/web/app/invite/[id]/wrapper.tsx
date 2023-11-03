@@ -151,14 +151,11 @@ export default function Wrapper({
     <>
       <Toaster />
       <div className="mx-auto h-screen max-w-3xl px-6 py-6 text-center">
-        <Shapes className="mx-auto h-12 w-12 text-purple-400 hover:text-slate-500" />
+        <Shapes className="mx-auto h-12 w-12 text-cyan-500 hover:text-slate-500" />
         <h1 className="my-4 text-center text-2xl font-semibold">
           🎉 Invite to Join Collaboration
         </h1>
-        <p>
-          You are being invited to join the collaboration space:{" "}
-          <strong className="text-blue-500">{room?.data?.title}</strong>
-        </p>
+        <p>You are being invited to join the collaboration space</p>
 
         <motion.div
           className="mx-auto mb-4 mt-6 w-80 rounded-lg border border-slate-100 p-3 text-sm shadow-md"
@@ -168,7 +165,9 @@ export default function Wrapper({
         >
           <li className="flex items-center justify-between border-b border-slate-100 pb-2">
             <span>Space name</span>
-            <span className="font-semibold">{room?.data?.title}</span>
+            <span className="font-semibold text-cyan-500">
+              {room?.data?.title}
+            </span>
           </li>
           <li className="flex items-center justify-between border-b border-slate-100 py-2">
             <span>Joined members</span>

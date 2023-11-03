@@ -47,12 +47,12 @@ const CreatRoomModal = ({
 
   const handleSubmit = async () => {
     if (!session?.user) {
-      toast("Please login first")
-      return
+      toast("Please login first");
+      return;
     }
     if (!title || title.length < 3 || title.length > 20) {
-      toast("Invalid space name")
-      return
+      toast("Invalid space name");
+      return;
     }
 
     setLoading(true);
@@ -112,7 +112,7 @@ const CreatRoomModal = ({
     <Modal showModal={showEditModal} setShowModal={setShowEditModal}>
       <div className="w-full overflow-hidden bg-gray-50 shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-10">
-          <Shapes className="inline h-12 w-12 text-purple-500" />
+          <Shapes className="inline h-12 w-12 text-cyan-500" />
           <h3 className="font-display text-2xl font-bold">
             Collaboration space
           </h3>
@@ -150,16 +150,18 @@ const CreatRoomModal = ({
             )}
           </button>
 
-          <p className="text-start text-sm text-gray-600 mt-6">
+          <p className="mt-6 text-start text-sm text-gray-600">
             You are creating a collaboration space, just enter the space name
-            and click <strong className="text-blue-500">Create</strong>. See more about{" "}
+            and click <strong className="text-blue-500">Create</strong>. See
+            more about{" "}
             <Link
               className="text-blue-600 after:content-['_↗'] hover:text-blue-300"
               href={`/collaboration`}
               target="_blank"
             >
               Collaboration space
-            </Link>. 
+            </Link>
+            .
           </p>
           <p className="text-start text-sm text-gray-600">
             Once created successfully, it will automatically jump to your
