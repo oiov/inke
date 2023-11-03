@@ -285,12 +285,13 @@ export default function Editor({
 
                   {collaboration && room && room.data && (
                     <Clipboard
-                      onClick={() =>
+                      onClick={() => {
                         navigator.clipboard.writeText(
                           `https://inke.app/invite/${room.data.id}`,
-                        )
-                      }
-                      className="h-4 w-4 cursor-pointer text-purple-500 hover:text-slate-300 active:text-green-500 "
+                        );
+                        toast("Copied to clipboard");
+                      }}
+                      className="h-4 w-4 cursor-pointer text-cyan-500 hover:text-slate-300 active:text-green-500 "
                     />
                   )}
                 </div>
@@ -299,7 +300,7 @@ export default function Editor({
                   <p className="mt-2 hyphens-manual">
                     This note has enabled multi person collaboration, Copy the{" "}
                     <Link
-                      className="text-purple-500 after:content-['_↗'] hover:text-blue-300"
+                      className="text-cyan-500 after:content-['_↗'] hover:opacity-80"
                       href={`/invite/${room.data.id}`}
                       target="_blank"
                     >
@@ -350,7 +351,7 @@ export default function Editor({
                     );
                     toast("Copied to clipboard");
                   }}
-                  className="mr-2 text-sm text-purple-400 hover:text-purple-300"
+                  className="hover:opacity-800 mr-2 text-sm text-cyan-500"
                 >
                   Invite
                 </button>
