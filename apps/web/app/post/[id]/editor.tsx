@@ -108,6 +108,7 @@ export default function Editor({
         if (index !== -1 && contents[index]) {
           setCurrentContent(contents[index].content ?? {});
           setCurrentIndex(index);
+          document.title = `${contents[index].title} - Note`;
         }
       }
     }

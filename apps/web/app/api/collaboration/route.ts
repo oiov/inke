@@ -88,7 +88,6 @@ export async function POST(
 
     // 判断用户是否已经加入此协作
     const find_res = await findCollaborationByRoomId(roomId, user.id);
-    // const find_res = await findCollaborationByRoomId(roomId, user.id)
 
     if (find_res) {
       return NextResponse.json({
@@ -98,6 +97,8 @@ export async function POST(
       });
     }
 
+    // TODO: 限制新建个数
+    // 新建
     const res = await createCollaboration(user.id, localId, roomId, title);
 
     if (res) {
