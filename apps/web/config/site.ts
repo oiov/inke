@@ -56,7 +56,7 @@ export const siteConfig = {
     card: "summary_large_image",
     title: baseSiteConfig.name,
     description: baseSiteConfig.description,
-    images: [`${baseSiteConfig.url}/og.png`],
+    images: [`${baseSiteConfig.url}/opengraph-image.png`],
     creator: baseSiteConfig.creator,
   },
 };
