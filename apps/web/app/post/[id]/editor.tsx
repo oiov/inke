@@ -313,7 +313,7 @@ export default function Editor({
                     This local note is already associated with a collaboration
                     space. Click the link below to jump to the collaboration:{" "}
                     <Link
-                      className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                      className="text-cyan-500 after:content-['_↗'] hover:text-cyan-300"
                       href={`/post/${id}?work=${localRoom.data.roomId}`}
                       target="_blank"
                     >
@@ -326,7 +326,7 @@ export default function Editor({
                     team members. Start by creating collaborative space. Learn
                     more about{" "}
                     <Link
-                      className="text-blue-600 after:content-['_↗'] hover:text-blue-300"
+                      className="text-cyan-600 after:content-['_↗'] hover:text-cyan-300"
                       href={`/collaboration`}
                       target="_blank"
                     >
@@ -376,19 +376,19 @@ export default function Editor({
             shares.data.find((i) => i.localId === id)) ||
             isShowShareLink) && (
             <Link href={`/publish/${id}`} target="_blank">
-              <ExternalLink className="h-5 w-5 text-blue-500 hover:text-blue-300" />
+              <ExternalLink className="h-5 w-5 text-cyan-500 hover:text-cyan-300" />
             </Link>
           )}
 
           <button
-            className="ml-1 flex h-7 w-20 items-center justify-center gap-1 rounded-md bg-blue-500 px-4 py-1 text-sm text-white transition-all hover:bg-blue-300"
+            className="ml-1 flex h-7 w-20 items-center justify-center gap-1 rounded-md bg-cyan-500 px-4 py-1 text-sm text-white transition-all hover:opacity-80"
             onClick={handleCreateShare}
             disabled={isSharing || saveStatus !== "Saved"}
           >
             {isSharing ? (
               <LoadingDots color="#fff" />
             ) : (
-              <span className="bg-gradient-to-r from-red-100 via-yellow-200 to-orange-200 bg-clip-text font-semibold text-transparent">
+              <span className="bg-gradient-to-r from-red-200 via-yellow-300 to-orange-200 bg-clip-text font-semibold text-transparent">
                 Publish
               </span>
             )}
@@ -406,7 +406,7 @@ export default function Editor({
                   your notes with others. Your notes will be uploaded after
                   serialization. e.g{" "}
                   <a
-                    className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
+                    className="text-cyan-500 after:content-['_↗'] hover:text-cyan-300"
                     href="https://inke.app/publish/0e1be533-ae66-4ffa-9725-bd6b84899e78"
                     target="_blank"
                   >

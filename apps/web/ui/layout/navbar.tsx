@@ -35,10 +35,10 @@ export default function NavBar({ session }: { session: Session | null }) {
               <Logo className="h-5 w-5" />
             </Link>
             <Link href="/" className="font-bold">
-              <span className="bg-gradient-to-r from-slate-400 via-slate-600 to-slate-800 bg-clip-text text-transparent ">
-                INK
+              <span className="bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-800 bg-clip-text text-transparent ">
+                INKE
               </span>
-              <span>E.AI</span>
+              <span>.AI</span>
             </Link>
           </div>
 

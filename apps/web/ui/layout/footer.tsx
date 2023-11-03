@@ -9,10 +9,10 @@ export default function Footer() {
     <div className="mt-6 flex h-full min-h-[256px] w-screen flex-col items-start justify-between gap-4 bg-slate-800 px-5 py-8 sm:flex-row sm:px-16">
       <div className="flex flex-col items-start justify-start">
         <Link href="/" className="mb-4 flex items-center text-3xl font-bold">
-          <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-600 bg-clip-text text-transparent ">
-            INK
+          <span className="bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-800 bg-clip-text text-transparent ">
+            INKE
           </span>
-          <span className="text-slate-100">E.AI</span>
+          <span className="text-slate-300">.AI</span>
         </Link>
         <p className="flex items-center gap-1 font-mono text-slate-200">
           AI notebook, empowering writing.

@@ -75,7 +75,7 @@ export default function NewPostButton({
       <button
         className={
           className +
-          " flex items-center justify-center gap-1 rounded-md bg-blue-500 px-3 text-center text-sm text-slate-100 transition-all hover:bg-blue-300"
+          " flex items-center justify-center gap-1 rounded-md bg-cyan-500 px-3 text-center text-sm text-slate-100 transition-all hover:opacity-80"
         }
         onClick={handleClick}
         disabled={clickNew}

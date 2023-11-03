@@ -344,7 +344,7 @@ export default function Sidebar({
               from="post"
             />
             <button
-              className="flex h-9 w-full items-center justify-center gap-1 rounded-md bg-blue-500 px-3 text-center text-sm text-slate-100 shadow transition-all hover:bg-blue-300"
+              className="flex h-9 w-full items-center justify-center gap-1 rounded-md bg-cyan-500 px-3 text-center text-sm text-slate-100 shadow transition-all hover:opacity-80"
               onClick={handleCreateSpace}
             >
               <Shapes className="inline h-4 w-4 text-slate-50" /> Space
@@ -386,7 +386,7 @@ export default function Sidebar({
                   className={
                     `${
                       categorizedData[tag].findIndex((i) => i.id === id) !== -1
-                        ? "text-blue-500"
+                        ? "text-cyan-500"
                         : "text-gray-500"
                     }` +
                     " flex cursor-pointer items-center justify-start gap-1 pt-2 font-mono text-xs font-semibold transition-all  hover:text-slate-300"
@@ -428,7 +428,7 @@ export default function Sidebar({
                           className={
                             "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs hover:opacity-80 " +
                             `${
-                              id === item.id ? "text-blue-500" : "text-gray-500"
+                              id === item.id ? "text-cyan-500" : "text-gray-500"
                             }`
                           }
                           onClick={() => router.push(`/post/${item.id}`)}
@@ -468,7 +468,7 @@ export default function Sidebar({
                       {sharesCache.length > 0 &&
                         sharesCache.find((i) => i.localId === item.id) && (
                           <Link href={`/publish/${item.id}`} target="_blank">
-                            <ExternalLink className="h-4 w-4 text-blue-500" />
+                            <ExternalLink className="h-4 w-4 text-cyan-500" />
                           </Link>
                         )}
                     </div>
@@ -499,7 +499,7 @@ export default function Sidebar({
                     <p
                       className={
                         "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs hover:opacity-80 " +
-                        `${id === item.id ? "text-blue-500" : "text-gray-500"}`
+                        `${id === item.id ? "text-cyan-500" : "text-gray-500"}`
                       }
                       onClick={() => router.push(`/post/${item.id}`)}
                     >
@@ -527,7 +527,7 @@ export default function Sidebar({
                   {sharesCache.length > 0 &&
                     sharesCache.find((i) => i.localId === item.id) && (
                       <Link href={`/publish/${item.id}`} target="_blank">
-                        <ExternalLink className="h-4 w-4 text-blue-500" />
+                        <ExternalLink className="h-4 w-4 text-cyan-500" />
                       </Link>
                     )}
                 </motion.div>
@@ -569,7 +569,7 @@ export default function Sidebar({
                       className={
                         `${
                           item.localId === id
-                            ? "text-blue-500"
+                            ? "text-cyan-500"
                             : "text-gray-500"
                         }` + " truncate font-mono text-xs hover:opacity-80"
                       }
@@ -651,7 +651,7 @@ export default function Sidebar({
                       className={
                         `${
                           item.localId === id
-                            ? "text-blue-500"
+                            ? "text-cyan-500"
                             : "text-gray-500"
                         }` + " truncate font-mono text-xs hover:opacity-80"
                       }
