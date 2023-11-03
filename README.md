@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="108" src="https://inke.app/logo-c.png">
+  <img width="108" src="https://inke.app/logo-256.png">
 </p>
 
 <p align="center"><strong> Inke - Small is beautiful</strong></p>

@@ -5,15 +5,20 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Inke",
     short_name: "Inke",
     description:
-      "Inke is a Notion-style WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.",
+      "Inke is a WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.",
     start_url: "/",
     display: "standalone",
     background_color: "#fff",
     theme_color: "#fff",
     icons: [
       {
-        src: "/512.png",
-        sizes: "512x512",
+        src: "/favicon.ico",
+        sizes: "32x32",
+        type: "image/x-icon",
+      },
+      {
+        src: "/logo-256.png",
+        sizes: "256x256",
         type: "image/png",
       },
     ],
