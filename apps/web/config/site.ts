@@ -1,5 +1,5 @@
 const baseSiteConfig = {
-  name: "Inke Note",
+  name: "Inke",
   description:
     "Inke is a WYSIWYG editor with AI-powered autocompletions. Built with Tiptap, OpenAI, and Vercel AI SDK.",
   url: "https://inke.app",
@@ -9,16 +9,15 @@ const baseSiteConfig = {
     "Notebook",
     "Markdown",
     "WYSIWYG",
+    "Collaboration",
     "Openai",
     "ChatGPT",
     "AI",
     "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Client Components",
-    "next-auth",
-    "Prisma",
+    "note",
+    "writing",
+    "translate",
+    "AIGC",
   ],
   authors: [
     {

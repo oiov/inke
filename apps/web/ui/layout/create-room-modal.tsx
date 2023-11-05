@@ -152,22 +152,25 @@ const CreatRoomModal = ({
 
           <p className="mt-6 text-start text-sm text-gray-600">
             You are creating a collaboration space, just enter the space name
-            and click <strong className="text-blue-500">Create</strong>. See
-            more about{" "}
-            <Link
-              className="text-blue-600 after:content-['_↗'] hover:text-blue-300"
-              href={`/collaboration`}
-              target="_blank"
-            >
-              Collaboration space
-            </Link>
-            .
+            and click <strong className="text-cyan-500">Create</strong>.
           </p>
           <p className="text-start text-sm text-gray-600">
             Once created successfully, it will automatically jump to your
             collaboration space and generate an{" "}
-            <strong className="text-blue-500">invitation link</strong>, which
+            <strong className="text-cyan-500">invitation link</strong>, which
             allows you to invite your team to join the collaboration.
+          </p>
+          <p className="text-start text-sm text-gray-600">
+            {" "}
+            See more about{" "}
+            <Link
+              className="text-cyan-500 after:content-['_↗'] hover:opacity-80"
+              href={`/collaboration`}
+              target="_blank"
+            >
+              collaboration
+            </Link>{" "}
+            space.
           </p>
         </div>
       </div>
