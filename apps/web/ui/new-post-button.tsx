@@ -1,14 +1,15 @@
 "use client";
 
 import { v4 as uuidv4 } from "uuid";
-import { Note_Storage_Key, defaultEditorContent } from "@/lib/consts";
+import { defaultEditorContent } from "@/lib/consts";
 import { useRouter } from "next/navigation";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { useState } from "react";
 import { LoadingDots } from "./shared/icons";
 import { JSONContent } from "@tiptap/react";
 import { Plus } from "lucide-react";
+import { addNote, noteTable } from "@/store/db.model";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export default function NewPostButton({
   className,
@@ -27,10 +28,7 @@ export default function NewPostButton({
 }) {
   const router = useRouter();
   const [clickNew, setClickNew] = useState(false);
-  const [contents, setContents] = useLocalStorage<ContentItem[]>(
-    Note_Storage_Key,
-    [],
-  );
+  const contents = useLiveQuery<ContentItem[]>(() => noteTable.toArray());
 
   const handleClick = () => {
     if (from === "post" || contents.length === 0) {
@@ -52,9 +50,6 @@ export default function NewPostButton({
   const handleNewNote = () => {
     setClickNew(true);
     const id = uuidv4();
-    const newest_list = JSON.parse(
-      localStorage.getItem(Note_Storage_Key) || "[]",
-    );
     const date = new Date();
     const newItem: ContentItem = {
       id,
@@ -66,7 +61,7 @@ export default function NewPostButton({
       created_at: date.getTime(),
       updated_at: date.getTime(),
     };
-    setContents([...newest_list, newItem]);
+    addNote(newItem);
     router.push(`/post/${newItem.id}`);
   };
 

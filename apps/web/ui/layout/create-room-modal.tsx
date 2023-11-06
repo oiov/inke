@@ -15,12 +15,12 @@ import { IResponse } from "@/lib/types/response";
 import { Collaboration } from "@prisma/client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Note_Storage_Key, defaultEditorContent } from "@/lib/consts";
+import { defaultEditorContent } from "@/lib/consts";
 import { v4 as uuidv4 } from "uuid";
 import { ContentItem } from "@/lib/types/note";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { Shapes } from "lucide-react";
 import Link from "next/link";
+import { addNote } from "@/store/db.model";
 
 const CreatRoomModal = ({
   initTitle,
@@ -40,11 +40,6 @@ const CreatRoomModal = ({
   const [isSendSuccess, setIsSendSuccess] = useState(false);
   const router = useRouter();
 
-  const [contents, setContents] = useLocalStorage<ContentItem[]>(
-    Note_Storage_Key,
-    [],
-  );
-
   const handleSubmit = async () => {
     if (!session?.user) {
       toast("Please login first");
@@ -58,21 +53,6 @@ const CreatRoomModal = ({
     setLoading(true);
 
     const new_localId = uuidv4();
-    const newest_list = JSON.parse(
-      localStorage.getItem(Note_Storage_Key) || "[]",
-    );
-    const date = new Date();
-    const newItem: ContentItem = {
-      id: new_localId,
-      title: `Untitled-${new_localId.slice(0, 6)}-${
-        date.getMonth() + 1
-      }/${date.getDate()}`,
-      content: defaultEditorContent,
-      tag: "",
-      created_at: date.getTime(),
-      updated_at: date.getTime(),
-    };
-    setContents([...newest_list, newItem]);
 
     const roomId = shortid.generate().replace("_", "A").replace("-", "a");
     const res = await fetcher<IResponse<Collaboration | null>>(
@@ -91,6 +71,18 @@ const CreatRoomModal = ({
         icon: "😅",
       });
     } else {
+      const date = new Date();
+      const newItem: ContentItem = {
+        id: new_localId,
+        title: `Untitled-${new_localId.slice(0, 6)}-${
+          date.getMonth() + 1
+        }/${date.getDate()}`,
+        content: defaultEditorContent,
+        tag: "",
+        created_at: date.getTime(),
+        updated_at: date.getTime(),
+      };
+      addNote(newItem);
       toast.success(res.msg, {
         icon: "🎉",
       });

@@ -5,14 +5,14 @@ import {
   useCollaborationByRoomId,
   useCollaborationInviteCount,
 } from "@/app/post/[id]/request";
-import { Note_Storage_Key } from "@/lib/consts";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
 import { IResponse } from "@/lib/types/response";
 import { fetcher } from "@/lib/utils";
+import { addNote, noteTable } from "@/store/db.model";
 import UINotFound from "@/ui/layout/not-found";
 import { LoadingCircle, LoadingDots } from "@/ui/shared/icons";
 import { Collaboration, User } from "@prisma/client";
+import { useLiveQuery } from "dexie-react-hooks";
 import { motion } from "framer-motion";
 import { Shapes, Users } from "lucide-react";
 import { Session } from "next-auth";
@@ -32,10 +32,8 @@ export default function Wrapper({
   const { count } = useCollaborationInviteCount(room?.data?.roomId);
 
   const router = useRouter();
-  const [contents, setContents] = useLocalStorage<ContentItem[]>(
-    Note_Storage_Key,
-    [],
-  );
+  const contents = useLiveQuery<ContentItem[]>(() => noteTable.toArray());
+
   const [isJoined, setIsJoined] = useState(false);
   const [isClickJoin, setClickJoin] = useState(false);
   const [creator, setCreator] = useState<User>();
@@ -121,11 +119,8 @@ export default function Wrapper({
   };
 
   const newPost = (localId: string) => {
-    const newest_list = JSON.parse(
-      localStorage.getItem(Note_Storage_Key) || "[]",
-    );
     const date = new Date();
-    const newItem: ContentItem = {
+    addNote({
       id: localId,
       title: `Untitled-${localId.slice(0, 6)}-${
         date.getMonth() + 1
@@ -134,8 +129,7 @@ export default function Wrapper({
       tag: "",
       created_at: date.getTime(),
       updated_at: date.getTime(),
-    };
-    setContents([...newest_list, newItem]);
+    });
   };
 
   if (isLoading)

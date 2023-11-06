@@ -7,7 +7,6 @@ export interface ContentItem {
   tag?: string;
   created_at?: number;
   updated_at?: number;
-
   collapsed?: boolean;
 }
 

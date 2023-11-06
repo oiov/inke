@@ -9,9 +9,7 @@ import {
   useRef,
 } from "react";
 import { motion, useAnimation } from "framer-motion";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { ContentItem } from "@/lib/types/note";
-import { Note_Storage_Key } from "@/lib/consts";
 import { useRouter, useSearchParams } from "next/navigation";
 import NewPostButton from "@/ui/new-post-button";
 import UserDropdown from "@/ui/layout/user-dropdown";
@@ -40,12 +38,14 @@ import {
 import Tooltip from "@/ui/shared/tooltip";
 import useWindowSize from "@/lib/hooks/use-window-size";
 import toast from "react-hot-toast";
+import { addNote, deleteNote, patchNote, updateNote } from "@/store/db.model";
+import useLocalStorage from "@/lib/hooks/use-local-storage";
+import { Note_Storage_Key } from "@/lib/consts";
 
 export default function Sidebar({
   id,
   session,
   contents,
-  setContents,
   setShowSignInModal,
   setShowEditModal,
   setShowRoomModal,
@@ -53,7 +53,6 @@ export default function Sidebar({
   id?: string;
   session: Session | null;
   contents: ContentItem[];
-  setContents: Dispatch<SetStateAction<ContentItem[]>>;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
   setShowEditModal: Dispatch<SetStateAction<boolean>>;
   setShowRoomModal: Dispatch<SetStateAction<boolean>>;
@@ -86,7 +85,13 @@ export default function Sidebar({
   const [openShares, setOpenShares] = useState(false);
   const [openRooms, setOpenRooms] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const editCateRef = useRef<HTMLInputElement>(null);
+  const editTitleRef = useRef<HTMLInputElement>(null);
+
+  const [oldContents, setOldContents] = useLocalStorage<ContentItem[]>(
+    Note_Storage_Key,
+    [],
+  );
 
   const showMore = () => {
     controls.start({
@@ -124,9 +129,13 @@ export default function Sidebar({
     setActive(false);
   };
 
+  // patch
   useEffect(() => {
-    // inputRef.current && inputRef.current?.focus();
-  });
+    if (oldContents.length > 0) {
+      patchNote(oldContents);
+      setOldContents([]);
+    }
+  }, [oldContents]);
 
   useEffect(() => {
     showMore();
@@ -172,8 +181,7 @@ export default function Sidebar({
   }, [rooms]);
 
   const handleDeleteItem = (_id: string) => {
-    const updatedList = contents.filter((item) => item.id !== _id);
-    setContents(updatedList);
+    deleteNote(_id);
   };
   const handleDeletePublicItem = async (_id: string) => {
     const res = await fetcher(`/api/share?id=${_id}`, {
@@ -186,19 +194,15 @@ export default function Sidebar({
   const handleEditTitle = (itemId: string) => {
     if (showEditInput && id === itemId) {
       setShowEditInput(false);
+      const index = contents.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        updateNote({
+          ...contents[index],
+          title: editTitleRef.current.value,
+        });
+      }
     } else {
       setShowEditInput(true);
-    }
-  };
-  const handleChangeTitle = (value: string) => {
-    const index = contents.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      const updatedList = [...contents];
-      updatedList[index] = {
-        ...updatedList[index],
-        title: value,
-      };
-      setContents(updatedList);
     }
   };
   const handleEditCate = (itemId: string) => {
@@ -206,12 +210,10 @@ export default function Sidebar({
       setShowEditCate(false);
       const index = contents.findIndex((item) => item.id === id);
       if (index !== -1) {
-        const updatedList = [...contents];
-        updatedList[index] = {
-          ...updatedList[index],
-          tag: inputRef.current.value,
-        };
-        setContents(updatedList);
+        updateNote({
+          ...contents[index],
+          tag: editCateRef.current.value,
+        });
       }
     } else {
       setShowEditCate(true);
@@ -276,10 +278,7 @@ export default function Sidebar({
   const handleSyncPublisToLocal = (localId: string, remoteDate: string) => {
     const data = JSON.parse(remoteDate || "{}");
     if (remoteDate && data) {
-      const newest_list = JSON.parse(
-        localStorage.getItem(Note_Storage_Key) || "[]",
-      );
-      setContents([...newest_list, data]);
+      addNote(data);
       router.push(`/post/${data.id}`);
     }
   };
@@ -408,19 +407,18 @@ export default function Sidebar({
                     >
                       {showEditInput && id === item.id ? (
                         <input
+                          ref={editTitleRef}
                           type="text"
                           className="rounded border px-2 py-1 text-xs text-slate-500"
                           defaultValue={item.title}
-                          onChange={(e) => handleChangeTitle(e.target.value)}
                           placeholder="Enter note title"
                         />
                       ) : showEditCate && id === item.id ? (
                         <input
-                          ref={inputRef}
+                          ref={editCateRef}
                           type="text"
                           className="rounded border px-2 py-1 text-xs text-slate-500"
                           defaultValue={item.tag}
-                          // onChange={(e) => handleChangeCate(e.target.value)}
                           placeholder="Enter note category"
                         />
                       ) : (

@@ -12,11 +12,7 @@ import { Editor as InkeEditor } from "inkejs";
 import { JSONContent } from "@tiptap/react";
 import useLocalStorage from "@/lib/hooks/use-local-storage";
 import { useDebouncedCallback } from "use-debounce";
-import {
-  Content_Storage_Key,
-  Default_Debounce_Duration,
-  Note_Storage_Key,
-} from "@/lib/consts";
+import { Content_Storage_Key, Default_Debounce_Duration } from "@/lib/consts";
 import { ContentItem } from "@/lib/types/note";
 import {
   exportAsJson,
@@ -44,18 +40,17 @@ import {
 import Link from "next/link";
 import Tooltip from "@/ui/shared/tooltip";
 import { useSearchParams } from "next/navigation";
+import db, { noteTable, updateNote } from "@/store/db.model";
 
 export default function Editor({
   id,
   session,
   contents,
-  setContents,
   setShowRoomModal,
 }: {
   id?: string;
   session: Session | null;
   contents: ContentItem[];
-  setContents: Dispatch<SetStateAction<ContentItem[]>>;
   setShowRoomModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const params = useSearchParams();
@@ -105,6 +100,7 @@ export default function Editor({
       if (id && contents.length > 0) {
         setLoading(true);
         const index = contents.findIndex((item) => item.id === id);
+
         if (index !== -1 && contents[index]) {
           setCurrentContent(contents[index].content ?? {});
           setCurrentIndex(index);
@@ -125,15 +121,11 @@ export default function Editor({
 
   const handleUpdateItem = (id: string, updatedContent: JSONContent) => {
     if (currentIndex !== -1) {
-      // console.log(id, contents[currentIndex].title);
-
-      const updatedList = [...contents];
-      updatedList[currentIndex] = {
-        ...updatedList[currentIndex],
+      updateNote({
+        ...contents[currentIndex],
         content: updatedContent,
         updated_at: new Date().getTime(),
-      };
-      setContents(updatedList);
+      });
     }
   };
 
@@ -272,7 +264,7 @@ export default function Editor({
               {saveStatus}{" "}
               {saveStatus === "Saved" &&
                 currentIndex !== -1 &&
-                timeAgo(contents[currentIndex].updated_at)}
+                timeAgo(contents[currentIndex]?.updated_at || 0)}
             </span>
           </div>
 
@@ -436,7 +428,32 @@ export default function Editor({
           />
         </div>
 
-        {id && currentIndex === -1 && !isLoading && <UINotFound />}
+        {id &&
+          currentIndex === -1 &&
+          !isLoading &&
+          (collaboration && room && room.data ? (
+            <div className="relative mx-auto mt-10 h-screen w-full overflow-auto px-12 pt-12">
+              <Shapes className="mx-auto h-12 w-12 text-cyan-500" />
+              <h1 className="my-4 text-center text-2xl font-semibold">
+                Sync collaboration space
+              </h1>
+              <p className="mt-2 hyphens-manual">
+                It seems that you have joined this collaboration space (
+                {room.data.title}), but this device has not been created. Copy
+                this{" "}
+                <Link
+                  className="text-cyan-500 after:content-['_↗'] hover:opacity-80"
+                  href={`/invite/${room.data.id}`}
+                  target="_blank"
+                >
+                  invite link
+                </Link>{" "}
+                and recreate a local record to enter.
+              </p>
+            </div>
+          ) : (
+            <UINotFound />
+          ))}
 
         {contents && currentIndex !== -1 && (
           <div ref={ref} className="w-full max-w-screen-lg overflow-auto">
