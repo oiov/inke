@@ -48,7 +48,7 @@ export default function Wrapper({
       setCurrentContent(parsed.content);
       setCanRenderGuide(true);
       const title = parsed.title || "Untitled";
-      document.title = `${title} - Inke Note`;
+      document.title = `${title} | Inke`;
     }
   }, [share]);
 

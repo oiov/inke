@@ -94,6 +94,7 @@ export default function Editor({
         if (index !== -1 && contents[index]) {
           setCurrentContent({});
           setCurrentIndex(index);
+          document.title = "Space | Inke";
         }
       }
     } else {
@@ -104,7 +105,7 @@ export default function Editor({
         if (index !== -1 && contents[index]) {
           setCurrentContent(contents[index].content ?? {});
           setCurrentIndex(index);
-          document.title = `${contents[index].title} - Note`;
+          document.title = `${contents[index].title} | Inke`;
         }
       }
     }
@@ -350,15 +351,7 @@ export default function Editor({
                 </button>
               ) : (
                 <button className="mr-2" onClick={handleCreateCollaboration}>
-                  <Shapes
-                    className={
-                      `${
-                        localRoom && localRoom.code === 200
-                          ? "text-cyan-500"
-                          : "text-purple-400"
-                      }` + " h-5 w-5 hover:opacity-80"
-                    }
-                  />
+                  <Shapes className="h-5 w-5 text-cyan-500 hover:opacity-80" />
                 </button>
               )}
             </div>

@@ -2,6 +2,7 @@ import { Editor } from "@tiptap/core";
 import {
   Beef,
   Book,
+  Check,
   CheckCheck,
   ChevronDown,
   Heading1,
@@ -11,10 +12,12 @@ import {
   PartyPopper,
   PauseCircle,
   Scissors,
+  Send,
   SprayCan,
+  Trash,
   Wand,
 } from "lucide-react";
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext, useEffect, useRef } from "react";
 import { Command } from "cmdk";
 import Magic from "@/ui/icons/magic";
 import { useCompletion } from "ai/react";
@@ -80,13 +83,9 @@ export const AISelector: FC<AISelectorProps> = ({
       detail: "Identify and fix repetitive words or phrases in the content",
       icon: Scissors,
     },
-    {
-      name: "Adjust writing style",
-      detail:
-        "Suggest adjustments to writing style and tone based on the target audience",
-      icon: PartyPopper,
-    },
   ];
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -103,6 +102,10 @@ export const AISelector: FC<AISelectorProps> = ({
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    inputRef.current && inputRef.current?.focus();
+  });
 
   const { completionApi, plan } = useContext(NovelContext);
 
@@ -122,6 +125,7 @@ export const AISelector: FC<AISelectorProps> = ({
               stop();
             }
             setIsOpen(!isOpen);
+            editor.chain().blur().run();
           }}>
           <SprayCan className="novel-h-5 novel-w-5" />
           {isLoading ? (
@@ -136,29 +140,53 @@ export const AISelector: FC<AISelectorProps> = ({
       </div>
 
       {isOpen && (
-        <Command className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-w-60 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-2 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
-          <Command.List>
-            {items.map((item, index) => (
-              <Command.Item
-                key={index}
-                onSelect={() => {
-                  if (!isLoading) {
-                    const { from, to } = editor.state.selection;
-                    const text = editor.state.doc.textBetween(from, to, " ");
-                    complete(`${item.detail}:\n ${text}`);
-                    setIsOpen(false);
-                  }
-                }}
-                className="novel-flex group novel-cursor-pointer novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-gray-600 active:novel-bg-stone-200 aria-selected:novel-bg-stone-100">
-                <div className="novel-flex novel-items-center novel-space-x-2">
-                  <item.icon className="novel-h-4 novel-w-4 novel-text-cyan-500" />
-                  <span>{item.name}</span>
-                </div>
-                {/* <CornerDownLeft className="novel-hidden novel-h-4 novel-w-4 group-hover:novel-block" /> */}
-              </Command.Item>
-            ))}
-          </Command.List>
-        </Command>
+        <>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const input = e.currentTarget[0] as HTMLInputElement;
+              if (!input.value) return;
+              const { from, to } = editor.state.selection;
+              const text = editor.state.doc.textBetween(from, to, " ");
+              complete(`${input.value}:\n ${text}`);
+              setIsOpen(false);
+            }}
+            className="novel-fixed novel-top-full novel-z-[99999] novel-mt-1 novel-flex novel-w-full novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-1 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Make this para funnier..."
+              className="novel-flex-1 novel-bg-white novel-p-1 novel-text-sm novel-outline-none"
+              defaultValue={editor.getAttributes("link").href || ""}
+            />
+            <button className="novel-flex novel-items-center novel-rounded-sm novel-p-1 novel-text-stone-600 novel-transition-all hover:novel-bg-stone-100">
+              <Send className="novel-h-4 novel-w-4 novel-text-cyan-500" />
+            </button>
+          </form>
+          <Command className="novel-fixed novel-top-full novel-z-[99999] novel-mt-12 novel-w-60 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-p-2 novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-top-1">
+            <Command.List>
+              {items.map((item, index) => (
+                <Command.Item
+                  key={index}
+                  onSelect={() => {
+                    if (!isLoading) {
+                      const { from, to } = editor.state.selection;
+                      const text = editor.state.doc.textBetween(from, to, " ");
+                      complete(`${item.detail}:\n ${text}`);
+                      setIsOpen(false);
+                    }
+                  }}
+                  className="novel-flex group novel-cursor-pointer novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-gray-600 active:novel-bg-stone-200 aria-selected:novel-bg-stone-100">
+                  <div className="novel-flex novel-items-center novel-space-x-2">
+                    <item.icon className="novel-h-4 novel-w-4 novel-text-cyan-500" />
+                    <span>{item.name}</span>
+                  </div>
+                  {/* <CornerDownLeft className="novel-hidden novel-h-4 novel-w-4 group-hover:novel-block" /> */}
+                </Command.Item>
+              ))}
+            </Command.List>
+          </Command>
+        </>
       )}
     </div>
   );

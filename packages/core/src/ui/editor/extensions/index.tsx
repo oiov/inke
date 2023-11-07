@@ -45,6 +45,10 @@ export const defaultExtensions = (collaboration: boolean) => [
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
+      // HTMLAttributes: {
+      //   href: "ls",
+      //   class: "head- novel-cursor-pointer hover:after:novel-content-['_#']",
+      // },
     },
     bulletList: {
       HTMLAttributes: {
