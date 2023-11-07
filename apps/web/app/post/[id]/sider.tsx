@@ -313,7 +313,7 @@ export default function Sidebar({
         animate={controls}
         className={
           `${active ? "border-r" : ""}` +
-          " animate group flex h-screen w-[270px] flex-col gap-3 overflow-y-auto border-slate-200/80 py-6 duration-300"
+          " animate group flex h-screen w-[270px] flex-col gap-3 overflow-y-auto border-slate-200/60 py-6 duration-300"
         }
       >
         {active && (
@@ -474,67 +474,10 @@ export default function Sidebar({
               </motion.div>
             ))}
 
-          {/* {openHistory &&
-            contentsCache
-              .sort((a, b) => b.updated_at - a.updated_at)
-              .map((item) => (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  key={item.id}
-                  className="group/item my-2 mb-2 flex items-center justify-between gap-2 transition-all"
-                >
-                  {showEditInput && id === item.id ? (
-                    <input
-                      type="text"
-                      className="rounded border px-2 py-1 text-xs text-slate-500"
-                      defaultValue={item.title}
-                      onChange={(e) => handleChangeTitle(e.target.value)}
-                      onKeyDown={(e) => handleKeydown(e.key)}
-                    />
-                  ) : (
-                    <p
-                      className={
-                        "flex cursor-pointer items-center justify-start gap-2 truncate font-mono text-xs hover:opacity-80 " +
-                        `${id === item.id ? "text-cyan-500" : "text-gray-500"}`
-                      }
-                      onClick={() => router.push(`/post/${item.id}`)}
-                    >
-                      {item.title.length > 0 ? item.title : "Untitled"}
-                    </p>
-                  )}
-
-                  <div className="ml-auto hidden group-hover/item:block">
-                    <div className="flex items-center justify-end gap-2">
-                      {id === item.id && (
-                        <button onClick={() => handleEditTitle(item.id)}>
-                          {showEditInput ? (
-                            <Check className="h-4 w-4 text-green-500" />
-                          ) : (
-                            <Edit className="h-4 w-4 text-slate-300" />
-                          )}
-                        </button>
-                      )}
-                      <button onClick={() => handleDeleteItem(item.id)}>
-                        <Trash2 className="h-4 w-4 text-slate-300" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {sharesCache.length > 0 &&
-                    sharesCache.find((i) => i.localId === item.id) && (
-                      <Link href={`/publish/${item.id}`} target="_blank">
-                        <ExternalLink className="h-4 w-4 text-cyan-500" />
-                      </Link>
-                    )}
-                </motion.div>
-              ))} */}
-
           {sharesCache.length > 0 && (
             <>
               <div
-                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/70 pt-3"
+                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/50 pt-3"
                 onClick={() => {
                   setOpenShares(!openShares);
                 }}
@@ -616,7 +559,7 @@ export default function Sidebar({
           {roomsCache.length > 0 && (
             <>
               <div
-                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/70 pt-3"
+                className="mt-3 flex cursor-pointer items-center justify-between border-t border-slate-200/50 pt-3"
                 onClick={() => {
                   setOpenRooms(!openRooms);
                 }}

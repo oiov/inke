@@ -22,6 +22,7 @@ import AIGeneratingLoading from "./bubble-menu/ai-selectors/ai-loading";
 import AITranslateBubble from "./bubble-menu/ai-selectors/translate/ai-translate-bubble";
 import { ChatBot } from "./bot/chat-bot";
 import {
+  CollaborationInfo,
   User,
   generateRandomColorCode,
   useCollaborationExt,
@@ -118,8 +119,18 @@ export default function Editor({
    * Defaults to false.
    */
   bot?: boolean;
+  /**
+   * Id: collaboration room id.
+   */
   id?: string;
+  /**
+   * Collaboration: enable collaboration space.
+   * Defaults to false.
+   */
   collaboration?: boolean;
+  /**
+   * userName: collaboration userName.
+   */
   userName?: string;
 }) {
   const [content, setContent] = useLocalStorage(storageKey, defaultValue);
@@ -195,7 +206,6 @@ export default function Editor({
       provider.on("status", (event: any) => {
         setStatus(event.status);
         editor?.chain().focus().updateUser(user).run();
-        console.log("status changes", event.status);
       });
     }
   }, [editor]);
@@ -259,20 +269,7 @@ export default function Editor({
           </>
         )}
         {editor && collaboration && (
-          <div className="novel-fixed novel-bottom-3 novel-right-3">
-            {status === "connected" ? (
-              <div className="novel-flex novel-font-semibold novel-gap-1 novel-items-center novel-justify-center">
-                <Users className="novel-h-4 novel-animate-pulse novel-text-cyan-500 novel-w-4" />
-                <span className="novel-text-xs novel-text-slate-500">
-                  {editor.storage?.collaborationCursor?.users?.length}
-                </span>
-              </div>
-            ) : (
-              <span className="novel-text-sm novel-animate-pulse novel-text-slate-500">
-                connecting...
-              </span>
-            )}
-          </div>
+          <CollaborationInfo status={status} editor={editor} />
         )}
 
         {editor?.isActive("image") && <ImageResizer editor={editor} />}

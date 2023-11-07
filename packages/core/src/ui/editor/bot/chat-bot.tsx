@@ -80,7 +80,7 @@ export function ChatBot({ editor }: { editor: Editor }) {
     <div
       className={
         `${isOpen ? "novel-bottom-3" : "novel-bottom-16"}` +
-        " novel-fixed z-[1009] novel-right-3 novel-animate-in novel-fade-in novel-slide-in-from-bottom-1"
+        " novel-fixed novel-z-[1009] novel-right-3 novel-animate-in novel-fade-in novel-slide-in-from-bottom-1"
       }>
       <motion.div
         className="novel-rounded-full"
