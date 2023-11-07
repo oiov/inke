@@ -17,7 +17,8 @@ export function Welcome() {
         <span className="bg-gradient-to-r from-slate-400 via-slate-500 to-slate-800 bg-clip-text text-transparent ">
           Lightweight
         </span>{" "}
-        . AI Powered .{" "}
+        . <br className="block sm:hidden" />
+        AI Powered . <br className="block sm:hidden" />
         <span className="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-400 bg-clip-text text-transparent ">
           Markdown
         </span>
