@@ -6,6 +6,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TiptapUnderline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
 import TextAlign from "@tiptap/extension-text-align";
+import FontFamily from "@tiptap/extension-font-family";
 import CharacterCount from "@tiptap/extension-character-count";
 import { Color } from "@tiptap/extension-color";
 import TaskItem from "@tiptap/extension-task-item";
@@ -16,6 +17,7 @@ import Typography from "@tiptap/extension-typography";
 import SlashCommand from "./slash-command";
 import { InputRule } from "@tiptap/core";
 import UploadImagesPlugin from "@/ui/editor/plugins/upload-images";
+
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { createLowlight, common } from "lowlight";
 import markdown from "highlight.js/lib/languages/markdown";
@@ -23,10 +25,12 @@ import css from "highlight.js/lib/languages/css";
 import js from "highlight.js/lib/languages/javascript";
 import ts from "highlight.js/lib/languages/typescript";
 import html from "highlight.js/lib/languages/xml";
+
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+
 import Youtube from "@tiptap/extension-youtube";
 import UpdatedImage from "./updated-image";
 import CustomKeymap from "./custom-keymap";
@@ -150,6 +154,7 @@ export const defaultExtensions = (collaboration: boolean) => [
   SlashCommand,
   TiptapUnderline,
   TextStyle,
+  FontFamily,
   Color,
   ColorHighlighter,
   Highlight.configure({

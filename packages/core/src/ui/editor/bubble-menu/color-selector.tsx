@@ -8,6 +8,11 @@ export interface BubbleColorMenuItem {
   color: string;
 }
 
+export interface BubbleFontMenuItem {
+  name: string;
+  font: string;
+}
+
 interface ColorSelectorProps {
   editor: Editor;
   isOpen: boolean;
@@ -92,6 +97,33 @@ const HIGHLIGHT_COLORS: BubbleColorMenuItem[] = [
   },
 ];
 
+const TEXT_FONT: BubbleFontMenuItem[] = [
+  {
+    name: "Default",
+    font: "",
+  },
+  {
+    name: "Inter",
+    font: "Inter",
+  },
+  {
+    name: "Comic Sans",
+    font: "Comic Sans MS, Comic Sans",
+  },
+  {
+    name: "monospace",
+    font: "monospace",
+  },
+  {
+    name: "serif",
+    font: "serif",
+  },
+  {
+    name: "cursive",
+    font: "cursive",
+  },
+];
+
 export const ColorSelector: FC<ColorSelectorProps> = ({
   editor,
   isOpen,
@@ -105,6 +137,10 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
     editor.isActive("highlight", { color })
   );
 
+  const activeFontItem = TEXT_FONT.find(({ font }) =>
+    editor.isActive("textStyle", { font })
+  );
+
   return (
     <Popover.Root open={isOpen}>
       <div className="novel-relative novel-h-full">
@@ -116,6 +152,7 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
             style={{
               color: activeColorItem?.color,
               backgroundColor: activeHighlightItem?.color,
+              fontFamily: activeFontItem?.font,
             }}>
             A
           </span>
@@ -161,7 +198,6 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
           <div className="novel-mb-1 novel-mt-2 novel-px-2 novel-text-sm novel-text-stone-500">
             Background
           </div>
-
           {HIGHLIGHT_COLORS.map(({ name, color }, index) => (
             <button
               key={index}
@@ -181,6 +217,36 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
                 <span>{name}</span>
               </div>
               {editor.isActive("highlight", { color }) && (
+                <Check className="novel-h-4 novel-w-4" />
+              )}
+            </button>
+          ))}
+
+          <div className="novel-mb-1 novel-mt-2 novel-px-2 novel-text-sm novel-text-stone-500">
+            Font
+          </div>
+          {TEXT_FONT.map(({ name, font }, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (name !== "Default") {
+                  editor.commands.setFontFamily(font);
+                } else {
+                  editor.commands.unsetFontFamily();
+                }
+                setIsOpen(false);
+              }}
+              className="novel-flex novel-items-center novel-justify-between novel-rounded-sm novel-px-2 novel-py-1 novel-text-sm novel-text-stone-600 hover:novel-bg-stone-100"
+              type="button">
+              <div className="novel-flex novel-items-center novel-space-x-2">
+                <div
+                  className="novel-rounded-sm novel-border novel-border-stone-200 novel-px-1 novel-py-px novel-font-medium"
+                  style={{ fontFamily: font }}>
+                  A
+                </div>
+                <span style={{ fontFamily: font }}>{name}</span>
+              </div>
+              {editor.isActive("textStyle", { font }) && (
                 <Check className="novel-h-4 novel-w-4" />
               )}
             </button>

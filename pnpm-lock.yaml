@@ -387,6 +387,9 @@ importers:
       '@tiptap/extension-color':
         specifier: ^2.1.7
         version: 2.1.7(@tiptap/core@2.1.7)(@tiptap/extension-text-style@2.1.7)
+      '@tiptap/extension-font-family':
+        specifier: ^2.1.12
+        version: 2.1.12(@tiptap/core@2.1.7)(@tiptap/extension-text-style@2.1.7)
       '@tiptap/extension-highlight':
         specifier: ^2.1.7
         version: 2.1.7(@tiptap/core@2.1.7)
@@ -2446,6 +2449,16 @@ packages:
       '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
       '@tiptap/pm': 2.1.7
       tippy.js: 6.3.7
+    dev: false
+
+  /@tiptap/extension-font-family@2.1.12(@tiptap/core@2.1.7)(@tiptap/extension-text-style@2.1.7):
+    resolution: {integrity: sha512-1PAvmtilBD1OWfr1I+oKND1MLNGWMEx/Qa7xC2YDzonxhiBd56Xog6fDE/+2Bbud0vPEIrMHrg8QOjCDH413vw==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/extension-text-style': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/extension-text-style': 2.1.7(@tiptap/core@2.1.7)
     dev: false
 
   /@tiptap/extension-gapcursor@2.0.4(@tiptap/core@2.0.4)(@tiptap/pm@2.0.4):
