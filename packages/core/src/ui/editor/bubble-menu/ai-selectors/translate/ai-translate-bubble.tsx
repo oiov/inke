@@ -46,7 +46,7 @@ const AITranslateBubble: React.FC<Props> = ({ editor }: Props) => {
   };
 
   return isShow || isLoading ? (
-    <div className="novel-fixed z-[1000] novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
+    <div className="novel-fixed novel-z-[10001] novel-bottom-3 novel-right-3 novel-p-3 novel-overflow-hidden novel-rounded novel-border novel-border-stone-200 novel-bg-white novel-shadow-xl novel-animate-in novel-fade-in novel-slide-in-from-bottom-1">
       <div className="novel-w-64 novel-max-h-48 novel-overflow-y-auto">
         <div className=" novel-flex novel-gap-2 novel-items-center novel-text-slate-500">
           <Magic className="novel-h-5 novel-animate-pulse novel-w-5 novel-text-cyan-500" />

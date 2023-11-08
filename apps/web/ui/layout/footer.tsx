@@ -32,7 +32,7 @@ export default function Footer() {
 
         <Link
           className="mb-6 mt-2"
-          href="https://www.producthunt.com/posts/inke?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-inke"
+          href="https://www.producthunt.com/products/inke/launches"
           target="_blank"
         >
           <ProductHunt />

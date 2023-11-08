@@ -58,7 +58,7 @@ export function CollaborationInfo({
   editor: Editor;
 }) {
   return (
-    <div className="novel-fixed novel-bottom-3 novel-right-3">
+    <div className="novel-fixed novel-z-[9999] novel-bottom-3 novel-right-3">
       {status === "connected" ? (
         <div className="novel-flex novel-group novel-font-semibold novel-gap-1 novel-items-center novel-justify-center">
           <Users className="novel-h-4 novel-text-cyan-500 novel-w-4" />
