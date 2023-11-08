@@ -72,7 +72,7 @@ export function CollaborationInfo({
               {editor.storage.collaborationCursor.users.length === 1
                 ? ""
                 : "s"}{" "}
-              online in space
+              online
             </p>
 
             {editor.storage?.collaborationCursor?.users?.map((i: User) => (
