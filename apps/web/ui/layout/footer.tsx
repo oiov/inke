@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Mail, MessageSquare, Youtube } from "lucide-react";
+import { Github, MessageSquare, Youtube } from "lucide-react";
 import ProductHunt from "../shared/icons/product-hunt";
-import pkg from "../../package.json";
+import Telegram from "../shared/icons/telegram";
 
 export default function Footer() {
   return (
@@ -83,6 +83,13 @@ export default function Footer() {
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Community</p>
           <Link
+            className="-ml-0.5 mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
+            href="https://t.me/yesmore_cc"
+            target="_blank"
+          >
+            <Telegram className="" /> Telegram
+          </Link>
+          <Link
             className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/feedback"
             target="_blank"
@@ -104,9 +111,6 @@ export default function Footer() {
             <Github className="h-4 w-4 text-slate-100" />
             Open Source
           </Link>
-          <span className="text-sm font-semibold text-slate-300">
-            v{pkg.version}
-          </span>
         </div>
       </div>
     </div>
