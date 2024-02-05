@@ -8,9 +8,7 @@ import { Account_Plans } from "../../../../lib/consts";
 const api_key = process.env.OPENAI_API_KEY || "";
 const api_keys = process.env.OPENAI_API_KEYs || "";
 
-const openai = new OpenAI({
-  baseURL: process.env.OPENAI_API_PROXY || "https://api.openai.com",
-});
+const openai = new OpenAI();
 
 // IMPORTANT! Set the runtime to edge: https://vercel.com/docs/functions/edge-functions/edge-runtime
 export const runtime = "edge";
