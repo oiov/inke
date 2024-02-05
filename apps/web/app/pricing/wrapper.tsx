@@ -37,12 +37,7 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
             🎉 For users who are not logged in, the AI generation frequency will
             be limited to <strong>50</strong> times per day. Once logged in,
             they can receive <strong>100</strong> times. Sign in and upgrade
-            now!{" "}
-            <span className="text-blue-500">
-              Moreover, Inke is currently in beta version and you can apply for
-              the Basic plan for free. Please refer to `About plan` below for
-              the application method.
-            </span>
+            now!
           </p>
         </div>
 
@@ -219,33 +214,6 @@ export function PlanCards({ activeIndex }: { activeIndex: string }) {
           <p>
             All paid plans are one-time purchases, allowing users to permanently
             access all features.
-          </p>
-          <p className="my-2">
-            🎉 We have just introduced the Basic plan. And the best part is that
-            Basic plan is currently available for free activation indefinitely!
-            Simply give us a UPVOTE on{" "}
-            <Link
-              className="text-blue-500 after:content-['_↗'] hover:text-blue-300"
-              href="https://www.producthunt.com/posts/inke"
-              target="_blank"
-            >
-              Product Hunt
-            </Link>
-            , and send an email named{" "}
-            <strong>
-              <code>Apply for Upgrade</code>
-            </strong>{" "}
-            to{" "}
-            <strong>
-              <code>team@inke.app</code>
-            </strong>{" "}
-            , please include your registered email address (inke.app) and
-            Product Hunt nickname in the email content .
-          </p>
-          <p>
-            we will process your request within 1-2 business days. All you need
-            to do is stay updated on the latest status of this page. Thank you
-            for your continued support!
           </p>
         </div>
       </div>
