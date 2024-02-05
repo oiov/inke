@@ -44,30 +44,18 @@ export default function NavBar({ session }: { session: Session | null }) {
 
           <Suspense>
             <div className="flex items-center justify-center gap-3 md:gap-5">
-              {/*<Link
-                href="https://www.producthunt.com/products/inke?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-inke"
-                target="_blank"
-              >
-                <Image
-                  src="/follow.svg"
-                  alt="Inke | Product Hunt"
-                  width="86"
-                  height="32"
-                />
-              </Link> */}
-
               <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/document"}
               >
                 Docs
               </Link>
-              <Link
+              {/* <Link
                 className="text-slate-600 transition-all hover:text-slate-300"
                 href={"/pricing"}
               >
                 Pricing
-              </Link>
+              </Link> */}
 
               {session ? (
                 <UserDropdown

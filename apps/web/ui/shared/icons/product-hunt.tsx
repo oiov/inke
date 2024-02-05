@@ -51,7 +51,7 @@ export default function ProductHunt() {
                   line-spacing="20"
                 >
                   <tspan x="12.4" y="27">
-                    70
+                    84
                   </tspan>
                 </text>
               </g>
