@@ -34,7 +34,7 @@ export default function UserDropdown({
             {user && (
               <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
                 <span className="truncate font-semibold text-slate-700">
-                  {greeting()}, {user?.name || `${generateName(user.id || "")}`}
+                  {user?.name || `${generateName(user.id || "")}`}
                 </span>
               </button>
             )}
