@@ -9,7 +9,7 @@ const api_key = process.env.OPENAI_API_KEY || "";
 const api_keys = process.env.OPENAI_API_KEYs || "";
 
 const openai = new OpenAI({
-  baseURL: process.env.OPENAI_API_PROXY || "https://api.openai.com",
+  baseURL: "https://www.gptapi.us",
 });
 
 // IMPORTANT! Set the runtime to edge: https://vercel.com/docs/functions/edge-functions/edge-runtime
@@ -62,7 +62,7 @@ export async function POST(req: Request): Promise<Response> {
       }
     }
 
-    openai.apiKey = getRandomElement(api_keys.split(",")) || api_key;
+    openai.apiKey = api_key;
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-16k",
