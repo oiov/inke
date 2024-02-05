@@ -18,7 +18,7 @@ import NewPostButton from "@/ui/new-post-button";
 import Image from "next/image";
 import { BadgeInfo } from "lucide-react";
 import Tooltip from "@/ui/shared/tooltip";
-import { fetcher, timeAgo } from "@/lib/utils";
+import { fetcher, nFormatter, timeAgo } from "@/lib/utils";
 import { ContentItem } from "@/lib/types/note";
 
 export default function Wrapper({
@@ -81,9 +81,9 @@ export default function Wrapper({
                   </span>
 
                   <p className="flex text-xs text-slate-500">
-                    <strong>{share.data.click}</strong>
+                    <strong>{nFormatter(share.data.click ?? 0)}</strong>
                     &nbsp;clicks,&nbsp;
-                    <strong>{share.data.keeps}</strong>&nbsp;keeps
+                    <strong>{nFormatter(share.data.keeps ?? 0)}</strong>&nbsp;keeps
                     {parseContent.created_at && (
                       <span className="ml-2 hidden border-l border-slate-300 pl-2 text-xs text-slate-500 sm:block">
                         Updated {timeAgo(parseContent.updated_at)}
