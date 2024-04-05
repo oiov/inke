@@ -66,6 +66,7 @@ export default function EmailButton() {
         placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
         onKeyDown={(e) => handleKeydown(e.key)}
+        disabled={true}
       />
       <button
         disabled={loading}
