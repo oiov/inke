@@ -642,11 +642,11 @@ export default function Sidebar({
             href="/document"
             target="_blank"
           >
-            Document
+            Docs
           </Link>
           <span className="mx-2">‣</span>
-          <Link className="hover:text-slate-300" href="/pricing">
-            Pricing
+          <Link className="hover:text-slate-300" href="/privacy">
+            Privacy
           </Link>
         </div>
       </motion.div>

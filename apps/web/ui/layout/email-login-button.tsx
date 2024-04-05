@@ -60,7 +60,7 @@ export default function EmailButton() {
   return (
     <>
       <Toaster />
-      <input
+      {/* <input
         className="mb-4 rounded-md border border-slate-200 px-3 py-3 shadow-inner"
         type="text"
         placeholder="Enter your email"
@@ -98,7 +98,7 @@ export default function EmailButton() {
         <span className="w-full border border-b-0"></span>
         <span className="px-3 text-gray-400">or</span>
         <span className="w-full border border-b-0"></span>
-      </div>
+      </div> */}
 
       <button
         disabled={signInGithubClicked}

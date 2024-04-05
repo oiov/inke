@@ -83,13 +83,6 @@ export default function Footer() {
         <div className="flex flex-col items-start">
           <p className="mb-4 font-bold">Community</p>
           <Link
-            className="-ml-0.5 mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
-            href="https://t.me/yesmore_cc"
-            target="_blank"
-          >
-            <Telegram className="" /> Telegram
-          </Link>
-          <Link
             className="mb-2 flex items-center gap-1 font-mono text-sm text-slate-200 hover:text-slate-400"
             href="/feedback"
             target="_blank"
@@ -105,7 +98,7 @@ export default function Footer() {
           </Link>
           <Link
             className="mb-2 flex items-center justify-center gap-1 bg-gradient-to-r from-indigo-400 via-purple-400 to-purple-500 bg-clip-text text-sm font-semibold text-transparent hover:text-slate-400 "
-            href="https://github.com/yesmore/inke"
+            href="https://github.com/oiov/inke"
             target="_blank"
           >
             <Github className="h-4 w-4 text-slate-100" />
