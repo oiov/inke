@@ -100,7 +100,7 @@ export default function EmailButton() {
         <span className="w-full border border-b-0"></span>
       </div> */}
 
-      <button
+{/*       <button
         disabled={signInGithubClicked}
         className={`${
           signInGithubClicked
@@ -120,7 +120,7 @@ export default function EmailButton() {
             <p>Sign in with Github</p>
           </>
         )}
-      </button>
+      </button> */}
       <button
         disabled={signInGoogleClicked}
         className={`${
