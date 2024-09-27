@@ -2,8 +2,8 @@ const baseSiteConfig = {
   name: "Inke | Note",
   description:
     "Inke is a notebook with AI assisted writing and real-time collaboration",
-  url: "https://inke.app",
-  metadataBase: new URL("https://inke.app"),
+  url: "https://inke.wr.do",
+  metadataBase: new URL("https://inke.wr.do"),
   keywords: [
     "Editor",
     "Notebook",
@@ -22,7 +22,7 @@ const baseSiteConfig = {
   authors: [
     {
       name: "yesmore",
-      url: "https://github.com/yesmore",
+      url: "https://github.com/oiov",
     },
   ],
   creator: "@yesmoree",
@@ -33,10 +33,10 @@ const baseSiteConfig = {
     shortcut: "/favicon-32x32.png",
     apple: "/apple-touch-icon.png",
   },
-  ogImage: "https://inke.app/opengraph-image.png",
+  ogImage: "https://inke.wr.do/opengraph-image.png",
   links: {
     twitter: "https://twitter.com/yesmoree",
-    github: "https://github.com/yesmore/inke",
+    github: "https://github.com/oiov/inke",
   },
   manifest: "/manifest.json",
 };
